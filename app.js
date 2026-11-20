@@ -6,7 +6,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const store = {get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }};
 const mq = window.matchMedia("(max-width: 760px)");
-const U = {mode: null, force: store.get("tdesk.view"), sort: "sal", tradableOnly: false, open: {}, q: "", mview: "roster", mteam: null, sheet: null};
+const U = {mode: null, force: store.get("tdesk.view"), sort: "sal", tradableOnly: false, open: {}, pkOpen: {}, q: "", mview: "roster", mteam: null, sheet: null};
 let DATA = null;
 
 // ---------- small pieces ----------
@@ -68,6 +68,25 @@ function card(p) {
     ${dest}
   </div>`;
 }
+function picksSection(ab) {
+  const picks = E.teamPicks(ab), selN = picks.filter(k => L.psel[k.id]).length, open = U.pkOpen[ab] ?? false;
+  const firsts = picks.filter(k => k.r === 1).length, others = L.teamIds.filter(x => x !== ab);
+  const row = k => {
+    const to = L.psel[k.id], tag = k.also.length || /Protected|Conditional|Swap/.test(k.tags) ? (/Protected/.test(k.tags) ? "Protected" : /Swap/.test(k.tags) ? "Swap" : "Conditional") : "";
+    const frozen = k.r === 1 && k.y === E.PICK_LAST && E.payroll(ab) > E.APRON2;
+    return `<div class="pk ${to ? "sel" : ""}" role="button" tabindex="0" aria-pressed="${!!to}" data-pick="${k.id}" title="${esc(k.note || "")}">
+      <span class="py">${k.y}</span><span class="pr ${k.r === 1 ? "r1" : ""}">${k.r === 1 ? "1st" : "2nd"}</span>
+      <span class="po">${k.orig === ab ? "Own" : "via " + esc(team(k.orig)?.short || k.orig)}</span>
+      ${tag ? `<span class="pill warn">${tag}</span>` : ""}${frozen ? `<span class="pill lock">Frozen</span>` : ""}
+      ${to ? (others.length > 1 ? `<select data-pdest="${k.id}" aria-label="Destination for ${k.y} pick">${others.map(o => `<option value="${o}" ${o === to ? "selected" : ""}>→ ${esc(team(o).short)}</option>`).join("")}</select>` : `<span class="pto">→ ${esc(team(to).short)}</span>`) : `<span class="chk" aria-hidden="true">✓</span>`}
+    </div>`;
+  };
+  return `<div class="pks"><button class="pkhead" data-pkopen="${ab}" aria-expanded="${open}"><span><b>Draft picks</b> · ${firsts} first${firsts === 1 ? "" : "s"}, ${picks.length - firsts} second${picks.length - firsts === 1 ? "" : "s"}</span>${selN ? `<span class="pill info" style="color:var(--sel)">${selN} in deal</span>` : ""}<span class="car">${open ? "▴" : "▾"}</span></button>
+    ${open ? `<div class="pklist">${picks.length ? picks.map(row).join("") : `<div class="sub" style="padding:6px 4px">No picks left to trade.</div>`}</div>` : picks.filter(k => L.psel[k.id]).length ? `<div class="pklist">${picks.filter(k => L.psel[k.id]).map(row).join("")}</div>` : ""}</div>`;
+}
+function teamGrid(title, sub) {
+  return `<div class="pickteams"><h3>${title}</h3>${sub ? `<p class="sub">${sub}</p>` : ""}<div class="tgrid">${L.order.filter(ab => !L.teamIds.includes(ab)).map(ab => `<button data-team="${ab}"><span class="dot" style="background:${team(ab).color}"></span><span class="n">${esc(team(ab).name)}</span></button>`).join("")}</div></div>`;
+}
 function rosterIds(ab) {
   const f = {sal: p => -(p.twoway ? -1 : p.sal), pts: p => -(p.st?.[2] ?? -1), age: p => p.age ?? 99, name: p => p.name};
   let arr = team(ab).roster.map(id => L.players[id]);
@@ -88,13 +107,14 @@ function issuesHtml(ev) {
   return ev.issues.length || ev.warns.length ? `<div class="issues">${ev.issues.map(x => one(x)).join("")}${ev.warns.map(x => one(x, true)).join("")}</div>` : "";
 }
 function summaryHtml(ev) {
-  if (ev.state === "idle") return `<div class="empty"><h4>How to build a trade</h4><ol><li>Pick 2 to 4 teams.</li><li>Tap players to send them. With 3+ teams, choose where each one goes.</li><li>Read the verdict. If it fails, each problem says why, with a fix.</li><li>Use the date controls to fast-forward until locked players become eligible.</li></ol></div>`;
+  if (ev.state === "idle") return `<div class="empty"><h4>How to build a trade</h4><ol><li>Pick 2 to 4 teams.</li><li>Tap players or draft picks to send them. With 3+ teams, choose where each one goes.</li><li>Read the verdict. If it fails, each problem says why, with a fix.</li><li>Use the date controls to fast-forward until locked players become eligible.</li></ol></div>`;
   return L.teamIds.map(ab => {
     const s = ev.summary[ab], t = team(ab); if (!s) return "";
-    const li = arr => arr.length ? arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") : `<div><span style="color:var(--faint)">Nothing</span></div>`;
+    const li = (arr, pk) => arr.length || pk.length ? arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") +
+      pk.map(k => `<div><span>${esc(E.pickLabel(k))} pick</span><span class="mono" style="color:var(--mute)">${/Protected|Conditional|Swap/.test(k.tags) || k.also.length ? "cond." : "pick"}</span></div>`).join("") : `<div><span style="color:var(--faint)">Nothing</span></div>`;
     const bad = ev.issues.some(i => i.kind === "salary" && i.team === ab);
     return `<div class="tsum"><h3><span class="dot" style="background:${t.color}"></span>${esc(t.short)}</h3>
-      <div class="lst"><div class="k">Receive</div>${li(s.inc)}<div class="k">Send</div>${li(s.out)}</div>
+      <div class="lst"><div class="k">Receive</div>${li(s.inc, s.pIn)}<div class="k">Send</div>${li(s.out, s.pOut)}</div>
       <div class="mrow"><span>Outgoing salary</span><span class="mono">${money(s.outV)}</span></div>
       <div class="mrow"><span>Incoming salary</span><span class="mono">${money(s.inV)}</span></div>
       ${s.allowed != null ? `<div class="mrow"><span>Max allowed in</span><span class="mono">${money(s.allowed)}</span></div>` : ""}
@@ -120,8 +140,8 @@ function searchList(compact) {
   return `<div class="sres">${res.map(p => { const e = E.elig(p); return `<button data-find="${p.id}" class="${L.sel[p.id] ? "on" : ""}"><span class="dot" style="background:${team(p.team).color}"></span><span style="min-width:0"><div class="n">${esc(p.name)}</div><div class="m">${esc(team(p.team).short)} · ${esc(p.pos)} · ${esc(p.ht)}${e.ok ? "" : " · 🔒 " + esc(e.label)}</div></span><span class="s">${p.twoway ? "2-way" : money(p.sal)}</span></button>`; }).join("")}</div>`;
 }
 const footHtml = () => `<p><b>Checks:</b> salary matching by payroll tier (under cap, over cap, 1st apron 100% rule, 2nd apron no-aggregation), roster limits (15 standard, 3 two-way, 13 minimum), freezes on newly signed and extended players, the 2-month aggregation freeze after a trade, 10-day contracts, and the trade deadline.</p>
-  <p><b>2026-27:</b> cap ${money(E.CAP, 3)} · tax ${money(E.TAX, 3)} · 1st apron ${money(E.APRON1, 3)} · 2nd apron ${money(E.APRON2, 3)}. Matching bands, the Feb 4 deadline and the Finals end date are estimates. Payroll leaves out dead money from waived players. Not modelled yet: draft picks, cash, trade exceptions, exception hard caps. * = salary not found, minimum assumed.</p>
-  <p>Data: rosters, heights, stats and transactions from ESPN; contracts from Basketball-Reference. Updated ${DATA ? new Date(DATA.updated).toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"}) : ""}. <button class="btn ghost" data-view="${U.mode === "mobile" ? "desktop" : "mobile"}" style="padding:2px 8px;font-size:12px">Switch to ${U.mode === "mobile" ? "desktop" : "mobile"} layout</button></p>`;
+  <p><b>2026-27:</b> cap ${money(E.CAP, 3)} · tax ${money(E.TAX, 3)} · 1st apron ${money(E.APRON1, 3)} · 2nd apron ${money(E.APRON2, 3)}. Matching bands, the Feb 4 deadline and the Finals end date are estimates. Payroll leaves out dead money from waived players. <b>Picks:</b> 2027–${E.PICK_LAST} firsts and seconds; checks the Stepien rule (no back-to-back years without a first), the frozen ${E.PICK_LAST} first for second-apron teams, and the draft date. Protected, conditional and swap picks keep their terms. Not modelled yet: trading swap rights on their own, cash, trade exceptions, exception hard caps. * = salary not found, minimum assumed.</p>
+  <p>Data: rosters, heights, stats and transactions from ESPN; contracts from Basketball-Reference; pick ownership from Salary Swish. Updated ${DATA ? new Date(DATA.updated).toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"}) : ""}. <button class="btn ghost" data-view="${U.mode === "mobile" ? "desktop" : "mobile"}" style="padding:2px 8px;font-size:12px">Switch to ${U.mode === "mobile" ? "desktop" : "mobile"} layout</button></p>`;
 
 // ---------- DESKTOP ----------
 function desktopShell() {
@@ -143,8 +163,11 @@ function dSide() {
   if (focused) { const i = $("dq"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }
 }
 function dBoard(ev) {
-  $("dBoard").style.gridAutoColumns = `minmax(${L.teamIds.length > 3 ? 290 : 300}px,1fr)`;
-  $("dBoard").innerHTML = L.teamIds.map(ab => `<article class="col">${thead(ab, L.teamIds.length > 2)}${capBox(ab, ev)}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div></article>`).join("");
+  const n = L.teamIds.length;
+  $("dBoard").style.gridAutoColumns = `minmax(${n > 3 ? 290 : 300}px,1fr)`;
+  $("dBoard").innerHTML = L.teamIds.map(ab => `<article class="col">${thead(ab, true)}${capBox(ab, ev)}${picksSection(ab)}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div></article>`).join("") +
+    (n === 0 ? `<article class="col startcol">${teamGrid("Start a trade", "Choose the teams you want to trade between. You can also search for any player on the left.")}</article>`
+      : n === 1 ? `<article class="col startcol">${teamGrid("Add a team to trade with", `Pick a partner for the ${esc(team(L.teamIds[0]).short)}. Trades can include up to 4 teams.`)}</article>` : "");
 }
 function dPanel(ev) {
   const [c, h, s] = verdict(ev);
@@ -172,7 +195,7 @@ function mBar() {
 }
 function mTeams() {
   if (!L.teamIds.includes(U.mteam)) U.mteam = L.teamIds[0];
-  $("mTeams").innerHTML = L.teamIds.map(ab => { const t = team(ab), n = Object.keys(L.sel).filter(id => L.players[id].team === ab).length, on = U.mview === "roster" && ab === U.mteam;
+  $("mTeams").innerHTML = L.teamIds.map(ab => { const t = team(ab), n = Object.keys(L.sel).filter(id => L.players[id].team === ab).length + Object.keys(L.psel).filter(id => L.picks[id].own === ab).length, on = U.mview === "roster" && ab === U.mteam;
     return `<button class="tchip ${on ? "on" : ""}" data-mteam="${ab}" style="${on ? `background:${t.color}` : ""}"><span class="dot" style="background:${on ? "#fff" : t.color}"></span>${esc(t.short)}${n ? `<span class="ct">${n}</span>` : ""}</button>`; }).join("") +
     `<button class="tchip add" data-sheet="teams">+ Teams</button>`;
 }
@@ -180,7 +203,8 @@ function mBody(ev) {
   const b = $("mBody");
   if (U.mview === "roster") {
     const ab = U.mteam;
-    b.innerHTML = `<div class="m-thead">${thead(ab, false)}${capBox(ab, ev)}</div>${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div>`;
+    if (!ab) { b.innerHTML = `<div class="m-section">${teamGrid("Start a trade", "Pick the teams you want to trade between. You can also find any player in Search.")}</div>`; return; }
+    b.innerHTML = `<div class="m-thead">${thead(ab, false)}${capBox(ab, ev)}${picksSection(ab)}</div>${L.teamIds.length < 2 ? `<div class="m-section" style="margin-top:12px">${teamGrid("Add a team to trade with", "")}</div>` : ""}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div>`;
   } else if (U.mview === "search") {
     b.innerHTML = `<div class="m-section"><h2>Find any player</h2><div class="sbox"><input id="mq" type="search" placeholder="Name, e.g. Tatum" value="${esc(U.q)}" autocomplete="off" enterkeyhint="search"></div><div id="mRes">${searchList(false)}</div>${U.q ? "" : `<p class="sub" style="margin:10px 2px 0">Tap a result to add him to the trade. His team joins the deal if it isn't in it yet.</p>`}</div>`;
   } else {
@@ -193,8 +217,8 @@ function mBody(ev) {
   }
 }
 function mDock(ev) {
-  const [c, h] = verdict(ev), n = Object.keys(L.sel).length;
-  const detail = ev.state === "bad" ? ev.issues[0].h : ev.state === "ok" ? `${n} player${n > 1 ? "s" : ""} move` : "Tap players to add them";
+  const [c, h] = verdict(ev), n = Object.keys(L.sel).length + Object.keys(L.psel).length;
+  const detail = ev.state === "bad" ? ev.issues[0].h : ev.state === "ok" ? `${n} asset${n > 1 ? "s" : ""} move` : L.teamIds.length < 2 ? "Pick at least 2 teams" : "Tap players or picks to add them";
   $("mDock").innerHTML = (U.mview !== "trade" ? `<button class="m-verdict" data-mview="trade"><span class="vt ${c}">${h}</span><span class="vd">${esc(detail)}</span>${ev.state === "ok" ? `<span class="btn go" data-exec>Make trade</span>` : ""}</button>` : "") +
     `<div class="m-tabs" role="tablist">${[["roster", "Rosters"], ["search", "Search"], ["trade", "Trade"]].map(([k, l]) => `<button role="tab" aria-selected="${U.mview === k}" class="${U.mview === k ? "on" : ""}" data-mview="${k}">${ICON[k]}${l}${k === "trade" && n ? `<span class="badge ${ev.state}">${n}</span>` : ""}</button>`).join("")}</div>`;
 }
@@ -237,39 +261,59 @@ function setDate(ms, keepSlider) {
 }
 function toggleTeam(ab) {
   if (L.teamIds.includes(ab)) {
-    if (L.teamIds.length <= 2) return toast("A trade needs at least 2 teams. Add another before removing this one.");
     L.teamIds = L.teamIds.filter(x => x !== ab);
     for (const [id, to] of Object.entries(L.sel)) if (to === ab || L.players[id].team === ab) delete L.sel[id];
+    for (const [id, to] of Object.entries(L.psel)) if (to === ab || L.picks[id].own === ab) delete L.psel[id];
     for (const [id, to] of Object.entries(L.sel)) if (!L.teamIds.includes(to)) L.sel[id] = L.teamIds.find(x => x !== L.players[id].team);
+    if (U.mteam === ab) U.mteam = L.teamIds[0];
   } else {
     if (L.teamIds.length >= 4) return toast("Trades can include up to 4 teams. Remove one first.");
     L.teamIds.push(ab); U.mteam = ab;
+    if (U.sheet === null && U.mode === "mobile" && L.teamIds.length < 2) toast(`Added the ${team(ab).short}. Now pick a team to trade with.`);
   }
-  save(); render();
+  render();
+}
+function addTeamFor(ab, what) {
+  if (L.teamIds.includes(ab)) return true;
+  if (L.teamIds.length >= 4) { toast(`Trades can include up to 4 teams. Remove one to add ${what}.`); return false; }
+  L.teamIds.push(ab); return true;
 }
 function togglePlayer(id, to) {
   const p = L.players[id];
   if (L.sel[id] && !to) delete L.sel[id];
   else {
-    if (!L.teamIds.includes(p.team)) { if (L.teamIds.length >= 4) return toast("Trades can include up to 4 teams. Remove one to add " + p.name + "."); L.teamIds.push(p.team); }
-    L.sel[id] = to && L.teamIds.includes(to) ? to : L.teamIds.find(x => x !== p.team);
+    if (!addTeamFor(p.team, p.name)) return;
+    const dest = to && L.teamIds.includes(to) ? to : L.teamIds.find(x => x !== p.team);
+    if (!dest) { U.mteam = p.team; toast(`Added the ${team(p.team).short}. Pick a second team to send ${p.name} to.`); return render(); }
+    L.sel[id] = dest;
   }
-  save(); render();
+  render();
+}
+function togglePick(id) {
+  const k = L.picks[id];
+  if (L.psel[id]) delete L.psel[id];
+  else {
+    const dest = L.teamIds.find(x => x !== k.own);
+    if (!dest) return toast(`Pick a second team to send the ${E.pickLabel(k)} pick to.`);
+    L.psel[id] = dest;
+  }
+  render();
 }
 function execute() {
   const ev = E.evaluate(); if (ev.state !== "ok") return;
-  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; return s.inc.length ? `${team(ab).short} get ${s.inc.map(p => p.name).join(", ")}` : null; }).filter(Boolean).join("; ");
-  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), label});
-  L.sel = {}; store.set("tdesk.trades", L.executed); save(); render(); toast("Trade made. Rosters updated.");
+  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; const got = [...s.inc.map(p => p.name), ...s.pIn.map(k => E.pickLabel(k) + " pick")]; return got.length ? `${team(ab).short} get ${got.join(", ")}` : null; }).filter(Boolean).join("; ");
+  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), pmoves: Object.entries(L.psel), label});
+  L.sel = {}; L.psel = {}; store.set("tdesk.trades", L.executed); render(); toast("Trade made. Rosters and picks updated.");
 }
-function save() { store.set("tdesk.ui", {teamIds: L.teamIds, sel: L.sel, date: +L.date}); }
 
 document.addEventListener("click", e => {
-  const el = e.target.closest("[data-pid],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
+  const el = e.target.closest("[data-pid],[data-pick],[data-pkopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
   if (!el || el.matches("select,input")) return;
   if (el.dataset.open) { e.stopPropagation(); U.open[el.dataset.open] = !U.open[el.dataset.open]; return render(); }
   if (el.dataset.exec !== undefined) { e.stopPropagation(); return execute(); }
   if (el.dataset.pid) return togglePlayer(el.dataset.pid);
+  if (el.dataset.pick) return togglePick(el.dataset.pick);
+  if (el.dataset.pkopen) { const ab = el.dataset.pkopen; U.pkOpen[ab] = !(U.pkOpen[ab] ?? false); return render(); }
   if (el.dataset.go) return setDate(+el.dataset.go);
   if (el.dataset.addd) return setDate(+L.date + el.dataset.addd * DAY);
   if (el.dataset.rm || el.dataset.team) return toggleTeam(el.dataset.rm || el.dataset.team);
@@ -281,16 +325,18 @@ document.addEventListener("click", e => {
   if (el.dataset.sheet) { U.sheet = el.dataset.sheet; return render(); }
   if (el.dataset.close !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.view) { U.force = el.dataset.view; store.set("tdesk.view", U.force); return render(); }
-  if (el.id === "clearSel") { L.sel = {}; save(); return render(); }
-  if (el.id === "resetLeague") { store.set("tdesk.trades", []); E.load(DATA, []); L.date = E.START; L.teamIds = ["LAL", "BOS"].filter(x => L.teams[x]); save(); return render(); }
+  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; return render(); }
+  if (el.id === "resetLeague") { store.set("tdesk.trades", []); const keep = L.teamIds; E.load(DATA, []); L.date = E.START; L.teamIds = keep; return render(); }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ") && e.target.dataset?.pid) { e.preventDefault(); togglePlayer(e.target.dataset.pid); }
+  if ((e.key === "Enter" || e.key === " ") && e.target.dataset?.pick) { e.preventDefault(); togglePick(e.target.dataset.pick); }
   if (e.key === "Escape" && U.sheet) { U.sheet = null; render(); }
 });
 document.addEventListener("change", e => {
   const el = e.target;
-  if (el.dataset.dest) { L.sel[el.dataset.dest] = el.value; save(); render(); }
+  if (el.dataset.dest) { L.sel[el.dataset.dest] = el.value; render(); }
+  if (el.dataset.pdest) { L.psel[el.dataset.pdest] = el.value; render(); }
   if (el.id === "tradOnly") { U.tradableOnly = el.checked; render(); }
 });
 document.addEventListener("input", e => {
@@ -300,24 +346,12 @@ document.addEventListener("input", e => {
 });
 mq.addEventListener?.("change", () => { if (!U.force) render(); });
 
-// ---------- boot ----------
+// ---------- boot: start with no teams picked ----------
 fetch("data.json", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(data => {
   DATA = data;
   E.load(data, store.get("tdesk.trades") || []);
-  const ui = store.get("tdesk.ui");
-  const valid = ab => !!L.teams[ab];
-  if (ui && ui.teamIds?.length >= 2 && ui.teamIds.every(valid)) {
-    L.teamIds = ui.teamIds.slice(0, 4);
-    for (const [id, to] of Object.entries(ui.sel || {})) if (L.players[id] && L.teamIds.includes(to) && L.teamIds.includes(L.players[id].team) && L.players[id].team !== to) L.sel[id] = to;
-    if (ui.date && ui.date >= +E.minDate() && ui.date <= +E.END) L.date = new Date(ui.date);
-  } else {
-    // opening example: a deal that fails for clear reasons, ready to fix or fast-forward
-    L.teamIds = ["LAL", "BOS"].filter(valid); if (L.teamIds.length < 2) L.teamIds = L.order.slice(0, 2);
-    const find = (ab, nm) => L.teams[ab]?.roster.find(id => L.players[id].name === nm);
-    const a = find("LAL", "Austin Reaves"), b = find("BOS", "Derrick White"), c = find("BOS", "Sam Hauser");
-    if (a && b && c && !L.executed.length) { L.sel[a] = "BOS"; L.sel[b] = "LAL"; L.sel[c] = "LAL"; }
-  }
-  U.mteam = L.teamIds[0];
+  L.teamIds = [];
+  U.mteam = null;
   render();
 }).catch(err => { $("app").innerHTML = `<div class="loading">Couldn't load roster data (${esc(err.message)}). Reload the page to try again.</div>`; });
 })();

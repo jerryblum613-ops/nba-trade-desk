@@ -11,22 +11,23 @@ const MIN_SAL = 1358000; // estimated rookie minimum, used only when a salary is
 const DAY = 86400000;
 const d = s => new Date(s + "T12:00:00");
 const TODAY = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate(), 12); })();
-const DEC15 = d("2026-12-15"), JAN15 = d("2027-01-15"), DEADLINE = d("2027-02-04"), REOPEN = d("2027-06-21"), END = d("2027-06-30");
+const DEC15 = d("2026-12-15"), JAN15 = d("2027-01-15"), DEADLINE = d("2027-02-04"), REOPEN = d("2027-06-21"), DRAFT = d("2027-06-24"), END = d("2027-06-30");
+const PICK_FIRST = 2027, PICK_LAST = 2033; // teams may trade picks up to 7 drafts out
 const START = TODAY < d("2026-07-06") ? d("2026-07-06") : TODAY > END ? END : TODAY;
 const BREF_TEAM = {GSW: "GS", NOP: "NO", UTA: "UTAH", NYK: "NY", SAS: "SA", PHO: "PHX", BRK: "BKN", CHO: "CHA", WAS: "WSH"};
 const SEASONS = ["2026-27", "2027-28", "2028-29", "2029-30", "2030-31", "2031-32"];
 const TIER = ["Under cap", "Over cap", "Taxpayer", "1st apron", "2nd apron"];
 
 // ---------- helpers ----------
-const money = (v, dp = 1) => v == null ? "—" : (v < 0 ? "−" : "") + "$" + (Math.abs(v) >= 1e6 ? (Math.abs(v) / 1e6).toFixed(dp) + "M" : Math.round(Math.abs(v) / 1e3) + "K");
+const money = (v, dp = 1) => v == null ? "—" : v === 0 ? "$0" : (v < 0 ? "−" : "") + "$" + (Math.abs(v) >= 1e6 ? (Math.abs(v) / 1e6).toFixed(dp) + "M" : Math.round(Math.abs(v) / 1e3) + "K");
 const fmtD = (dt, yr = true) => dt.toLocaleDateString("en-US", {month: "short", day: "numeric", ...(yr ? {year: "numeric"} : {})});
 const addMonths = (dt, m) => { const x = new Date(dt); x.setMonth(x.getMonth() + m); return x; };
 const maxD = (a, b) => a > b ? a : b;
 const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g, "").replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
 
 // ---------- league state ----------
-const L = {teams: {}, players: {}, order: [], date: START, teamIds: [], sel: {}, executed: []};
-// L.sel: playerId -> destination team abbr
+const L = {teams: {}, players: {}, picks: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, executed: []};
+// L.sel: playerId -> destination team abbr; L.psel: pickId -> destination team abbr
 
 function classify(s, name) {
   const i = s.toLowerCase().indexOf(name.toLowerCase());
@@ -46,7 +47,9 @@ function classify(s, name) {
 }
 
 function load(data, executed) {
-  L.teams = {}; L.players = {}; L.sel = {};
+  L.teams = {}; L.players = {}; L.picks = {}; L.sel = {}; L.psel = {};
+  for (const [y, r, orig, own, also, tags, note] of data.picks || [])
+    L.picks[`${y}-${r}-${orig}`] = {id: `${y}-${r}-${orig}`, y, r, orig, own, also: also || [], tags: tags || "", note: note || "", acq: null};
   const salIdx = {};
   for (const r of data.sal) { const k = norm(r[0]); (salIdx[k] ||= []).push(r); }
   const sentences = data.tx.map(([date, team, desc]) => ({date: d(date), team, parts: desc.split(/\.\s+(?=[A-Z])/)}));
@@ -124,16 +127,25 @@ function elig(p, dt = L.date) {
   return ok;
 }
 
-function evaluate(sel = L.sel) {
-  const ids = Object.keys(sel), issues = [], warns = [], summary = {};
-  for (const ab of L.teamIds) summary[ab] = {out: [], inc: [], outV: 0, inV: 0};
+const teamName = ab => L.teams[ab]?.short || ab;
+const pickLabel = k => `${k.y} ${k.r === 1 ? "1st" : "2nd"}${k.orig !== k.own ? ` (${teamName(k.orig)})` : ""}`;
+const teamPicks = ab => Object.values(L.picks).filter(k => k.own === ab && !(k.y === 2027 && L.date > DRAFT)).sort((a, b) => a.y - b.y || a.r - b.r || (a.orig === ab ? -1 : 1));
+
+function evaluate(sel = L.sel, psel = L.psel) {
+  const ids = Object.keys(sel), pids = Object.keys(psel), issues = [], warns = [], summary = {};
+  for (const ab of L.teamIds) summary[ab] = {out: [], inc: [], outV: 0, inV: 0, pOut: [], pIn: []};
   for (const id of ids) {
     const p = L.players[id], to = sel[id];
     if (!summary[p.team] || !summary[to]) continue;
     summary[p.team].out.push(p); summary[p.team].outV += p.outV;
     summary[to].inc.push(p); summary[to].inV += p.inV;
   }
-  if (!ids.length) return {state: "idle", issues, warns, summary};
+  for (const id of pids) {
+    const k = L.picks[id], to = psel[id];
+    if (!k || !summary[k.own] || !summary[to]) continue;
+    summary[k.own].pOut.push(k); summary[to].pIn.push(k);
+  }
+  if ((!ids.length && !pids.length) || L.teamIds.length < 2) return {state: "idle", issues, warns, summary};
   const dt = L.date;
   if (!windowOpen(dt)) issues.push({kind: "window", h: "The trade deadline has passed",
     p: `The 2026-27 deadline is ${fmtD(DEADLINE)} (estimated). No trades can be made from the day after the deadline until the NBA Finals end, around ${fmtD(REOPEN)}. Move the league date back before the deadline, or past the Finals.`,
@@ -148,7 +160,7 @@ function evaluate(sel = L.sel) {
   }
   for (const ab of L.teamIds) {
     const t = L.teams[ab], s = summary[ab], name = t.short;
-    if (!s.out.length && !s.inc.length) { warns.push({h: `The ${name} aren't part of this deal`, p: `Nothing goes to or from the ${name}. Add one of their players or remove them from the trade.`}); continue; }
+    if (!s.out.length && !s.inc.length && !s.pOut.length && !s.pIn.length) { warns.push({h: `The ${name} aren't part of this deal`, p: `Nothing goes to or from the ${name}. Add one of their players or remove them from the trade.`}); continue; }
     const before = payroll(ab), after = before - s.outV + s.inV;
     const outStd = s.out.filter(p => !p.twoway), incStd = s.inc.filter(p => !p.twoway);
     s.before = before; s.after = after;
@@ -163,7 +175,7 @@ function evaluate(sel = L.sel) {
         s.allowed = o <= BAND1 ? 2 * o + CUSHION : o <= BAND2 ? o + BAND_ADD : 1.25 * o + CUSHION;
         s.rule = o <= BAND1 ? `Sends ≤ ${money(BAND1)}: may take back 200% + $250K.` : o <= BAND2 ? `Sends ${money(BAND1)}–${money(BAND2)}: may take back outgoing + ${money(BAND_ADD)}.` : `Sends > ${money(BAND2)}: may take back 125% + $250K.`;
         if (s.inV > s.allowed) issues.push({kind: "salary", team: ab, gap: s.inV - s.allowed, h: `The ${name} take back too much salary`,
-          p: `The ${name} are over the cap but under the first apron after this deal (${money(after)}). Sending out ${money(o)} lets them take back up to ${money(s.allowed)}, but they'd receive ${money(s.inV)}, which is ${money(s.inV - s.allowed)} over the limit. ${s.rule} Send more salary from the ${name}, or take back less.`});
+          p: `The ${name} are over the cap but under the first apron after this deal (${money(after)}). Sending out ${money(o)} lets them take back up to ${money(s.allowed)}, but they'd receive ${money(s.inV)}, which is ${money(s.inV - s.allowed)} over the limit. ${s.rule}${o === 0 ? " Draft picks don't count as salary, so a team over the cap has to send a contract back to take a player in." : ""} Send more salary from the ${name}, or take back less.`});
       }
     } else s.rule = s.inV === s.outV ? "Salaries match exactly." : `Takes back less salary than it sends (${money(s.outV - s.inV)} saved).`;
     if (after > APRON2 && outStd.length >= 2 && s.inV > Math.max(...outStd.map(p => p.outV))) issues.push({kind: "salary", team: ab, h: `The ${name} can't combine salaries above the 2nd apron`,
@@ -180,6 +192,30 @@ function evaluate(sel = L.sel) {
     if (std2 < 13 && std2 < std) issues.push({kind: "roster", team: ab, h: `The ${name} would drop below 13 players`, p: `The ${name} would have only ${std2} standard contracts. Teams can't go below 13 (and must get back to 14 within two weeks). Take a player back in the deal.`});
     else if (std2 < 14 && std2 < std) warns.push({h: `The ${name} would need to sign a player`, p: `The ${name} would be at ${std2} standard contracts. That's allowed for up to two weeks, then they need 14.`});
     if (s.inc.some(p => p.est)) warns.push({h: "Estimated salary", p: `No contract figure was found for ${s.inc.filter(p => p.est).map(p => p.name).join(", ")}, so a minimum salary of ${money(MIN_SAL)} is assumed.`});
+  }
+  // draft picks
+  for (const id of pids) {
+    const k = L.picks[id]; if (!k) continue;
+    const owner = teamName(k.own), label = pickLabel(k);
+    if (k.y === 2027 && dt > DRAFT) issues.push({kind: "pick", h: `The ${label} pick has already been used`, p: `The 2027 draft took place around ${fmtD(DRAFT)} (estimated). A pick can't be traded after its draft. Trade the player who was drafted instead.`});
+    if (k.r === 1 && k.y === PICK_LAST && payroll(k.own) > APRON2) issues.push({kind: "pick", team: k.own, h: `The ${owner} can't trade their ${PICK_LAST} first`,
+      p: `The ${owner} are above the ${money(APRON2)} second apron (${money(payroll(k.own))}). Teams above the second apron have their first-round pick seven years out (${PICK_LAST}) frozen. Trade a different pick, or get payroll under the second apron first.`});
+    if (k.also.length || /Protected|Conditional|Swap/.test(k.tags)) warns.push({h: `${label} pick comes with conditions`,
+      p: `${k.note || k.tags + "."}${k.also.length ? ` Also involves: ${k.also.map(teamName).join(", ")}.` : ""} The team receiving it takes on the same protections and conditions.`});
+  }
+  // Stepien rule: no team may be without a first-round pick in back-to-back future drafts
+  for (const ab of L.teamIds) {
+    const s = summary[ab], sentYears = s.pOut.filter(k => k.r === 1).map(k => k.y);
+    if (!sentYears.length) continue;
+    const has = y => Object.values(L.picks).some(k => k.r === 1 && k.y === y && (psel[k.id] ? psel[k.id] === ab : k.own === ab));
+    for (let y = PICK_FIRST; y < PICK_LAST; y++) {
+      if (!sentYears.includes(y) && !sentYears.includes(y + 1)) continue;
+      if (!has(y) && !has(y + 1)) {
+        issues.push({kind: "stepien", team: ab, h: `The ${L.teams[ab].short} would break the Stepien rule`,
+          p: `After this deal the ${L.teams[ab].short} would have no first-round pick in either ${y} or ${y + 1}. Teams can't go without a first in back-to-back future drafts (the Stepien rule). Keep one of those firsts, or get a first back for one of those years.`});
+        break;
+      }
+    }
   }
   return {state: issues.length ? "bad" : "ok", issues, warns, summary};
 }
@@ -208,12 +244,14 @@ function suggest(ev) {
 
 function applyTrade(tr) {
   for (const [id, to] of tr.moves) if (!L.players[id] || !L.teams[to]) return false;
+  for (const [id, to] of tr.pmoves || []) if (!L.picks[id] || !L.teams[to]) return false;
   for (const [id, to] of tr.moves) {
     const p = L.players[id];
     L.teams[p.team].roster = L.teams[p.team].roster.filter(x => x !== id);
     L.teams[to].roster.push(id);
     p.team = to; p.acq = d(tr.date);
   }
+  for (const [id, to] of tr.pmoves || []) { const k = L.picks[id]; k.own = to; k.also = k.also.filter(x => x !== to); k.acq = d(tr.date); }
   L.executed.push(tr);
   return true;
 }
@@ -223,6 +261,6 @@ function search(q, limit = 12) {
   return Object.values(L.players).filter(p => p.key.includes(k)).sort((a, b) => (a.key.startsWith(k) ? 0 : 1) - (b.key.startsWith(k) ? 0 : 1) || b.sal - a.sal).slice(0, limit);
 }
 
-global.Engine = {L, CAP, TAX, APRON1, APRON2, BAND1, BAND2, BAND_ADD, MIN_SAL, DAY, TODAY, DEC15, JAN15, DEADLINE, REOPEN, END, START, SEASONS, TIER,
-  d, money, fmtD, load, payroll, tierOf, windowOpen, minDate, elig, evaluate, suggest, applyTrade, search};
+global.Engine = {L, CAP, TAX, APRON1, APRON2, BAND1, BAND2, BAND_ADD, MIN_SAL, DAY, TODAY, DEC15, JAN15, DEADLINE, REOPEN, DRAFT, END, START, SEASONS, TIER, PICK_LAST,
+  d, money, fmtD, load, pickLabel, teamPicks, payroll, tierOf, windowOpen, minDate, elig, evaluate, suggest, applyTrade, search};
 })(window);

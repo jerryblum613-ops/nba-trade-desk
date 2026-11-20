@@ -11,7 +11,22 @@ done
 curl -sf "https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/statistics/byathlete?region=us&lang=en&contentorigin=espn&isqualified=false&page=1&limit=1000&sort=offensive.avgPoints:desc&seasontype=2" -o raw/stats.json &
 curl -sf "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/transactions?limit=1000" -o raw/tx.json &
 curl -sf -A "Mozilla/5.0" "https://www.basketball-reference.com/contracts/players.html" -o raw/bref.html &
+# Salary Swish draft pages: who owns each traded future pick, with protections
+UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
+PICK_YEARS="2027 2028 2029 2030 2031 2032 2033"
+for y in $PICK_YEARS; do curl -sf -A "$UA" "https://www.salaryswish.com/draft/$y" -o raw/ss$y.html &
+done
 wait
+perl picks.pl $PICK_YEARS > raw/picks.jsonl || : > raw/picks.jsonl
+# Full pick grid: every team's own 1st and 2nd for 2027-2033, with current owner if traded
+jq -n -c --slurpfile p raw/picks.jsonl '
+  def esp: {"GSW":"GS","NOP":"NO","NYK":"NY","SAS":"SA","UTA":"UTAH","WAS":"WSH"}[.] // .;
+  ($p | map({key: "\(.y)-\(.r)-\(.orig)", value: .}) | from_entries) as $m
+  | [range(2027; 2034) as $y | range(1; 3) as $r
+     | ("ATL BOS BKN CHA CHI CLE DAL DEN DET GSW HOU IND LAC LAL MEM MIA MIL MIN NOP NYK OKC ORL PHI PHX POR SAC SAS TOR UTA WAS" | split(" "))[] as $t
+     | $m["\($y)-\($r)-\($t)"] as $x
+     | (($x.own // [$t]) as $o | if (($x.tags // "") | test("Swap")) and ($o | index($t)) then $t else $o[0] end) as $own
+     | [$y, $r, ($t|esp), ($own|esp), (($x.own // []) | map(select(. != $own)) | map(esp)), ($x.tags // ""), ($x.note // "")]]' > raw/picks.json
 # Basketball-Reference contracts -> name|team|y1..y6 (suffix P=player option, T=team option, E=ETO)
 tr -d '\n' < raw/bref.html | sed 's/<tr/\n<tr/g' | grep "data-stat=\"player\" ><a" \
  | sed -E "s/.*<a href='[^']*'>([^<]*)<\/a>.*data-stat=\"team_id\" ><a [^>]*>([A-Z]+)<.*/\1|\2|&/" \
@@ -30,12 +45,12 @@ jq -R 'split("|")' raw/bref.psv | jq -s . > raw/bref.json
         inj: ([.injuries[]?.status] | first), prev: ([.contracts[]? | select(.season.year==2026) | .salary] | first),
         c: (if .contract then {sal: .contract.salary, inV: .contract.incomingTradeValue, outV: .contract.outgoingTradeValue, yrs: .contract.yearsRemaining, kick: (if .contract.tradeKicker.active then .contract.tradeKicker.percentage else 0 end), prev: ([.contracts[]? | select(.season.year==2026) | .salary] | first)} else null end)}]}' raw/team_$i.json
   done
-} | jq -s --slurpfile st raw/stats.json --slurpfile tx raw/tx.json --slurpfile br raw/bref.json '
+} | jq -s --slurpfile st raw/stats.json --slurpfile tx raw/tx.json --slurpfile br raw/bref.json --slurpfile pk raw/picks.json '
   ($st[0].athletes | map({key: .athlete.id, value: (
      (.categories|map({key:.name, value:.values})|from_entries) as $c |
      [$c.general[0], $c.general[1], $c.offensive[0], $c.general[11], $c.offensive[10], $c.offensive[3], $c.offensive[6], $c.defensive[0], $c.defensive[1]] | map(. * 10 | round / 10))}) | from_entries) as $stats
   | {updated: (now|todate), season: $tx[0].season.displayName,
      tx: [$tx[0].transactions[] | [.date[0:10], .team.abbreviation, .description]],
-     sal: $br[0],
+     sal: $br[0], picks: $pk[0],
      teams: map(.players |= map(. + {st: $stats[.id]}))}' > data.json
 echo "teams: $(jq '.teams|length' data.json)  players: $(jq '[.teams[].players[]]|length' data.json)  size: $(wc -c < data.json)"
