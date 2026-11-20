@@ -26,4 +26,4 @@ Then serve the folder with any static server and open `index.html`.
 
 ## Notes
 
-2026-27 cap figures come from the NBA's July 2026 release. The salary-matching bands, the Feb 4, 2027 deadline and the Finals end date are estimates. Pick ownership and terms come from Salary Swish; every conditional pick shows what it depends on. Swap rights can be traded, and new swaps can be offered on a pick a team owns. Cash, trade exceptions and exception hard caps are not modelled yet.
+2026-27 cap figures come from the NBA's July 2026 release. The salary-matching bands, the Feb 4, 2027 deadline and the Finals end date are estimates. Pick ownership and terms come from Salary Swish; every conditional pick shows what it depends on. Swap rights can be traded, and new swaps can be offered on a pick a team owns. Cash limits, trade exceptions and hard caps are checked too, using Salary Swish's trade exception and hard cap trackers (parsed by `trackers.pl`).

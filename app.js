@@ -6,7 +6,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const store = {get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }};
 const mq = window.matchMedia("(max-width: 760px)");
-const U = {mode: null, force: store.get("tdesk.view"), sort: "sal", tradableOnly: false, open: {}, pkOpen: {}, q: "", mview: "roster", mteam: null, sheet: null};
+const U = {mode: null, force: store.get("tdesk.view"), sort: "sal", tradableOnly: false, open: {}, pkOpen: {}, ctOpen: {}, q: "", mview: "roster", mteam: null, sheet: null};
 let DATA = null;
 
 // ---------- small pieces ----------
@@ -103,6 +103,19 @@ function picksSection(ab) {
   return `<div class="pks"><button class="pkhead" data-pkopen="${ab}" aria-expanded="${open}"><span><b>Draft picks</b> · ${firsts} first${firsts === 1 ? "" : "s"}, ${picks.length - firsts} second${picks.length - firsts === 1 ? "" : "s"}${swaps.length ? `, ${swaps.length} swap right${swaps.length > 1 ? "s" : ""}` : ""}</span>${inDeal ? `<span class="pill info" style="color:var(--sel)">${inDeal} in deal</span>` : ""}<span class="car">${open ? "▴" : "▾"}</span></button>
     ${body ? `<div class="pklist">${body}</div>` : ""}</div>`;
 }
+function capTools(ab) {
+  const hc = L.hardcap[ab], tpes = E.teamTPEs(ab), sent = L.cashSent[ab] || 0, recv = L.cashRecv[ab] || 0, c = L.csel[ab], others = L.teamIds.filter(x => x !== ab);
+  const open = U.ctOpen[ab] ?? false;
+  const summary = [hc ? `Hard cap: ${hc === 1 ? "1st" : "2nd"} apron` : "", tpes.length ? `${tpes.length} trade exception${tpes.length > 1 ? "s" : ""}` : "", c?.amt ? `${money(c.amt)} cash in deal` : ""].filter(Boolean).join(" · ") || "No hard cap or trade exceptions";
+  const cashVal = c?.amt ? String(+(c.amt / 1e6).toFixed(3)) : "";
+  return `<div class="pks ct"><button class="pkhead" data-ctopen="${ab}" aria-expanded="${open}"><span><b>Cap tools</b> · ${esc(summary)}</span><span class="car">${open ? "▴" : "▾"}</span></button>
+    ${open ? `<div class="ctbody">
+      <div class="ctrow"><span class="k">Hard cap</span><span>${hc ? `<span class="pill lock">${hc === 1 ? "1st" : "2nd"} apron · ${money(hc === 1 ? E.APRON1 : E.APRON2)}</span><div class="sub">Because of ${esc(L.hcWhy[ab] || "")}.</div>` : `<span class="sub">None yet. A trade can create one.</span>`}</span></div>
+      <div class="ctrow"><span class="k">Trade exceptions</span><span>${tpes.length ? tpes.map(x => `<div class="tpe"><b class="mono">${money(x.amt, 2)}</b> from ${esc(x.from)} <span class="sub">· expires ${fmtD(x.end)}</span></div>`).join("") : `<span class="sub">None open on ${fmtD(L.date)}.</span>`}<div class="sub">Used automatically when a deal needs one: one incoming player per exception, only if the team stays under the first apron.</div></span></div>
+      <div class="ctrow"><span class="k">Cash</span><span><div class="sub">Sent ${money(sent, 2)}, received ${money(recv, 2)}. Limit is ${money(E.CASH_LIMIT, 3)} each way this season.</div>
+        ${others.length ? `<div class="cashin"><label for="cash-${ab}">Send $</label><input id="cash-${ab}" type="number" min="0" step="0.1" inputmode="decimal" data-cash="${ab}" value="${cashVal}" placeholder="0"><span>M to</span><select data-cashto="${ab}" aria-label="Team receiving the cash">${others.map(o => `<option value="${o}" ${o === (c?.to || others[0]) ? "selected" : ""}>${esc(team(o).short)}</option>`).join("")}</select></div>` : ""}</span></div>
+    </div>` : ""}</div>`;
+}
 function teamGrid(title, sub) {
   return `<div class="pickteams"><h3>${title}</h3>${sub ? `<p class="sub">${sub}</p>` : ""}<div class="tgrid">${L.order.filter(ab => !L.teamIds.includes(ab)).map(ab => `<button data-team="${ab}"><span class="dot" style="background:${team(ab).color}"></span><span class="n">${esc(team(ab).name)}</span></button>`).join("")}</div></div>`;
 }
@@ -129,13 +142,13 @@ function summaryHtml(ev) {
   if (ev.state === "idle") return `<div class="empty"><h4>How to build a trade</h4><ol><li>Pick 2 to 4 teams.</li><li>Tap players or draft picks to send them. With 3+ teams, choose where each one goes.</li><li>Read the verdict. If it fails, each problem says why, with a fix.</li><li>Use the date controls to fast-forward until locked players become eligible.</li></ol></div>`;
   return L.teamIds.map(ab => {
     const s = ev.summary[ab], t = team(ab); if (!s) return "";
-    const li = (arr, pk, sw) => arr.length || pk.length || sw.length ? arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") +
+    const li = (arr, pk, sw, cash) => arr.length || pk.length || sw.length || cash ? (cash ? `<div><span>Cash</span><span class="mono">${money(cash, 2)}</span></div>` : "") + arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") +
       pk.map(k => `<div><span>${esc(E.pickLabel(k))} pick</span><span class="mono" style="color:var(--mute)">${E.isConditional(k) ? "conditional" : "pick"}</span></div>`).join("") +
       sw.map(w => `<div><span>${w.y} ${w.r === 1 ? "1st" : "2nd"} swap (${esc(team(w.grantor)?.short || w.grantor)} pick)</span><span class="mono" style="color:var(--mute)">${w.isNew ? "new" : w.to === w.grantor ? "cancels it" : "swap"}</span></div>`).join("")
       : `<div><span style="color:var(--faint)">Nothing</span></div>`;
     const bad = ev.issues.some(i => i.kind === "salary" && i.team === ab);
     return `<div class="tsum"><h3><span class="dot" style="background:${t.color}"></span>${esc(t.short)}</h3>
-      <div class="lst"><div class="k">Receive</div>${li(s.inc, s.pIn, s.wIn)}<div class="k">Send</div>${li(s.out, s.pOut, s.wOut)}</div>
+      <div class="lst"><div class="k">Receive</div>${li(s.inc, s.pIn, s.wIn, s.cashIn)}<div class="k">Send</div>${li(s.out, s.pOut, s.wOut, s.cashOut)}</div>
       <div class="mrow"><span>Outgoing salary</span><span class="mono">${money(s.outV)}</span></div>
       <div class="mrow"><span>Incoming salary</span><span class="mono">${money(s.inV)}</span></div>
       ${s.allowed != null ? `<div class="mrow"><span>Max allowed in</span><span class="mono">${money(s.allowed)}</span></div>` : ""}
@@ -161,7 +174,7 @@ function searchList(compact) {
   return `<div class="sres">${res.map(p => { const e = E.elig(p); return `<button data-find="${p.id}" class="${L.sel[p.id] ? "on" : ""}"><span class="dot" style="background:${team(p.team).color}"></span><span style="min-width:0"><div class="n">${esc(p.name)}</div><div class="m">${esc(team(p.team).short)} · ${esc(p.pos)} · ${esc(p.ht)}${e.ok ? "" : " · 🔒 " + esc(e.label)}</div></span><span class="s">${p.twoway ? "2-way" : money(p.sal)}</span></button>`; }).join("")}</div>`;
 }
 const footHtml = () => `<p><b>Checks:</b> salary matching by payroll tier (under cap, over cap, 1st apron 100% rule, 2nd apron no-aggregation), roster limits (15 standard, 3 two-way, 13 minimum), freezes on newly signed and extended players, the 2-month aggregation freeze after a trade, 10-day contracts, and the trade deadline.</p>
-  <p><b>2026-27:</b> cap ${money(E.CAP, 3)} · tax ${money(E.TAX, 3)} · 1st apron ${money(E.APRON1, 3)} · 2nd apron ${money(E.APRON2, 3)}. Matching bands, the Feb 4 deadline and the Finals end date are estimates. Payroll leaves out dead money from waived players. <b>Picks:</b> 2027–${E.PICK_LAST} firsts and seconds; checks the Stepien rule (no back-to-back years without a first), the frozen ${E.PICK_LAST} first for second-apron teams, and the draft date. Protected, conditional and swap picks keep their terms, and each one says what it depends on. You can trade swap rights a team holds or offer a new swap on a pick a team owns (both teams must own that year's pick). Not modelled yet: cash, trade exceptions, exception hard caps. * = salary not found, minimum assumed.</p>
+  <p><b>2026-27:</b> cap ${money(E.CAP, 3)} · tax ${money(E.TAX, 3)} · 1st apron ${money(E.APRON1, 3)} · 2nd apron ${money(E.APRON2, 3)}. Matching bands, the Feb 4 deadline and the Finals end date are estimates. Payroll leaves out dead money from waived players. <b>Picks:</b> 2027–${E.PICK_LAST} firsts and seconds; checks the Stepien rule (no back-to-back years without a first), the frozen ${E.PICK_LAST} first for second-apron teams, and the draft date. Protected, conditional and swap picks keep their terms, and each one says what it depends on. You can trade swap rights a team holds or offer a new swap on a pick a team owns (both teams must own that year's pick). <b>Cash, exceptions, hard caps:</b> cash is limited to ${money(E.CASH_LIMIT, 3)} sent and received per team this season, and second-apron teams can't send any. Trade exceptions (one player each, must stay under the first apron) are used automatically and expire after a year; a team that sends out more salary than it takes back while over the cap gets a new one. Hard caps from earlier moves come from Salary Swish's tracker, and the deal itself can add one: taking back more than 100% or using a trade exception (1st apron), combining salaries or sending cash (2nd apron). * = salary not found, minimum assumed.</p>
   <p>Data: rosters, heights, stats and transactions from ESPN; contracts from Basketball-Reference; pick ownership from Salary Swish. Updated ${DATA ? new Date(DATA.updated).toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"}) : ""}. <button class="btn ghost" data-view="${U.mode === "mobile" ? "desktop" : "mobile"}" style="padding:2px 8px;font-size:12px">Switch to ${U.mode === "mobile" ? "desktop" : "mobile"} layout</button></p>`;
 
 // ---------- DESKTOP ----------
@@ -186,7 +199,7 @@ function dSide() {
 function dBoard(ev) {
   const n = L.teamIds.length;
   $("dBoard").style.gridAutoColumns = `minmax(${n > 3 ? 290 : 300}px,1fr)`;
-  $("dBoard").innerHTML = L.teamIds.map(ab => `<article class="col">${thead(ab, true)}${capBox(ab, ev)}${picksSection(ab)}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div></article>`).join("") +
+  $("dBoard").innerHTML = L.teamIds.map(ab => `<article class="col">${thead(ab, true)}${capBox(ab, ev)}${capTools(ab)}${picksSection(ab)}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div></article>`).join("") +
     (n === 0 ? `<article class="col startcol">${teamGrid("Start a trade", "Choose the teams you want to trade between. You can also search for any player on the left.")}</article>`
       : n === 1 ? `<article class="col startcol">${teamGrid("Add a team to trade with", `Pick a partner for the ${esc(team(L.teamIds[0]).short)}. Trades can include up to 4 teams.`)}</article>` : "");
 }
@@ -225,7 +238,7 @@ function mBody(ev) {
   if (U.mview === "roster") {
     const ab = U.mteam;
     if (!ab) { b.innerHTML = `<div class="m-section">${teamGrid("Start a trade", "Pick the teams you want to trade between. You can also find any player in Search.")}</div>`; return; }
-    b.innerHTML = `<div class="m-thead">${thead(ab, false)}${capBox(ab, ev)}${picksSection(ab)}</div>${L.teamIds.length < 2 ? `<div class="m-section" style="margin-top:12px">${teamGrid("Add a team to trade with", "")}</div>` : ""}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div>`;
+    b.innerHTML = `<div class="m-thead">${thead(ab, false)}${capBox(ab, ev)}${capTools(ab)}${picksSection(ab)}</div>${L.teamIds.length < 2 ? `<div class="m-section" style="margin-top:12px">${teamGrid("Add a team to trade with", "")}</div>` : ""}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div>`;
   } else if (U.mview === "search") {
     b.innerHTML = `<div class="m-section"><h2>Find any player</h2><div class="sbox"><input id="mq" type="search" placeholder="Name, e.g. Tatum" value="${esc(U.q)}" autocomplete="off" enterkeyhint="search"></div><div id="mRes">${searchList(false)}</div>${U.q ? "" : `<p class="sub" style="margin:10px 2px 0">Tap a result to add him to the trade. His team joins the deal if it isn't in it yet.</p>`}</div>`;
   } else {
@@ -238,7 +251,7 @@ function mBody(ev) {
   }
 }
 function mDock(ev) {
-  const [c, h] = verdict(ev), n = Object.keys(L.sel).length + Object.keys(L.psel).length + Object.keys(L.wsel).length;
+  const [c, h] = verdict(ev), n = Object.keys(L.sel).length + Object.keys(L.psel).length + Object.keys(L.wsel).length + Object.values(L.csel).filter(c => c.amt > 0).length;
   const detail = ev.state === "bad" ? ev.issues[0].h : ev.state === "ok" ? `${n} asset${n > 1 ? "s" : ""} move` : L.teamIds.length < 2 ? "Pick at least 2 teams" : "Tap players or picks to add them";
   $("mDock").innerHTML = (U.mview !== "trade" ? `<button class="m-verdict" data-mview="trade"><span class="vt ${c}">${h}</span><span class="vd">${esc(detail)}</span>${ev.state === "ok" ? `<span class="btn go" data-exec>Make trade</span>` : ""}</button>` : "") +
     `<div class="m-tabs" role="tablist">${[["roster", "Rosters"], ["search", "Search"], ["trade", "Trade"]].map(([k, l]) => `<button role="tab" aria-selected="${U.mview === k}" class="${U.mview === k ? "on" : ""}" data-mview="${k}">${ICON[k]}${l}${k === "trade" && n ? `<span class="badge ${ev.state}">${n}</span>` : ""}</button>`).join("")}</div>`;
@@ -286,6 +299,7 @@ function toggleTeam(ab) {
     for (const [id, to] of Object.entries(L.sel)) if (to === ab || L.players[id].team === ab) delete L.sel[id];
     for (const [id, to] of Object.entries(L.psel)) if (to === ab || L.picks[id].own === ab) delete L.psel[id];
     for (const [id, to] of Object.entries(L.wsel)) { const s = E.swapFromKey(id); if (to === ab || (s.isNew ? s.grantor : s.holder) === ab) delete L.wsel[id]; }
+    for (const [from, c] of Object.entries(L.csel)) if (from === ab || c.to === ab) delete L.csel[from];
     for (const [id, to] of Object.entries(L.sel)) if (!L.teamIds.includes(to)) L.sel[id] = L.teamIds.find(x => x !== L.players[id].team);
     if (U.mteam === ab) U.mteam = L.teamIds[0];
   } else {
@@ -333,13 +347,13 @@ function toggleSwap(key) {
 }
 function execute() {
   const ev = E.evaluate(); if (ev.state !== "ok") return;
-  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; const got = [...s.inc.map(p => p.name), ...s.pIn.map(k => E.pickLabel(k) + " pick"), ...s.wIn.map(w => `${w.y} swap rights (${team(w.grantor).short} pick)`)]; return got.length ? `${team(ab).short} get ${got.join(", ")}` : null; }).filter(Boolean).join("; ");
-  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), pmoves: Object.entries(L.psel), wmoves: Object.entries(L.wsel), label});
-  L.sel = {}; L.psel = {}; L.wsel = {}; store.set("tdesk.trades", L.executed); render(); toast("Trade made. Rosters and picks updated.");
+  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; const got = [...s.inc.map(p => p.name), ...s.pIn.map(k => E.pickLabel(k) + " pick"), ...s.wIn.map(w => `${w.y} swap rights (${team(w.grantor).short} pick)`), ...(s.cashIn ? [money(s.cashIn, 2) + " cash"] : [])]; return got.length ? `${team(ab).short} get ${got.join(", ")}` : null; }).filter(Boolean).join("; ");
+  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), pmoves: Object.entries(L.psel), wmoves: Object.entries(L.wsel), fx: E.tradeEffects(ev), label});
+  L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; store.set("tdesk.trades", L.executed); render(); toast("Trade made. Rosters and picks updated.");
 }
 
 document.addEventListener("click", e => {
-  const el = e.target.closest("[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
+  const el = e.target.closest("[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-ctopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
   if (!el || el.matches("select,input")) return;
   if (el.dataset.open) { e.stopPropagation(); U.open[el.dataset.open] = !U.open[el.dataset.open]; return render(); }
   if (el.dataset.exec !== undefined) { e.stopPropagation(); return execute(); }
@@ -348,6 +362,7 @@ document.addEventListener("click", e => {
   if (el.dataset.swap) return toggleSwap(el.dataset.swap);
   if (el.dataset.newswap) return toggleSwap(el.dataset.newswap);
   if (el.dataset.pkopen) { const ab = el.dataset.pkopen; U.pkOpen[ab] = !(U.pkOpen[ab] ?? false); return render(); }
+  if (el.dataset.ctopen) { const ab = el.dataset.ctopen; U.ctOpen[ab] = !(U.ctOpen[ab] ?? false); return render(); }
   if (el.dataset.go) return setDate(+el.dataset.go);
   if (el.dataset.addd) return setDate(+L.date + el.dataset.addd * DAY);
   if (el.dataset.rm || el.dataset.team) return toggleTeam(el.dataset.rm || el.dataset.team);
@@ -359,7 +374,7 @@ document.addEventListener("click", e => {
   if (el.dataset.sheet) { U.sheet = el.dataset.sheet; return render(); }
   if (el.dataset.close !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.view) { U.force = el.dataset.view; store.set("tdesk.view", U.force); return render(); }
-  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; L.wsel = {}; return render(); }
+  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; return render(); }
   if (el.id === "resetLeague") { store.set("tdesk.trades", []); const keep = L.teamIds; E.load(DATA, []); L.date = E.START; L.teamIds = keep; return render(); }
 });
 document.addEventListener("keydown", e => {
@@ -373,6 +388,8 @@ document.addEventListener("change", e => {
   if (el.dataset.dest) { L.sel[el.dataset.dest] = el.value; render(); }
   if (el.dataset.pdest) { L.psel[el.dataset.pdest] = el.value; render(); }
   if (el.dataset.wdest) { L.wsel[el.dataset.wdest] = el.value; render(); }
+  if (el.dataset.cash) { const ab = el.dataset.cash, amt = Math.max(0, Math.round((parseFloat(el.value) || 0) * 1e6)); const to = L.csel[ab]?.to || L.teamIds.find(x => x !== ab); if (amt) L.csel[ab] = {to, amt}; else delete L.csel[ab]; render(); }
+  if (el.dataset.cashto) { const ab = el.dataset.cashto; if (L.csel[ab]) L.csel[ab].to = el.value; else L.csel[ab] = {to: el.value, amt: 0}; render(); }
   if (el.id === "tradOnly") { U.tradableOnly = el.checked; render(); }
 });
 document.addEventListener("input", e => {

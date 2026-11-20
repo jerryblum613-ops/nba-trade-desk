@@ -9,12 +9,14 @@ const CAP = 164961000, TAX = 200428000, APRON1 = 209015000, APRON2 = 221686000;
 // out ≤ BAND1: 200% + $250K; BAND1–BAND2: out + BAND_ADD; > BAND2: 125% + $250K. The bands rise with the cap;
 // 2025-26 was $8,277,000 / +$8,527,000 / $33,108,000, scaled here by the 2026-27 cap increase.
 const CUSHION = 250000, BAND1 = 8829000, BAND_ADD = BAND1 + CUSHION, BAND2 = BAND1 * 4;
+const CASH_LIMIT = 8497000; // max cash a team may send, and separately receive, in trades in 2026-27
 const MIN_SAL = 1358000; // estimated rookie minimum, used only when a salary is missing
 const DAY = 86400000;
 const d = s => new Date(s + "T12:00:00");
 const TODAY = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate(), 12); })();
 const DEC15 = d("2026-12-15"), JAN15 = d("2027-01-15"), DEADLINE = d("2027-02-04"), REOPEN = d("2027-06-21"), DRAFT = d("2027-06-24"), END = d("2027-06-30");
 const PICK_FIRST = 2027, PICK_LAST = 2033; // teams may trade picks up to 7 drafts out
+const SEASON_START = d("2026-07-01");
 const START = TODAY < d("2026-07-06") ? d("2026-07-06") : TODAY > END ? END : TODAY;
 const BREF_TEAM = {GSW: "GS", NOP: "NO", UTA: "UTAH", NYK: "NY", SAS: "SA", PHO: "PHX", BRK: "BKN", CHO: "CHA", WAS: "WSH"};
 const SEASONS = ["2026-27", "2027-28", "2028-29", "2029-30", "2030-31", "2031-32"];
@@ -28,7 +30,7 @@ const maxD = (a, b) => a > b ? a : b;
 const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g, "").replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
 
 // ---------- league state ----------
-const L = {teams: {}, players: {}, picks: {}, swaps: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, wsel: {}, executed: []};
+const L = {teams: {}, players: {}, picks: {}, swaps: {}, tpes: [], hardcap: {}, hcWhy: {}, cashSent: {}, cashRecv: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, wsel: {}, csel: {}, executed: []};
 // L.sel: playerId -> destination team; L.psel: pickId -> destination team;
 // L.wsel: swapId -> destination team (passing on a swap right it holds), or "new-YEAR-ROUND-TEAM" -> team that receives a new swap right
 const SS_ABBR = {WAS: "WSH", UTA: "UTAH", SAS: "SA", NOP: "NO", NYK: "NY", GSW: "GS"};
@@ -62,7 +64,11 @@ function classify(s, name) {
 }
 
 function load(data, executed) {
-  L.teams = {}; L.players = {}; L.picks = {}; L.swaps = {}; L.sel = {}; L.psel = {}; L.wsel = {};
+  L.teams = {}; L.players = {}; L.picks = {}; L.swaps = {}; L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {};
+  L.cashSent = {}; L.cashRecv = {}; L.hcWhy = {};
+  L.hardcap = {...(data.hardcap || {})};
+  for (const ab of Object.keys(L.hardcap)) L.hcWhy[ab] = "a signing or trade they made earlier this season (per Salary Swish's hard cap tracker)";
+  L.tpes = (data.tpe || []).map(([team, from, amt, start, end], i) => ({id: "tpe" + i, team, from, amt, start: d(start), end: d(end)}));
   for (const t of data.teams) L.teams[t.abbr] = {...t};   // names first, so notes can be read below
   for (const [y, r, orig, own, also, tags, note] of data.picks || [])
     L.picks[`${y}-${r}-${orig}`] = {id: `${y}-${r}-${orig}`, y, r, orig, own, also: also || [], tags: tags || "", note: note || "", acq: null, swap: null};
@@ -188,8 +194,10 @@ function swapFromKey(key) { // "new-2029-1-MIL" or an existing swap id
   return {id: key, y: +m[1], r: +m[2], grantor: m[3], holder: null, note: "", pre: false, isNew: true};
 }
 
-function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel) {
-  const ids = Object.keys(sel), pids = Object.keys(psel), wids = Object.keys(wsel), issues = [], warns = [], summary = {};
+const teamTPEs = (ab, dt = L.date) => L.tpes.filter(x => x.team === ab && x.amt > 0 && x.start <= dt && x.end > dt);
+
+function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
+  const ids = Object.keys(sel), pids = Object.keys(psel), wids = Object.keys(wsel), cids = Object.keys(csel).filter(k => csel[k].amt > 0), issues = [], warns = [], summary = {};
   for (const ab of L.teamIds) summary[ab] = {out: [], inc: [], outV: 0, inV: 0, pOut: [], pIn: [], wOut: [], wIn: []};
   for (const id of wids) {
     const s = swapFromKey(id), to = wsel[id]; if (!s) continue;
@@ -208,7 +216,7 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel) {
     if (!k || !summary[k.own] || !summary[to]) continue;
     summary[k.own].pOut.push(k); summary[to].pIn.push(k);
   }
-  if ((!ids.length && !pids.length && !wids.length) || L.teamIds.length < 2) return {state: "idle", issues, warns, summary};
+  if ((!ids.length && !pids.length && !wids.length && !cids.length) || L.teamIds.length < 2) return {state: "idle", issues, warns, summary};
   const dt = L.date;
   if (!windowOpen(dt)) issues.push({kind: "window", h: "The trade deadline has passed",
     p: `The 2026-27 deadline is ${fmtD(DEADLINE)} (estimated). No trades can be made from the day after the deadline until the NBA Finals end, around ${fmtD(REOPEN)}. Move the league date back before the deadline, or past the Finals.`,
@@ -223,26 +231,72 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel) {
   }
   for (const ab of L.teamIds) {
     const t = L.teams[ab], s = summary[ab], name = t.short;
-    if (!s.out.length && !s.inc.length && !s.pOut.length && !s.pIn.length && !s.wOut.length && !s.wIn.length) { warns.push({h: `The ${name} aren't part of this deal`, p: `Nothing goes to or from the ${name}. Add one of their players or remove them from the trade.`}); continue; }
+    if (!s.out.length && !s.inc.length && !s.pOut.length && !s.pIn.length && !s.wOut.length && !s.wIn.length && !(csel[ab]?.amt > 0) && !Object.values(csel).some(c => c.to === ab && c.amt > 0)) { warns.push({h: `The ${name} aren't part of this deal`, p: `Nothing goes to or from the ${name}. Add one of their players or remove them from the trade.`}); continue; }
     const before = payroll(ab), after = before - s.outV + s.inV;
     const outStd = s.out.filter(p => !p.twoway), incStd = s.inc.filter(p => !p.twoway);
     s.before = before; s.after = after;
+    const matchCap = o => o <= BAND1 ? 2 * o + CUSHION : o <= BAND2 ? o + BAND_ADD : 1.25 * o + CUSHION;
+    const triggers = []; // hard caps this deal would create: [level, reason]
+    let salaryProblem = null;
     if (s.inV > s.outV) {
       if (after <= CAP) s.rule = `Stays under the ${money(CAP)} cap after the trade, so no matching needed.`;
       else if (after > APRON1) {
         s.allowed = s.outV; s.rule = "Above the 1st apron after the trade: can take back at most 100% of outgoing salary.";
-        if (s.inV > s.allowed) issues.push({kind: "salary", team: ab, gap: s.inV - s.allowed, h: `The ${name} take back too much salary`,
-          p: `The ${name} would be at ${money(after)} after this deal, above the ${money(APRON1)} first apron. Teams above the first apron can only take back as much salary as they send out. They send ${money(s.outV)} and receive ${money(s.inV)}, which is ${money(s.inV - s.outV)} too much. Send more salary from the ${name}, or take back less.`});
+        if (s.inV > s.allowed) salaryProblem = `The ${name} would be at ${money(after)} after this deal, above the ${money(APRON1)} first apron. Teams above the first apron can only take back as much salary as they send out, and they can't use trade exceptions. They send ${money(s.outV)} and receive ${money(s.inV)}, which is ${money(s.inV - s.outV)} too much. Send more salary from the ${name}, or take back less.`;
       } else {
         const o = s.outV;
-        s.allowed = o <= BAND1 ? 2 * o + CUSHION : o <= BAND2 ? o + BAND_ADD : 1.25 * o + CUSHION;
+        s.allowed = matchCap(o);
         s.rule = o <= BAND1 ? `Sends ≤ ${money(BAND1)}: may take back 200% + $250K.` : o <= BAND2 ? `Sends ${money(BAND1)}–${money(BAND2)}: may take back outgoing + ${money(BAND_ADD)}.` : `Sends > ${money(BAND2)}: may take back 125% + $250K.`;
-        if (s.inV > s.allowed) issues.push({kind: "salary", team: ab, gap: s.inV - s.allowed, h: `The ${name} take back too much salary`,
-          p: `The ${name} are over the cap but under the first apron after this deal (${money(after)}). Sending out ${money(o)} lets them take back up to ${money(s.allowed)}, but they'd receive ${money(s.inV)}, which is ${money(s.inV - s.allowed)} over the limit. ${s.rule}${o === 0 ? " Draft picks don't count as salary, so a team over the cap has to send a contract back to take a player in." : ""} Send more salary from the ${name}, or take back less.`});
+        if (s.inV > s.allowed) salaryProblem = `The ${name} are over the cap but under the first apron after this deal (${money(after)}). Sending out ${money(o)} lets them take back up to ${money(s.allowed)}, but they'd receive ${money(s.inV)}, which is ${money(s.inV - s.allowed)} over the limit. ${s.rule}${o === 0 ? " Draft picks and cash don't count as salary, so a team over the cap has to send a contract back or use a trade exception to take a player in." : ""} Send more salary from the ${name}, take back less, or use a trade exception.`;
+        else triggers.push([1, "taking back more salary than they send"]);
       }
+      // Traded player exception: absorb incoming players (one per exception) into open exceptions; the rest must match normally.
+      if (salaryProblem && after <= APRON1) {
+        const open = teamTPEs(ab, dt).map(x => ({...x})).sort((a, b) => a.amt - b.amt), used = [];
+        let rest = 0;
+        for (const p of [...incStd].sort((a, b) => b.inV - a.inV)) {
+          const x = open.find(x => !x.taken && x.amt >= p.inV);
+          if (x) { x.taken = true; used.push({tpe: x, p}); } else rest += p.inV;
+        }
+        if (used.length && (rest === 0 || rest <= matchCap(s.outV))) {
+          salaryProblem = null; s.tpeUse = used;
+          s.rule = used.map(u => `${u.p.name} (${money(u.p.inV)}) goes into the ${money(u.tpe.amt)} trade exception from ${u.tpe.from} (expires ${fmtD(u.tpe.end)}).`).join(" ") + (rest ? ` The other ${money(rest)} is matched by outgoing salary.` : "");
+          triggers.push([1, used.some(u => u.tpe.start < SEASON_START) ? "using a trade exception from last season" : "taking back more salary than they send"]);
+        } else if (open.length) {
+          salaryProblem += ` Their trade exceptions (largest ${money(open.at(-1).amt)}) can't absorb ${incStd.length > 1 ? "these contracts" : "this contract"}: an exception takes one player whose salary fits inside it.`;
+        }
+      } else if (salaryProblem && teamTPEs(ab, dt).length) salaryProblem += ` Teams above the first apron after a trade can't use trade exceptions.`;
+      if (salaryProblem) issues.push({kind: "salary", team: ab, gap: s.inV - (s.allowed || 0), h: `The ${name} take back too much salary`, p: salaryProblem});
     } else s.rule = s.inV === s.outV ? "Salaries match exactly." : `Takes back less salary than it sends (${money(s.outV - s.inV)} saved).`;
-    if (after > APRON2 && outStd.length >= 2 && s.inV > Math.max(...outStd.map(p => p.outV))) issues.push({kind: "salary", team: ab, h: `The ${name} can't combine salaries above the 2nd apron`,
+    const aggregated = outStd.length >= 2 && s.inV > Math.max(0, ...outStd.map(p => p.outV)) && after > CAP;
+    if (aggregated) triggers.push([2, "combining two or more players' salaries"]);
+    if (after > APRON2 && aggregated) issues.push({kind: "salary", team: ab, h: `The ${name} can't combine salaries above the 2nd apron`,
       p: `The ${name} would be at ${money(after)}, above the ${money(APRON2)} second apron. Teams there can't add players' salaries together to match an incoming contract. The biggest single salary they send is ${money(Math.max(...outStd.map(p => p.outV)))}, but they take back ${money(s.inV)}. Match with one player, or cut payroll below the second apron.`});
+    // cash
+    const cashOut = Object.entries(csel).filter(([from]) => from === ab).reduce((a, [, c]) => a + c.amt, 0);
+    const cashIn = Object.values(csel).filter(c => c.to === ab).reduce((a, c) => a + c.amt, 0);
+    s.cashOut = cashOut; s.cashIn = cashIn;
+    if (cashOut > 0) {
+      triggers.push([2, "sending cash"]);
+      if (after > APRON2) issues.push({kind: "cash", team: ab, h: `The ${name} can't send cash`, p: `Teams above the ${money(APRON2)} second apron can't include cash in a trade. The ${name} would be at ${money(after)}. Remove the cash, or get under the second apron.`});
+      const left = CASH_LIMIT - (L.cashSent[ab] || 0);
+      if (cashOut > left) issues.push({kind: "cash", team: ab, h: `The ${name} would send too much cash`, p: `A team can send at most ${money(CASH_LIMIT, 3)} in cash in trades during the 2026-27 season. The ${name} have ${money(left, 2)} left${L.cashSent[ab] ? ` (they already sent ${money(L.cashSent[ab], 2)} in your earlier trades)` : ""}, and this deal sends ${money(cashOut, 2)}.`});
+    }
+    if (cashIn > 0) {
+      const left = CASH_LIMIT - (L.cashRecv[ab] || 0);
+      if (cashIn > left) issues.push({kind: "cash", team: ab, h: `The ${name} would receive too much cash`, p: `A team can receive at most ${money(CASH_LIMIT, 3)} in cash in trades during the 2026-27 season. The ${name} can take ${money(left, 2)} more, and this deal sends them ${money(cashIn, 2)}.`});
+    }
+    // hard caps: one the team already has, plus any this deal creates
+    const capNow = L.hardcap[ab] || 0, capNew = triggers.length ? Math.min(...triggers.map(x => x[0])) : 0;
+    const level = Math.min(capNow || 9, capNew || 9), limit = level === 1 ? APRON1 : level === 2 ? APRON2 : Infinity;
+    s.hardcap = level < 9 ? level : 0; s.triggers = triggers;
+    if (after > limit) {
+      const why = capNow === level ? (L.hcWhy[ab] || "an earlier signing or trade this season") : triggers.filter(x => x[0] === level).map(x => x[1]).join(" and ");
+      issues.push({kind: "hardcap", team: ab, h: `The ${name} would go over their hard cap`,
+        p: `The ${name} ${capNow === level ? "are" : "would be"} hard-capped at the ${level === 1 ? "first" : "second"} apron (${money(limit)}) because of ${why}. A hard-capped team can't go over that line for the rest of the season, and this deal puts them at ${money(after)}, ${money(after - limit)} over. Send out more salary or take back less.`});
+    } else if (capNew && (!capNow || capNew < capNow)) {
+      warns.push({h: `This deal hard-caps the ${name}`, p: `Because of ${triggers.filter(x => x[0] === capNew).map(x => x[1]).join(" and ")}, the ${name} would be hard-capped at the ${capNew === 1 ? "first" : "second"} apron (${money(capNew === 1 ? APRON1 : APRON2)}) for the rest of the season.`});
+    }
     if (outStd.length >= 2 && s.inV > 0) for (const p of outStd) {
       const e = elig(p, dt);
       if (e.kind === "agg") issues.push({kind: "agg", team: ab, pid: p.id, h: `${p.name} can't be packaged with other players yet`, p: e.why + " Trade him by himself, or wait.", fix: [[`Fast-forward to ${fmtD(e.until, false)}`, +e.until]]});
@@ -327,6 +381,22 @@ function suggest(ev) {
   return out;
 }
 
+// What a passing deal changes beyond rosters and picks: cash totals, hard caps, exceptions used and created.
+const tpeKey = x => `${x.team}|${x.from}|${+x.start}`;
+function tradeEffects(ev) {
+  const fx = {cash: [], hardcaps: [], tpeUse: [], newTpes: []};
+  for (const [from, c] of Object.entries(L.csel)) if (c.amt > 0) fx.cash.push([from, c.to, c.amt]);
+  for (const ab of L.teamIds) {
+    const s = ev.summary[ab]; if (!s || s.before == null) continue;
+    if (s.hardcap && (!L.hardcap[ab] || s.hardcap < L.hardcap[ab]) && s.triggers?.length) fx.hardcaps.push([ab, s.hardcap, s.triggers.filter(t => t[0] === s.hardcap).map(t => t[1]).join(" and ")]);
+    for (const u of s.tpeUse || []) fx.tpeUse.push([tpeKey(u.tpe), u.p.inV]);
+    // A team over the cap that sends out more salary than it takes back gets a trade exception for the difference (good for one year).
+    const net = s.outV - s.inV;
+    if (!s.tpeUse && s.after > CAP && net > 0 && s.out.some(p => !p.twoway)) fx.newTpes.push([ab, s.out.filter(p => !p.twoway).map(p => p.name).join(", "), net]);
+  }
+  return fx;
+}
+
 function applyTrade(tr) {
   for (const [id, to] of tr.moves) if (!L.players[id] || !L.teams[to]) return false;
   for (const [id, to] of tr.pmoves || []) if (!L.picks[id] || !L.teams[to]) return false;
@@ -350,6 +420,11 @@ function applyTrade(tr) {
       delete L.swaps[id];
     } else { L.swaps[id].holder = to; }
   }
+  const fx = tr.fx || {};
+  for (const [from, to, amt] of fx.cash || []) { L.cashSent[from] = (L.cashSent[from] || 0) + amt; L.cashRecv[to] = (L.cashRecv[to] || 0) + amt; }
+  for (const [ab, level, why] of fx.hardcaps || []) if (!L.hardcap[ab] || level < L.hardcap[ab]) { L.hardcap[ab] = level; L.hcWhy[ab] = `${why} in your trade on ${fmtD(d(tr.date))}`; }
+  for (const [key, amt] of fx.tpeUse || []) { const x = L.tpes.find(x => tpeKey(x) === key); if (x) x.amt = Math.max(0, x.amt - amt); }
+  for (const [team, from, amt] of fx.newTpes || []) L.tpes.push({id: "sim" + L.tpes.length, team, from, amt, start: d(tr.date), end: new Date(+d(tr.date) + 365 * DAY)});
   L.executed.push(tr);
   return true;
 }
@@ -360,5 +435,6 @@ function search(q, limit = 12) {
 }
 
 global.Engine = {L, CAP, TAX, APRON1, APRON2, BAND1, BAND2, BAND_ADD, MIN_SAL, DAY, TODAY, DEC15, JAN15, DEADLINE, REOPEN, DRAFT, END, START, SEASONS, TIER, PICK_LAST,
+  CASH_LIMIT, teamTPEs, tradeEffects,
   d, money, fmtD, load, pickLabel, teamPicks, pickTerms, isConditional, swapLabel, swapFromKey, teamSwaps: ab => Object.values(L.swaps).filter(s => s.holder === ab && !(s.y === 2027 && L.date > DRAFT)).sort((a, b) => a.y - b.y || a.r - b.r), payroll, tierOf, windowOpen, minDate, elig, evaluate, suggest, applyTrade, search};
 })(window);
