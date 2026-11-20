@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T11:38:09Z",
+  "updated": "2026-11-20T11:52:56Z",
   "season": "2026-27",
   "tx": [
     [
@@ -6945,7 +6945,7 @@
         "LAC"
       ],
       "Protected",
-      "2027 first-round pick swap rights (TOR for LAC/OKC/DEN, subject to OKC's prior swap rights and DEN (Top 5 protected))."
+      "OKC receives a protected 2027 1st round pick from DEN, details are below: 2027: 1-5 2028: 1-5 2029: 1-5 If not conveyed, 2029 2nd RD pick to OKC"
     ],
     [
       2027,
@@ -6969,12 +6969,12 @@
       2027,
       1,
       "HOU",
-      "BKN",
+      "HOU",
       [
-        "HOU"
+        "BKN"
       ],
-      "",
-      ""
+      "Swap Option",
+      "HOU's option to swap 2027 1st round pick with BKN"
     ],
     [
       2027,
@@ -6995,7 +6995,7 @@
         "TOR"
       ],
       "Swap Option",
-      "2027 first-round pick swap rights (TOR for LAC/OKC/DEN, subject to OKC's prior swap rights and DEN (Top 5 protected))."
+      "OKC will have the option to swap 2027 1st round pick of OKC or DEN (top 5 protected) for LAC 1st round pick."
     ],
     [
       2027,
@@ -7037,7 +7037,7 @@
         "NO"
       ],
       "Conditional Protected",
-      "ATL will receive least favorable pick of MIL/NOP"
+      "ATL will receive least favorable pick of MIL/NOP Protected 1-4"
     ],
     [
       2027,
@@ -7047,8 +7047,8 @@
       [
         "MEM"
       ],
-      "",
-      ""
+      "Conditional",
+      "More favorable pick of CLE, MIN, UTA"
     ],
     [
       2027,
@@ -7058,8 +7058,8 @@
       [
         "ATL"
       ],
-      "",
-      ""
+      "Conditional Protected",
+      "ATL will receive least favorable pick of MIL/NOP"
     ],
     [
       2027,
@@ -7078,8 +7078,8 @@
       [
         "LAC"
       ],
-      "",
-      ""
+      "Swap Option",
+      "OKC will have the option to swap 2027 1st round pick of OKC or DEN (top 5 protected) for LAC 1st round pick."
     ],
     [
       2027,
@@ -7159,7 +7159,7 @@
         "PHX"
       ],
       "Conditional",
-      "MEM receives a protected 2027 1st round pick from UTA, see details below: 2027: 1-4 Protected If pick is protected, MEM will receive a 2nd round pick."
+      "Least favourable between Utah, Cleveland and Minnesota's 2027 1st RD picks"
     ],
     [
       2027,
@@ -7207,7 +7207,7 @@
       "SAC",
       [],
       "Protected",
-      "SAC receives a protected 2025 1st round pick from SAS (originally CHA), details are below: 2023: 1-16 (DID NOT transfer) 2024: 1-14 (DID NOT transfer) 2025: 1-14 (DID NOT transfer) If 2025 1st round pick doesn't transfer"
+      "SAC receives a protected 2025 1st round pick from SAS (originally CHA), details are below: 2023: 1-16 (DID NOT transfer) 2024: 1-14 (DID NOT transfer) 2025: 1-14 (DID NOT transfer) If 2025 1st round pick doesn't transfer, 2026 and 2027 2nd RD pick (CHA) to SAC Result: SAC receives 2026 and 2027 2nd RD pick (CHA) Result: Resolved"
     ],
     [
       2027,
@@ -7215,8 +7215,8 @@
       "CHI",
       "OKC",
       [],
-      "",
-      ""
+      "Protected",
+      "Protected 31-50"
     ],
     [
       2027,
@@ -7266,7 +7266,7 @@
         "WSH"
       ],
       "Conditional",
-      "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Ph"
+      "PHI will receive the most favorable 2027 2nd round pick of GSW/PHX"
     ],
     [
       2027,
@@ -7277,8 +7277,8 @@
         "NO",
         "SA"
       ],
-      "",
-      ""
+      "Conditional",
+      "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Philadelphia's pick."
     ],
     [
       2027,
@@ -7362,8 +7362,8 @@
         "CHA",
         "HOU"
       ],
-      "",
-      ""
+      "Conditional",
+      "HOU will receive the less favorable of: -POR 2027 2nd round pick -NOP 2027 2nd round pick (Protected 31-55)"
     ],
     [
       2027,
@@ -7385,7 +7385,7 @@
         "PHI"
       ],
       "Conditional",
-      "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Ph"
+      "SAS receives the lowest 2027 2nd round pick between OKC, IND, HOU, or MIA"
     ],
     [
       2027,
@@ -7407,7 +7407,7 @@
         "LAC"
       ],
       "Conditional",
-      "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Ph"
+      "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Philadelphia's pick."
     ],
     [
       2027,
@@ -7417,8 +7417,8 @@
       [
         "PHI"
       ],
-      "",
-      ""
+      "Conditional",
+      "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Philadelphia's pick."
     ],
     [
       2027,
@@ -7449,7 +7449,7 @@
         "SA"
       ],
       "Conditional",
-      "Protected 1-16, If pick is protected, OKC receives 2027 2nd RD picks of SAS and CHA"
+      "MIA will receive the lowest 2nd round pick of SAS, HOU, IND, MIA, OKC."
     ],
     [
       2027,
@@ -7476,7 +7476,7 @@
       "NY",
       [],
       "Protected",
-      "NYK receives a protected 2023 1st round pick from OKC, details are below: 2023: 1-14 (DID NOT transfer) 2024: 1-12 (DID NOT transfer) 2025: 1-10 (DID NOT transfer) 2026: 1-8 (DID NOT transfer) If all years do not transfe"
+      "NYK receives a protected 2023 1st round pick from OKC, details are below: 2023: 1-14 (DID NOT transfer) 2024: 1-12 (DID NOT transfer) 2025: 1-10 (DID NOT transfer) 2026: 1-8 (DID NOT transfer) If all years do not transfer, NYK will receive 2026 2nd round pick and 2027 2nd round pick. Result: 2026 2nd round pick and 2027 2nd round pick transferred Result: Resolved"
     ],
     [
       2028,
@@ -7496,20 +7496,20 @@
         "SA"
       ],
       "Conditional Protected Swap Option",
-      "Boston will receive the more favorable pick of GSW, OKC or MIL"
+      "Since pick is protected, If BOS picks #1 they will trade a 2028 2nd round pick to SAS if the pick is between #31-45 Top 1 SAS option to swap 2028 1st round pick with BOS"
     ],
     [
       2028,
       1,
       "BKN",
-      "PHX",
+      "BKN",
       [
-        "BKN",
+        "PHX",
         "NY",
         "WSH"
       ],
-      "",
-      ""
+      "Swap Option",
+      "WAS has the option to swap WAS 2028 1st round pick for the lower 2028 1st round pick of BKN or PHX"
     ],
     [
       2028,
@@ -7538,7 +7538,7 @@
         "CLE"
       ],
       "Conditional",
-      "UTA will receive the more favorable of LAL or UTA 2030 1st round picks"
+      "On a prior trade UTA can swap its 2028 1st RD pick with CLE 2028 1st RD pick. After that, ATL can swap its 2028 1st RD pick for the less favorable of the two picks between UTA and CLE (after the first swap, if it happens)."
     ],
     [
       2028,
@@ -7687,8 +7687,8 @@
       [
         "DAL"
       ],
-      "",
-      ""
+      "Swap Option",
+      "OKC has the option to swap 2028 1st round picks with DAL"
     ],
     [
       2028,
@@ -7708,8 +7708,8 @@
         "PHI",
         "BOS"
       ],
-      "",
-      ""
+      "Conditional",
+      "A conditional 2028 first-round pick (LAC or PHI own, protected 1-16). If the pick does not convey, BOS instead receives the right to swap its own or SAS's 2028 first-round pick with LAC's or PHI's (if 1-8)."
     ],
     [
       2028,
@@ -7732,8 +7732,8 @@
         "MIL",
         "CHI"
       ],
-      "",
-      ""
+      "Swap Option",
+      "POR's option to swap 2028 1st round pick with MIL"
     ],
     [
       2028,
@@ -7748,12 +7748,12 @@
       2028,
       1,
       "SA",
-      "BOS",
+      "SA",
       [
-        "SA"
+        "BOS"
       ],
-      "",
-      ""
+      "Conditional Protected Swap Option",
+      "Since pick is protected, If BOS picks #1 they will trade a 2028 2nd round pick to SAS if the pick is between #31-45 Top 1 SAS option to swap 2028 1st round pick with BOS"
     ],
     [
       2028,
@@ -7768,25 +7768,25 @@
       2028,
       1,
       "UTAH",
-      "CLE",
+      "UTAH",
       [
-        "UTAH",
+        "CLE",
         "LAL"
       ],
-      "",
-      ""
+      "Swap Option",
+      "UTA's option to swap 2028 1st round pick with CLE"
     ],
     [
       2028,
       1,
       "WSH",
-      "PHX",
+      "WSH",
       [
-        "WSH",
+        "PHX",
         "MIL"
       ],
-      "",
-      ""
+      "Swap Option",
+      "WAS has the option to swap WAS 2028 1st round pick for the lower 2028 1st round pick of BKN or PHX"
     ],
     [
       2028,
@@ -7828,7 +7828,7 @@
         "UTAH"
       ],
       "Conditional",
-      "DET will receive the less favorable of the GSW and MIN 2031 2nd Rd picks"
+      "DET will receive less favorable 2nd RD pick of CHA/LAC"
     ],
     [
       2028,
@@ -7919,8 +7919,8 @@
         "DET",
         "UTAH"
       ],
-      "",
-      ""
+      "Conditional",
+      "UTA receives the least favorable of five possible 2028 2nd RD picks: - DET pick (protected 56-60) - The less favorable of CHA and LAC 2nd RD picks - MIA 2nd RD pick, only if DAL conveys a 1st to CHA in 2027 - NYK 2nd RD pick"
     ],
     [
       2028,
@@ -7951,8 +7951,8 @@
         "CHA",
         "UTAH"
       ],
-      "",
-      ""
+      "Conditional",
+      "UTA receives the least favorable of five possible 2028 2nd RD picks: - DET pick (protected 56-60) - The less favorable of CHA and LAC 2nd RD picks - MIA 2nd RD pick, only if DAL conveys a 1st to CHA in 2027 - NYK 2nd RD pick"
     ],
     [
       2028,
@@ -7962,8 +7962,8 @@
       [
         "BOS"
       ],
-      "",
-      ""
+      "Conditional",
+      "Boston will receive the more favorable pick of GSW, OKC or MIL"
     ],
     [
       2028,
@@ -7991,8 +7991,8 @@
       [
         "UTAH"
       ],
-      "",
-      ""
+      "Conditional",
+      "UTA receives the least favorable of five possible 2028 2nd RD picks: - DET pick (protected 56-60) - The less favorable of CHA and LAC 2nd RD picks - MIA 2nd RD pick, only if DAL conveys a 1st to CHA in 2027 - NYK 2nd RD pick"
     ],
     [
       2028,
@@ -8002,8 +8002,8 @@
       [
         "BOS"
       ],
-      "",
-      ""
+      "Conditional",
+      "Boston will receive the more favorable pick of GSW, OKC or MIL"
     ],
     [
       2028,
@@ -8033,8 +8033,8 @@
       [
         "IND"
       ],
-      "",
-      ""
+      "Swap Option",
+      "CHI can swap with the more favorable of CHI/IND/PHX"
     ],
     [
       2028,
@@ -8091,8 +8091,8 @@
       [
         "WSH"
       ],
-      "",
-      ""
+      "Conditional",
+      "WAS will receive the lower of the LAL 2028 2nd RD pick or the WAS 2nd RD pick"
     ],
     [
       2029,
@@ -8111,8 +8111,8 @@
       [
         "WSH"
       ],
-      "",
-      ""
+      "Conditional",
+      "WSH will receive the second most favorable 1st RD pick of POR/BOS/MIL"
     ],
     [
       2029,
@@ -8216,12 +8216,12 @@
       2029,
       1,
       "LAC",
-      "PHI",
+      "LAC",
       [
-        "LAC"
+        "PHI"
       ],
-      "",
-      ""
+      "Swap Option",
+      "PHI will have the option to swap 2029 1st round pick of PHI for LAC (top 3 protected)"
     ],
     [
       2029,
@@ -8240,8 +8240,8 @@
       [
         "ORL"
       ],
-      "",
-      ""
+      "Protected Swap Option",
+      "Top 2 Protected if protected ORL will give 2029 2nd RD pick to MEM MEM has the right to swap its 2029 1st round pick for ORL 1st round pick"
     ],
     [
       2029,
@@ -8260,8 +8260,8 @@
       [
         "WSH"
       ],
-      "",
-      ""
+      "Conditional",
+      "WSH will receive the second most favorable 1st RD pick of POR/BOS/MIL"
     ],
     [
       2029,
@@ -8272,7 +8272,7 @@
         "CHA"
       ],
       "Swap Option",
-      "Least favorable of CLE, CHA, UTA, or MIN (top 5 protected)"
+      "The right to swap the least favorable of CHA's, CLE's or UTA's 2029 1st for MIN's 2029 1st (if MIN is 1-5)"
     ],
     [
       2029,
@@ -8310,7 +8310,7 @@
         "MEM"
       ],
       "Protected Swap Option",
-      "Top 2 Protected if protected ORL will give 2029 2nd RD pick to MEM"
+      "Top 2 Protected if protected ORL will give 2029 2nd RD pick to MEM MEM has the right to swap its 2029 1st round pick for ORL 1st round pick"
     ],
     [
       2029,
@@ -8320,8 +8320,8 @@
       [
         "LAC"
       ],
-      "",
-      ""
+      "Swap Option",
+      "PHI will have the option to swap 2029 1st round pick of PHI for LAC (top 3 protected)"
     ],
     [
       2029,
@@ -8331,8 +8331,8 @@
       [
         "HOU"
       ],
-      "",
-      ""
+      "Conditional",
+      "HOU will receive the two most favorable of DAL, PHX, or HOU 1st round pick."
     ],
     [
       2029,
@@ -8381,7 +8381,7 @@
         "CHA"
       ],
       "Conditional",
-      "A conditional 2030 first-round swap (CHA for the less favorable of MIN or the more favorable of DAL/SAS, if MIN is not 1-3)"
+      "Least favourable between Utah, Cleveland and Minnesota's 2029 1st RD picks"
     ],
     [
       2029,
@@ -8543,8 +8543,8 @@
       [
         "CHA"
       ],
-      "",
-      ""
+      "Conditional",
+      "More favorable of ATL or MIA"
     ],
     [
       2029,
@@ -8554,8 +8554,8 @@
       [
         "DET"
       ],
-      "",
-      ""
+      "Conditional",
+      "Second most favorable of NYK/DET/MIL"
     ],
     [
       2029,
@@ -8677,8 +8677,8 @@
       [
         "POR"
       ],
-      "",
-      ""
+      "Conditional",
+      "POR receive the least favorable 2029 2nd round pick of IND/WAS"
     ],
     [
       2030,
@@ -8743,7 +8743,7 @@
         "SA"
       ],
       "Swap Option",
-      "CHA can swap with the more favorable of CHA/MIN"
+      "SAS option to swap 2030 1st round pick with DAL"
     ],
     [
       2030,
@@ -8816,12 +8816,12 @@
       2030,
       1,
       "MEM",
-      "PHX",
+      "MEM",
       [
-        "MEM"
+        "PHX"
       ],
-      "",
-      ""
+      "Swap Option",
+      "MEM's option to swap with lower pick of PHX or WAS"
     ],
     [
       2030,
@@ -8919,8 +8919,8 @@
       [
         "MIL"
       ],
-      "",
-      ""
+      "Swap Option",
+      "POR's option to swap 2030 1st round pick with MIL"
     ],
     [
       2030,
@@ -8935,13 +8935,13 @@
       2030,
       1,
       "SA",
-      "DAL",
+      "SA",
       [
-        "SA",
+        "DAL",
         "MIN"
       ],
-      "",
-      ""
+      "Swap Option",
+      "SAS option to swap 2030 1st round pick with DAL"
     ],
     [
       2030,
@@ -8960,20 +8960,20 @@
       [
         "LAL"
       ],
-      "",
-      ""
+      "Swap Option",
+      "UTA will receive the more favorable of LAL or UTA 2030 1st round picks"
     ],
     [
       2030,
       1,
       "WSH",
-      "MEM",
+      "WSH",
       [
-        "PHX",
-        "WSH"
+        "MEM",
+        "PHX"
       ],
-      "",
-      ""
+      "Swap Option",
+      "MEM's option to swap with lower pick of PHX or WAS"
     ],
     [
       2030,
@@ -9048,8 +9048,8 @@
       [
         "MEM"
       ],
-      "",
-      ""
+      "Conditional",
+      "More favourable of DEN, MIA or HOU"
     ],
     [
       2030,
@@ -9079,8 +9079,8 @@
       [
         "MEM"
       ],
-      "",
-      ""
+      "Conditional",
+      "More favourable of DEN, MIA or HOU"
     ],
     [
       2030,
@@ -9188,8 +9188,8 @@
       [
         "NO"
       ],
-      "",
-      ""
+      "Swap Option",
+      "ORL has the option to swap 2030 2nd RD pick with NOP"
     ],
     [
       2030,
@@ -9210,7 +9210,7 @@
         "BOS"
       ],
       "Conditional",
-      "Boston will receive the more favorable pick of GSW, OKC or MIL"
+      "PHI will receive the most favorable 2030 2nd round pick of PHX/POR"
     ],
     [
       2030,
@@ -9221,8 +9221,8 @@
         "PHI",
         "BOS"
       ],
-      "",
-      ""
+      "Conditional",
+      "Boston will receive the more favorable of WSH, POR or PHX"
     ],
     [
       2030,
@@ -9259,8 +9259,8 @@
       [
         "UTAH"
       ],
-      "",
-      ""
+      "Conditional",
+      "CHA will receive the more favorable 2030 2nd round pick of LAC/UTA"
     ],
     [
       2030,
@@ -9517,8 +9517,8 @@
       [
         "SAC"
       ],
-      "",
-      ""
+      "Swap Option",
+      "SAS receives the right to swap 2031 1st round picks of SAC/SAS"
     ],
     [
       2031,
@@ -9602,8 +9602,8 @@
       [
         "UTAH"
       ],
-      "",
-      ""
+      "Conditional",
+      "Most favorable of BOS/CLE"
     ],
     [
       2031,
@@ -9642,7 +9642,7 @@
         "DET"
       ],
       "Conditional",
-      "Chicago will receive the least favorable of GSW or DEN 2026 2nd round pick"
+      "DET will receive the less favorable of the GSW and MIN 2031 2nd Rd picks"
     ],
     [
       2031,
@@ -9654,7 +9654,7 @@
         "ATL"
       ],
       "Protected Swap Option",
-      "More favorable of ATL and HOU"
+      "Protected 56-60 Atlanta can swap their 2031 2nd round pick with Houston"
     ],
     [
       2031,
@@ -9765,8 +9765,8 @@
         "OKC",
         "NO"
       ],
-      "",
-      ""
+      "Swap Option",
+      "ORL has the option to swap 2031 2nd RD pick with NOP"
     ],
     [
       2031,
@@ -10210,8 +10210,8 @@
       [
         "CHI"
       ],
-      "",
-      ""
+      "Swap Option",
+      "MIN receives the right to swap 2032 2nd round picks of PHX/HOU"
     ],
     [
       2032,
@@ -10240,7 +10240,7 @@
         "ATL"
       ],
       "Conditional",
-      "More favorable of ATL and HOU"
+      "OKC will receive the less favorable of LAL or ATL 2032 2nd round picks"
     ],
     [
       2032,
@@ -10250,8 +10250,8 @@
       [
         "PHI"
       ],
-      "",
-      ""
+      "Swap Option",
+      "MEM's option to swap 2032 2nd round pick with PHI"
     ],
     [
       2032,
@@ -10325,7 +10325,7 @@
         "MEM"
       ],
       "Swap Option",
-      "MEM right to swap the most favorable 2nd round picks of MEM, PHI, UTA, or NOP"
+      "MEM's option to swap 2032 2nd round pick with PHI"
     ],
     [
       2032,
@@ -10383,7 +10383,7 @@
         "MEM"
       ],
       "Swap Option",
-      "MEM right to swap the most favorable 2nd round picks of MEM, PHI, UTA, or NOP"
+      "Most favorable of MEM, PHI and UTA 2032 2nd round pick swap"
     ],
     [
       2032,
@@ -16752,7 +16752,17 @@
             "kick": 0,
             "prev": 2743800
           },
-          "st": null
+          "st": [
+            1,
+            11,
+            2,
+            3,
+            0,
+            25,
+            0,
+            1,
+            0
+          ]
         },
         {
           "id": "4398390",

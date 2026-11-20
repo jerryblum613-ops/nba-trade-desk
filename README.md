@@ -8,6 +8,7 @@ An NBA trade machine with live rosters and contracts. It checks every trade agai
 - Rule checks: salary matching by payroll tier (under cap, over cap, 1st-apron 100% rule, 2nd-apron no-aggregation), roster limits, newly signed and extension trade freezes, the 2-month aggregation freeze after a trade, 10-day contracts, and the trade deadline
 - Plain-English explanations with one-click fixes: fast-forward to the eligibility date, or add a player that makes the salaries work
 - Draft picks: every team's 2027-2033 firsts and seconds with current owners and protections, checked against the Stepien rule, the frozen 7-years-out first for second-apron teams, and the draft date
+- Pick swaps: trade swap rights a team holds, or offer a new swap on a pick a team owns (both teams must own that year's pick; frozen picks can't be swapped)
 - 2 to 4 team trades, league-wide player search, and "Make trade" to play out a season (saved in your browser)
 - Separate desktop (three-pane desk) and mobile (tabbed app) layouts
 
@@ -25,4 +26,4 @@ Then serve the folder with any static server and open `index.html`.
 
 ## Notes
 
-2026-27 cap figures come from the NBA's July 2026 release. The salary-matching bands, the Feb 4, 2027 deadline and the Finals end date are estimates. Pick ownership comes from Salary Swish. Trading swap rights on their own, cash, trade exceptions and exception hard caps are not modelled yet.
+2026-27 cap figures come from the NBA's July 2026 release. The salary-matching bands, the Feb 4, 2027 deadline and the Finals end date are estimates. Pick ownership and terms come from Salary Swish; every conditional pick shows what it depends on. Swap rights can be traded, and new swaps can be offered on a pick a team owns. Cash, trade exceptions and exception hard caps are not modelled yet.

@@ -69,20 +69,39 @@ function card(p) {
   </div>`;
 }
 function picksSection(ab) {
-  const picks = E.teamPicks(ab), selN = picks.filter(k => L.psel[k.id]).length, open = U.pkOpen[ab] ?? false;
+  const picks = E.teamPicks(ab), swaps = E.teamSwaps(ab), open = U.pkOpen[ab] ?? false;
   const firsts = picks.filter(k => k.r === 1).length, others = L.teamIds.filter(x => x !== ab);
+  const destSel = (attr, id, to, what) => others.length > 1
+    ? `<select ${attr}="${id}" aria-label="Destination for ${what}">${others.map(o => `<option value="${o}" ${o === to ? "selected" : ""}>→ ${esc(team(o).short)}</option>`).join("")}</select>`
+    : `<span class="pto">→ ${esc(team(to).short)}</span>`;
+  const newKey = k => `new-${k.y}-${k.r}-${ab}`;
   const row = k => {
-    const to = L.psel[k.id], tag = k.also.length || /Protected|Conditional|Swap/.test(k.tags) ? (/Protected/.test(k.tags) ? "Protected" : /Swap/.test(k.tags) ? "Swap" : "Conditional") : "";
+    const to = L.psel[k.id], sw = L.wsel[newKey(k)], cond = E.isConditional(k);
+    const tag = cond ? (/Protected/.test(k.tags) ? "Protected" : /Swap/.test(k.tags) ? "Swap attached" : "Conditional") : "";
     const frozen = k.r === 1 && k.y === E.PICK_LAST && E.payroll(ab) > E.APRON2;
-    return `<div class="pk ${to ? "sel" : ""}" role="button" tabindex="0" aria-pressed="${!!to}" data-pick="${k.id}" title="${esc(k.note || "")}">
+    const canSwap = k.orig === ab && others.length && !to;
+    return `<div class="pkw"><div class="pk ${to ? "sel" : ""}" role="button" tabindex="0" aria-pressed="${!!to}" data-pick="${k.id}">
       <span class="py">${k.y}</span><span class="pr ${k.r === 1 ? "r1" : ""}">${k.r === 1 ? "1st" : "2nd"}</span>
       <span class="po">${k.orig === ab ? "Own" : "via " + esc(team(k.orig)?.short || k.orig)}</span>
       ${tag ? `<span class="pill warn">${tag}</span>` : ""}${frozen ? `<span class="pill lock">Frozen</span>` : ""}
-      ${to ? (others.length > 1 ? `<select data-pdest="${k.id}" aria-label="Destination for ${k.y} pick">${others.map(o => `<option value="${o}" ${o === to ? "selected" : ""}>→ ${esc(team(o).short)}</option>`).join("")}</select>` : `<span class="pto">→ ${esc(team(to).short)}</span>`) : `<span class="chk" aria-hidden="true">✓</span>`}
-    </div>`;
+      ${to ? destSel("data-pdest", k.id, to, `${k.y} pick`) : `<span class="chk" aria-hidden="true">✓</span>`}
+    </div>
+    ${cond ? `<div class="pnote"><b>Depends on:</b> ${esc(E.pickTerms(k))}</div>` : ""}
+    ${sw ? `<div class="pk swnew sel" data-newswap="${newKey(k)}" role="button" tabindex="0" aria-pressed="true"><span class="pr sw">Swap</span><span class="po">Swap rights on this pick</span>${destSel("data-wdest", newKey(k), sw, `${k.y} swap`)}</div>`
+      : canSwap ? `<button class="swbtn" data-newswap="${newKey(k)}">+ Offer a swap on this pick</button>` : ""}</div>`;
   };
-  return `<div class="pks"><button class="pkhead" data-pkopen="${ab}" aria-expanded="${open}"><span><b>Draft picks</b> · ${firsts} first${firsts === 1 ? "" : "s"}, ${picks.length - firsts} second${picks.length - firsts === 1 ? "" : "s"}</span>${selN ? `<span class="pill info" style="color:var(--sel)">${selN} in deal</span>` : ""}<span class="car">${open ? "▴" : "▾"}</span></button>
-    ${open ? `<div class="pklist">${picks.length ? picks.map(row).join("") : `<div class="sub" style="padding:6px 4px">No picks left to trade.</div>`}</div>` : picks.filter(k => L.psel[k.id]).length ? `<div class="pklist">${picks.filter(k => L.psel[k.id]).map(row).join("")}</div>` : ""}</div>`;
+  const srow = s => {
+    const to = L.wsel[s.id];
+    return `<div class="pkw"><div class="pk ${to ? "sel" : ""}" role="button" tabindex="0" aria-pressed="${!!to}" data-swap="${s.id}">
+      <span class="py">${s.y}</span><span class="pr sw">Swap</span><span class="po">Right to swap with the ${esc(team(s.grantor)?.short || s.grantor)}</span>
+      ${to ? destSel("data-wdest", s.id, to, `${s.y} swap right`) : `<span class="chk" aria-hidden="true">✓</span>`}</div>
+      <div class="pnote"><b>Terms:</b> ${esc(E.pickTerms({note: s.note, also: [], tags: ""}) || `May trade their ${s.y} pick for the ${team(s.grantor)?.short} pick if it's better.`)}</div></div>`;
+  };
+  const inDeal = picks.filter(k => L.psel[k.id] || L.wsel[newKey(k)]).length + swaps.filter(s => L.wsel[s.id]).length;
+  const body = open ? [...picks.map(row), ...swaps.map(srow)].join("") || `<div class="sub" style="padding:6px 4px">No picks left to trade.</div>`
+    : [...picks.filter(k => L.psel[k.id] || L.wsel[newKey(k)]).map(row), ...swaps.filter(s => L.wsel[s.id]).map(srow)].join("");
+  return `<div class="pks"><button class="pkhead" data-pkopen="${ab}" aria-expanded="${open}"><span><b>Draft picks</b> · ${firsts} first${firsts === 1 ? "" : "s"}, ${picks.length - firsts} second${picks.length - firsts === 1 ? "" : "s"}${swaps.length ? `, ${swaps.length} swap right${swaps.length > 1 ? "s" : ""}` : ""}</span>${inDeal ? `<span class="pill info" style="color:var(--sel)">${inDeal} in deal</span>` : ""}<span class="car">${open ? "▴" : "▾"}</span></button>
+    ${body ? `<div class="pklist">${body}</div>` : ""}</div>`;
 }
 function teamGrid(title, sub) {
   return `<div class="pickteams"><h3>${title}</h3>${sub ? `<p class="sub">${sub}</p>` : ""}<div class="tgrid">${L.order.filter(ab => !L.teamIds.includes(ab)).map(ab => `<button data-team="${ab}"><span class="dot" style="background:${team(ab).color}"></span><span class="n">${esc(team(ab).name)}</span></button>`).join("")}</div></div>`;
@@ -110,11 +129,13 @@ function summaryHtml(ev) {
   if (ev.state === "idle") return `<div class="empty"><h4>How to build a trade</h4><ol><li>Pick 2 to 4 teams.</li><li>Tap players or draft picks to send them. With 3+ teams, choose where each one goes.</li><li>Read the verdict. If it fails, each problem says why, with a fix.</li><li>Use the date controls to fast-forward until locked players become eligible.</li></ol></div>`;
   return L.teamIds.map(ab => {
     const s = ev.summary[ab], t = team(ab); if (!s) return "";
-    const li = (arr, pk) => arr.length || pk.length ? arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") +
-      pk.map(k => `<div><span>${esc(E.pickLabel(k))} pick</span><span class="mono" style="color:var(--mute)">${/Protected|Conditional|Swap/.test(k.tags) || k.also.length ? "cond." : "pick"}</span></div>`).join("") : `<div><span style="color:var(--faint)">Nothing</span></div>`;
+    const li = (arr, pk, sw) => arr.length || pk.length || sw.length ? arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") +
+      pk.map(k => `<div><span>${esc(E.pickLabel(k))} pick</span><span class="mono" style="color:var(--mute)">${E.isConditional(k) ? "conditional" : "pick"}</span></div>`).join("") +
+      sw.map(w => `<div><span>${w.y} ${w.r === 1 ? "1st" : "2nd"} swap (${esc(team(w.grantor)?.short || w.grantor)} pick)</span><span class="mono" style="color:var(--mute)">${w.isNew ? "new" : w.to === w.grantor ? "cancels it" : "swap"}</span></div>`).join("")
+      : `<div><span style="color:var(--faint)">Nothing</span></div>`;
     const bad = ev.issues.some(i => i.kind === "salary" && i.team === ab);
     return `<div class="tsum"><h3><span class="dot" style="background:${t.color}"></span>${esc(t.short)}</h3>
-      <div class="lst"><div class="k">Receive</div>${li(s.inc, s.pIn)}<div class="k">Send</div>${li(s.out, s.pOut)}</div>
+      <div class="lst"><div class="k">Receive</div>${li(s.inc, s.pIn, s.wIn)}<div class="k">Send</div>${li(s.out, s.pOut, s.wOut)}</div>
       <div class="mrow"><span>Outgoing salary</span><span class="mono">${money(s.outV)}</span></div>
       <div class="mrow"><span>Incoming salary</span><span class="mono">${money(s.inV)}</span></div>
       ${s.allowed != null ? `<div class="mrow"><span>Max allowed in</span><span class="mono">${money(s.allowed)}</span></div>` : ""}
@@ -140,7 +161,7 @@ function searchList(compact) {
   return `<div class="sres">${res.map(p => { const e = E.elig(p); return `<button data-find="${p.id}" class="${L.sel[p.id] ? "on" : ""}"><span class="dot" style="background:${team(p.team).color}"></span><span style="min-width:0"><div class="n">${esc(p.name)}</div><div class="m">${esc(team(p.team).short)} · ${esc(p.pos)} · ${esc(p.ht)}${e.ok ? "" : " · 🔒 " + esc(e.label)}</div></span><span class="s">${p.twoway ? "2-way" : money(p.sal)}</span></button>`; }).join("")}</div>`;
 }
 const footHtml = () => `<p><b>Checks:</b> salary matching by payroll tier (under cap, over cap, 1st apron 100% rule, 2nd apron no-aggregation), roster limits (15 standard, 3 two-way, 13 minimum), freezes on newly signed and extended players, the 2-month aggregation freeze after a trade, 10-day contracts, and the trade deadline.</p>
-  <p><b>2026-27:</b> cap ${money(E.CAP, 3)} · tax ${money(E.TAX, 3)} · 1st apron ${money(E.APRON1, 3)} · 2nd apron ${money(E.APRON2, 3)}. Matching bands, the Feb 4 deadline and the Finals end date are estimates. Payroll leaves out dead money from waived players. <b>Picks:</b> 2027–${E.PICK_LAST} firsts and seconds; checks the Stepien rule (no back-to-back years without a first), the frozen ${E.PICK_LAST} first for second-apron teams, and the draft date. Protected, conditional and swap picks keep their terms. Not modelled yet: trading swap rights on their own, cash, trade exceptions, exception hard caps. * = salary not found, minimum assumed.</p>
+  <p><b>2026-27:</b> cap ${money(E.CAP, 3)} · tax ${money(E.TAX, 3)} · 1st apron ${money(E.APRON1, 3)} · 2nd apron ${money(E.APRON2, 3)}. Matching bands, the Feb 4 deadline and the Finals end date are estimates. Payroll leaves out dead money from waived players. <b>Picks:</b> 2027–${E.PICK_LAST} firsts and seconds; checks the Stepien rule (no back-to-back years without a first), the frozen ${E.PICK_LAST} first for second-apron teams, and the draft date. Protected, conditional and swap picks keep their terms, and each one says what it depends on. You can trade swap rights a team holds or offer a new swap on a pick a team owns (both teams must own that year's pick). Not modelled yet: cash, trade exceptions, exception hard caps. * = salary not found, minimum assumed.</p>
   <p>Data: rosters, heights, stats and transactions from ESPN; contracts from Basketball-Reference; pick ownership from Salary Swish. Updated ${DATA ? new Date(DATA.updated).toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"}) : ""}. <button class="btn ghost" data-view="${U.mode === "mobile" ? "desktop" : "mobile"}" style="padding:2px 8px;font-size:12px">Switch to ${U.mode === "mobile" ? "desktop" : "mobile"} layout</button></p>`;
 
 // ---------- DESKTOP ----------
@@ -195,7 +216,7 @@ function mBar() {
 }
 function mTeams() {
   if (!L.teamIds.includes(U.mteam)) U.mteam = L.teamIds[0];
-  $("mTeams").innerHTML = L.teamIds.map(ab => { const t = team(ab), n = Object.keys(L.sel).filter(id => L.players[id].team === ab).length + Object.keys(L.psel).filter(id => L.picks[id].own === ab).length, on = U.mview === "roster" && ab === U.mteam;
+  $("mTeams").innerHTML = L.teamIds.map(ab => { const t = team(ab), n = Object.keys(L.sel).filter(id => L.players[id].team === ab).length + Object.keys(L.psel).filter(id => L.picks[id].own === ab).length + Object.keys(L.wsel).filter(id => { const s = E.swapFromKey(id); return s && (s.isNew ? s.grantor : s.holder) === ab; }).length, on = U.mview === "roster" && ab === U.mteam;
     return `<button class="tchip ${on ? "on" : ""}" data-mteam="${ab}" style="${on ? `background:${t.color}` : ""}"><span class="dot" style="background:${on ? "#fff" : t.color}"></span>${esc(t.short)}${n ? `<span class="ct">${n}</span>` : ""}</button>`; }).join("") +
     `<button class="tchip add" data-sheet="teams">+ Teams</button>`;
 }
@@ -217,7 +238,7 @@ function mBody(ev) {
   }
 }
 function mDock(ev) {
-  const [c, h] = verdict(ev), n = Object.keys(L.sel).length + Object.keys(L.psel).length;
+  const [c, h] = verdict(ev), n = Object.keys(L.sel).length + Object.keys(L.psel).length + Object.keys(L.wsel).length;
   const detail = ev.state === "bad" ? ev.issues[0].h : ev.state === "ok" ? `${n} asset${n > 1 ? "s" : ""} move` : L.teamIds.length < 2 ? "Pick at least 2 teams" : "Tap players or picks to add them";
   $("mDock").innerHTML = (U.mview !== "trade" ? `<button class="m-verdict" data-mview="trade"><span class="vt ${c}">${h}</span><span class="vd">${esc(detail)}</span>${ev.state === "ok" ? `<span class="btn go" data-exec>Make trade</span>` : ""}</button>` : "") +
     `<div class="m-tabs" role="tablist">${[["roster", "Rosters"], ["search", "Search"], ["trade", "Trade"]].map(([k, l]) => `<button role="tab" aria-selected="${U.mview === k}" class="${U.mview === k ? "on" : ""}" data-mview="${k}">${ICON[k]}${l}${k === "trade" && n ? `<span class="badge ${ev.state}">${n}</span>` : ""}</button>`).join("")}</div>`;
@@ -264,6 +285,7 @@ function toggleTeam(ab) {
     L.teamIds = L.teamIds.filter(x => x !== ab);
     for (const [id, to] of Object.entries(L.sel)) if (to === ab || L.players[id].team === ab) delete L.sel[id];
     for (const [id, to] of Object.entries(L.psel)) if (to === ab || L.picks[id].own === ab) delete L.psel[id];
+    for (const [id, to] of Object.entries(L.wsel)) { const s = E.swapFromKey(id); if (to === ab || (s.isNew ? s.grantor : s.holder) === ab) delete L.wsel[id]; }
     for (const [id, to] of Object.entries(L.sel)) if (!L.teamIds.includes(to)) L.sel[id] = L.teamIds.find(x => x !== L.players[id].team);
     if (U.mteam === ab) U.mteam = L.teamIds[0];
   } else {
@@ -299,20 +321,32 @@ function togglePick(id) {
   }
   render();
 }
+function toggleSwap(key) {
+  if (L.wsel[key]) delete L.wsel[key];
+  else {
+    const s = E.swapFromKey(key), from = s.isNew ? s.grantor : s.holder;
+    const dest = L.teamIds.find(x => x !== from);
+    if (!dest) return toast("Pick a second team to send the swap to.");
+    L.wsel[key] = dest;
+  }
+  render();
+}
 function execute() {
   const ev = E.evaluate(); if (ev.state !== "ok") return;
-  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; const got = [...s.inc.map(p => p.name), ...s.pIn.map(k => E.pickLabel(k) + " pick")]; return got.length ? `${team(ab).short} get ${got.join(", ")}` : null; }).filter(Boolean).join("; ");
-  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), pmoves: Object.entries(L.psel), label});
-  L.sel = {}; L.psel = {}; store.set("tdesk.trades", L.executed); render(); toast("Trade made. Rosters and picks updated.");
+  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; const got = [...s.inc.map(p => p.name), ...s.pIn.map(k => E.pickLabel(k) + " pick"), ...s.wIn.map(w => `${w.y} swap rights (${team(w.grantor).short} pick)`)]; return got.length ? `${team(ab).short} get ${got.join(", ")}` : null; }).filter(Boolean).join("; ");
+  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), pmoves: Object.entries(L.psel), wmoves: Object.entries(L.wsel), label});
+  L.sel = {}; L.psel = {}; L.wsel = {}; store.set("tdesk.trades", L.executed); render(); toast("Trade made. Rosters and picks updated.");
 }
 
 document.addEventListener("click", e => {
-  const el = e.target.closest("[data-pid],[data-pick],[data-pkopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
+  const el = e.target.closest("[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
   if (!el || el.matches("select,input")) return;
   if (el.dataset.open) { e.stopPropagation(); U.open[el.dataset.open] = !U.open[el.dataset.open]; return render(); }
   if (el.dataset.exec !== undefined) { e.stopPropagation(); return execute(); }
   if (el.dataset.pid) return togglePlayer(el.dataset.pid);
   if (el.dataset.pick) return togglePick(el.dataset.pick);
+  if (el.dataset.swap) return toggleSwap(el.dataset.swap);
+  if (el.dataset.newswap) return toggleSwap(el.dataset.newswap);
   if (el.dataset.pkopen) { const ab = el.dataset.pkopen; U.pkOpen[ab] = !(U.pkOpen[ab] ?? false); return render(); }
   if (el.dataset.go) return setDate(+el.dataset.go);
   if (el.dataset.addd) return setDate(+L.date + el.dataset.addd * DAY);
@@ -325,18 +359,20 @@ document.addEventListener("click", e => {
   if (el.dataset.sheet) { U.sheet = el.dataset.sheet; return render(); }
   if (el.dataset.close !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.view) { U.force = el.dataset.view; store.set("tdesk.view", U.force); return render(); }
-  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; return render(); }
+  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; L.wsel = {}; return render(); }
   if (el.id === "resetLeague") { store.set("tdesk.trades", []); const keep = L.teamIds; E.load(DATA, []); L.date = E.START; L.teamIds = keep; return render(); }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ") && e.target.dataset?.pid) { e.preventDefault(); togglePlayer(e.target.dataset.pid); }
   if ((e.key === "Enter" || e.key === " ") && e.target.dataset?.pick) { e.preventDefault(); togglePick(e.target.dataset.pick); }
+  if ((e.key === "Enter" || e.key === " ") && (e.target.dataset?.swap || e.target.dataset?.newswap)) { e.preventDefault(); toggleSwap(e.target.dataset.swap || e.target.dataset.newswap); }
   if (e.key === "Escape" && U.sheet) { U.sheet = null; render(); }
 });
 document.addEventListener("change", e => {
   const el = e.target;
   if (el.dataset.dest) { L.sel[el.dataset.dest] = el.value; render(); }
   if (el.dataset.pdest) { L.psel[el.dataset.pdest] = el.value; render(); }
+  if (el.dataset.wdest) { L.wsel[el.dataset.wdest] = el.value; render(); }
   if (el.id === "tradOnly") { U.tradableOnly = el.checked; render(); }
 });
 document.addEventListener("input", e => {
