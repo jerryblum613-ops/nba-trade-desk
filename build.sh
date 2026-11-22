@@ -62,7 +62,7 @@ jq -R 'split("|")' raw/bref.psv | jq -s . > raw/bref.json
 } | jq -s --slurpfile st raw/stats.json --slurpfile tx raw/tx.json --slurpfile br raw/bref.json --slurpfile pk raw/picks.json --slurpfile tk raw/trackers.json --slurpfile sh raw/sheets.json --slurpfile pt pick-terms.json '
   ($st[0].athletes | map({key: .athlete.id, value: (
      (.categories|map({key:.name, value:.values})|from_entries) as $c |
-     [$c.general[0], $c.general[1], $c.offensive[0], $c.general[11], $c.offensive[10], $c.offensive[3], $c.offensive[6], $c.defensive[0], $c.defensive[1]] | map(. * 10 | round / 10))}) | from_entries) as $stats
+     [$c.general[0], $c.general[1], $c.offensive[0], $c.general[11], $c.offensive[10], $c.offensive[3], $c.offensive[6], $c.defensive[0], $c.defensive[1], $c.offensive[1], $c.offensive[2], $c.offensive[7], $c.offensive[8], $c.offensive[11], $c.general[2]] | map(. * 10 | round / 10))}) | from_entries) as $stats
   | {updated: (now|todate), season: $tx[0].season.displayName,
      tx: [$tx[0].transactions[] | [.date[0:10], .team.abbreviation, .description]],
      sal: $br[0], picks: $pk[0], tpe: $tk[0].tpe, hardcap: $tk[0].hardcap, sheets: $sh[0], pickTerms: $pt[0],

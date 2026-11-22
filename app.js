@@ -66,7 +66,7 @@ function card(p) {
     <div class="pname"><span class="nm">${esc(p.name)}</span>${p.inj ? `<span class="pill inj">${esc(p.inj)}</span>` : ""}<span class="chk" aria-hidden="true">✓</span></div>
     <div class="pmeta"><b>${esc(p.pos)}</b> · <b>${esc(p.ht)}</b> · ${esc(p.wt)} · Age ${p.age ?? "—"} · ${p.exp ? p.exp + " yrs exp" : "Rookie"}</div>
     <div class="pstats">${stats}</div>
-    <div class="pcon">${sal}${!p.twoway && p.yrs ? `<span class="yrs">${p.yrs} yr${p.yrs > 1 ? "s" : ""} · thru ${thru}</span>` : ""}${optTxt}${termTxt}${status}${p.years.length ? `<button class="more" data-open="${p.id}" aria-expanded="${!!open}">${open ? "Hide" : "Contract"} ${open ? "▴" : "▾"}</button>` : ""}</div>
+    <div class="pcon">${L.waive[p.id] ? `<span class="pill lock">Waived</span>` : ""}${sal}${!p.twoway && p.yrs ? `<span class="yrs">${p.yrs} yr${p.yrs > 1 ? "s" : ""} · thru ${thru}</span>` : ""}${optTxt}${termTxt}${status}${L.teamIds.length > 1 && !selTo ? `<button class="more wv" data-waive="${p.id}" title="Release him to open a roster spot">${L.waive[p.id] ? "Undo waive" : "Waive"}</button>` : ""}${p.years.length ? `<button class="more" data-open="${p.id}" aria-expanded="${!!open}">${open ? "Hide" : "Contract"} ${open ? "▴" : "▾"}</button>` : ""}</div>
     ${years}
     ${selTo && !e.ok ? `<div class="whylock">${esc(e.why)}</div>` : ""}
     ${dest}
@@ -89,6 +89,7 @@ function picksSection(ab) {
       <span class="po">${k.orig === ab ? "Own" : "via " + esc(team(k.orig)?.short || k.orig)}</span>
       ${tag ? `<span class="pill warn">${tag}</span>` : ""}${frozen ? `<span class="pill lock">Frozen</span>` : ""}
       ${to ? destSel("data-pdest", k.id, to, `${k.y} pick`) : `<span class="chk" aria-hidden="true">✓</span>`}
+    </div>${to && k.r === 1 && k.orig === ab && !cond ? `<label class="pprot">Protection <select data-pprot="${k.id}" aria-label="Protection on the ${k.y} first">${[["", "None"], ["top3", "Top 3"], ["top5", "Top 5"], ["top8", "Top 8"], ["top10", "Top 10"], ["lottery", "Lottery (1–14)"]].map(([v, l]) => `<option value="${v}" ${(L.pprot[k.id] || "") === v ? "selected" : ""}>${l}</option>`).join("")}</select></label>` : ""}<div style="display:none">
     </div>
     ${cond ? `<div class="pnote"><b>How it works:</b> ${esc(E.pickTerms(k))}</div>` : ""}
     ${sw ? `<div class="pk swnew sel" data-newswap="${newKey(k)}" role="button" tabindex="0" aria-pressed="true"><span class="pr sw">Swap</span><span class="po">Swap rights on this pick</span>${destSel("data-wdest", newKey(k), sw, `${k.y} swap`)}</div>`
@@ -143,11 +144,12 @@ function issuesHtml(ev) {
   return ev.issues.length || ev.warns.length ? `<div class="issues">${ev.issues.map(x => one(x)).join("")}${ev.warns.map(x => one(x, true)).join("")}</div>` : "";
 }
 function summaryHtml(ev) {
-  if (ev.state === "idle") return `<div class="empty"><h4>How to build a trade</h4><ol><li>Pick 2 to 4 teams.</li><li>Tap players or draft picks to send them. With 3+ teams, choose where each one goes.</li><li>Read the verdict. If it fails, each problem says why, with a fix.</li><li>Use the date controls to fast-forward until locked players become eligible.</li></ol></div>`;
+  if (ev.state === "idle") return `<div class="empty"><h4>How to build a trade</h4><ol><li>Pick 2 to ${E.MAX_TEAMS} teams.</li><li>Tap players or draft picks to send them. Choose protection on firsts you send, or waive a player to open a roster spot. With 3+ teams, choose where each one goes.</li><li>Read the verdict. If it fails, each problem says why, with a fix.</li><li>Use the date controls to fast-forward until locked players become eligible.</li></ol></div>`;
+  const proj = E.projections(ev);
   return L.teamIds.map(ab => {
-    const s = ev.summary[ab], t = team(ab); if (!s) return "";
+    const s = ev.summary[ab], t = team(ab), pr = proj[ab]; if (!s) return "";
     const li = (arr, pk, sw, cash) => arr.length || pk.length || sw.length || cash ? (cash ? `<div><span>Cash</span><span class="mono">${money(cash, 2)}</span></div>` : "") + arr.map(p => `<div><span>${esc(p.name)}</span><span class="mono">${p.twoway ? "two-way" : money(p.sal)}</span></div>`).join("") +
-      pk.map(k => `<div><span>${esc(E.pickLabel(k))} pick</span><span class="mono" style="color:var(--mute)">${E.isConditional(k) ? "conditional" : "pick"}</span></div>`).join("") +
+      pk.map(k => `<div><span>${esc(E.pickLabel(k))} pick${L.pprot[k.id] ? ` (${E.PROT[L.pprot[k.id]][1].replace(/ \(.*\)/, "")})` : ""}</span><span class="mono" style="color:var(--mute)">${E.isConditional(k) ? "conditional" : "pick"}</span></div>`).join("") +
       sw.map(w => `<div><span>${w.y} ${w.r === 1 ? "1st" : "2nd"} swap (${esc(team(w.grantor)?.short || w.grantor)} pick)</span><span class="mono" style="color:var(--mute)">${w.isNew ? "new" : w.to === w.grantor ? "cancels it" : "swap"}</span></div>`).join("")
       : `<div><span style="color:var(--faint)">Nothing</span></div>`;
     const bad = ev.issues.some(i => i.kind === "salary" && i.team === ab);
@@ -157,7 +159,10 @@ function summaryHtml(ev) {
       <div class="mrow"><span>Incoming salary</span><span class="mono">${money(s.inV)}</span></div>
       ${s.allowed != null ? `<div class="mrow"><span>Max allowed in</span><span class="mono">${money(s.allowed)}</span></div>` : ""}
       ${s.before != null ? `<div class="mrow res"><span>Payroll</span><span class="mono">${money(s.before)} → ${money(s.after)}</span></div>
-      <div class="mrow"><span>Roster</span><span class="mono">${s.std[0]} → ${s.std[1]} standard</span></div>` : ""}
+      <div class="mrow"><span>Roster</span><span class="mono">${s.std[0]} → ${s.std[1]} standard</span></div>
+      ${s.waived?.length ? `<div class="mrow"><span>Waived</span><span>${s.waived.map(p => esc(p.name)).join(", ")}</span></div>` : ""}
+      ${s.future.map((f, i) => `<div class="mrow"><span>${E.SEASONS[i + 1]} salary</span><span class="mono">${money(f[0])} → ${money(f[1])}</span></div>`).join("")}
+      ${pr ? `<div class="mrow"><span title="Rough estimate: this season\x27s record pace, adjusted for the change in each team\x27s top-10 rotation (Game Score)">Projected record</span><span class="mono">${pr.before.join("-")} → ${pr.after.join("-")} <b style="color:${pr.delta > 0 ? "var(--ok)" : pr.delta < 0 ? "var(--bad)" : "var(--mute)"}">${pr.delta > 0 ? "+" : ""}${pr.delta}</b></span></div>` : ""}` : ""}
       ${s.rule ? `<div class="${bad ? "badline" : "okline"}">${bad ? "✕" : "✓"} ${esc(s.rule)}</div>` : ""}</div>`;
   }).join("");
 }
@@ -196,8 +201,9 @@ function dTop(keepSlider) {
 function dSide() {
   const focused = document.activeElement?.id === "dq";
   $("dSide").innerHTML = `<h2>Find any player</h2><div class="sbox"><input id="dq" type="search" placeholder="Search 500+ players" value="${esc(U.q)}" autocomplete="off"></div><div id="dRes">${searchList(true)}</div>
-    <h2>Teams in this trade (${L.teamIds.length}/4)</h2><div class="tlist">${L.order.map(ab => { const t = team(ab), on = L.teamIds.includes(ab), pay = E.payroll(ab);
-      return `<button data-team="${ab}" class="${on ? "in" : ""}" ${!on && L.teamIds.length >= 4 ? "disabled" : ""} aria-pressed="${on}"><span class="box">✓</span><span class="dot" style="background:${t.color}"></span><span class="nm">${esc(t.name)}</span><span class="tier t${E.tierOf(pay)}" title="${money(pay)}">${E.TIER[E.tierOf(pay)].replace("Under cap", "Room").replace("Over cap", "Over")}</span></button>`; }).join("")}</div>`;
+    <h2>Saved trades</h2>${savedHtml()}
+    <h2>Teams in this trade (${L.teamIds.length}/${E.MAX_TEAMS})</h2><div class="tlist">${L.order.map(ab => { const t = team(ab), on = L.teamIds.includes(ab), pay = E.payroll(ab);
+      return `<button data-team="${ab}" class="${on ? "in" : ""}" ${!on && L.teamIds.length >= E.MAX_TEAMS ? "disabled" : ""} aria-pressed="${on}"><span class="box">✓</span><span class="dot" style="background:${t.color}"></span><span class="nm">${esc(t.name)}</span><span class="tier t${E.tierOf(pay)}" title="${money(pay)}">${E.TIER[E.tierOf(pay)].replace("Under cap", "Room").replace("Over cap", "Over")}</span></button>`; }).join("")}</div>`;
   if (focused) { const i = $("dq"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }
 }
 function dBoard(ev) {
@@ -205,13 +211,14 @@ function dBoard(ev) {
   $("dBoard").style.gridAutoColumns = `minmax(${n > 3 ? 290 : 300}px,1fr)`;
   $("dBoard").innerHTML = L.teamIds.map(ab => `<article class="col">${thead(ab, true)}${capBox(ab, ev)}${capTools(ab)}${picksSection(ab)}${sortbar()}<div class="roster">${rosterIds(ab).map(card).join("")}</div></article>`).join("") +
     (n === 0 ? `<article class="col startcol">${teamGrid("Start a trade", "Choose the teams you want to trade between. You can also search for any player on the left.")}</article>`
-      : n === 1 ? `<article class="col startcol">${teamGrid("Add a team to trade with", `Pick a partner for the ${esc(team(L.teamIds[0]).short)}. Trades can include up to 4 teams.`)}</article>` : "");
+      : n === 1 ? `<article class="col startcol">${teamGrid("Add a team to trade with", `Pick a partner for the ${esc(team(L.teamIds[0]).short)}. Trades can include up to ${E.MAX_TEAMS} teams.`)}</article>` : "");
 }
 function dPanel(ev) {
   const [c, h, s] = verdict(ev);
   $("dPanel").innerHTML = `<div class="vhead"><div><div class="vtitle ${c}">${h}${c === "ok" ? " ✓" : ""}</div><div class="vsub">${s}</div></div></div>
     ${issuesHtml(ev)}
     <div class="actions"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec ${ev.state === "idle" ? "disabled" : ""}>${ev.state === "ok" ? "Complete trade · save image" : "Save trade image"}</button><button class="btn" id="clearSel" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div>
+    <div class="actions"><button class="btn" data-savetrade ${ev.state === "idle" ? "disabled" : ""}>Save trade</button><button class="btn" data-share ${ev.state === "idle" ? "disabled" : ""}>Share link</button></div>
     <p class="sub" style="margin:2px 0 8px">Completing a trade saves an image of it. The rosters stay as they really are.</p>
     ${summaryHtml(ev)}`;
 }
@@ -250,7 +257,9 @@ function mBody(ev) {
     const [c, h, s] = verdict(ev);
     b.innerHTML = `<div class="m-section"><div class="vtitle ${c}">${h}${c === "ok" ? " ✓" : ""}</div><div class="vsub">${s}</div>
       ${ev.issues.length || ev.warns.length ? `<div style="margin-top:12px">${issuesHtml(ev)}</div>` : ""}
-      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec style="flex:1;padding:11px" ${ev.state === "idle" ? "disabled" : ""}>${ev.state === "ok" ? "Complete trade · save image" : "Save trade image"}</button><button class="btn" id="clearSel" style="padding:11px" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div></div>
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec style="flex:1;padding:11px" ${ev.state === "idle" ? "disabled" : ""}>${ev.state === "ok" ? "Complete trade · save image" : "Save trade image"}</button><button class="btn" id="clearSel" style="padding:11px" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div>
+      <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" data-savetrade style="flex:1;padding:10px" ${ev.state === "idle" ? "disabled" : ""}>Save trade</button><button class="btn" data-share style="flex:1;padding:10px" ${ev.state === "idle" ? "disabled" : ""}>Share link</button></div></div>
+      <div class="m-section"><h2>Saved trades</h2>${savedHtml()}</div>
       <div class="m-section">${summaryHtml(ev)}</div>
       <div class="sub" style="padding:4px 2px 12px">${footHtml()}</div>`;
   }
@@ -273,8 +282,8 @@ function mSheet() {
       <button class="btn primary" data-close style="width:100%;margin-top:14px;padding:11px">Done</button></div>`;
   } else {
     el.innerHTML = `<div class="sheet-bg" data-close></div><div class="sheet" role="dialog" aria-label="Choose teams"><div class="grab"></div>
-      <h3>Teams in the trade (${L.teamIds.length}/4)</h3><div class="tgrid">${L.order.map(ab => { const t = team(ab), on = L.teamIds.includes(ab);
-        return `<button data-team="${ab}" class="${on ? "in" : ""}" ${!on && L.teamIds.length >= 4 ? "disabled" : ""} aria-pressed="${on}"><span class="dot" style="background:${t.color}"></span><span class="n">${esc(t.short)}</span>${on ? `<span style="margin-left:auto;color:var(--sel)">✓</span>` : ""}</button>`; }).join("")}</div>
+      <h3>Teams in the trade (${L.teamIds.length}/${E.MAX_TEAMS})</h3><div class="tgrid">${L.order.map(ab => { const t = team(ab), on = L.teamIds.includes(ab);
+        return `<button data-team="${ab}" class="${on ? "in" : ""}" ${!on && L.teamIds.length >= E.MAX_TEAMS ? "disabled" : ""} aria-pressed="${on}"><span class="dot" style="background:${t.color}"></span><span class="n">${esc(t.short)}</span>${on ? `<span style="margin-left:auto;color:var(--sel)">✓</span>` : ""}</button>`; }).join("")}</div>
       <p class="sub" style="margin:10px 0 0">Pick 2 to 4 teams. Tap a checked team to remove it.</p>
       <button class="btn primary" data-close style="width:100%;margin-top:12px;padding:11px">Done</button></div>`;
   }
@@ -294,7 +303,7 @@ function renderShot() {
   el.innerHTML = `<div class="sheet-bg" data-shotclose></div><div class="shot" role="dialog" aria-label="Trade image">
     <div class="shot-head"><h3>Trade image</h3><button class="tx-x shotx" data-shotclose aria-label="Close">×</button></div>
     <div class="shot-img"><img src="${shot.url}" alt="Image of this trade with players, picks, contracts and cap details"></div>
-    <div class="shot-actions"><button class="btn go" data-shotdl>Download PNG</button><button class="btn" data-shotclose>Close</button></div>
+    <div class="shot-actions"><div class="seg" role="group" aria-label="Image shape"><button class="${U.story ? "" : "on"}" data-shape="wide">Wide</button><button class="${U.story ? "on" : ""}" data-shape="story">Story (phone)</button></div><button class="btn go" data-shotdl>Download PNG</button><button class="btn" data-shotclose>Close</button></div>
     <p class="sub">If the download doesn\x27t start, press and hold (or right-click) the image and choose Save. The rosters haven\x27t changed.</p></div>`;
 }
 function render(keepSlider) {
@@ -316,10 +325,11 @@ function toggleTeam(ab) {
     for (const [id, to] of Object.entries(L.psel)) if (to === ab || L.picks[id].own === ab) delete L.psel[id];
     for (const [id, to] of Object.entries(L.wsel)) { const s = E.swapFromKey(id); if (to === ab || (s.isNew ? s.grantor : s.holder) === ab) delete L.wsel[id]; }
     for (const [from, c] of Object.entries(L.csel)) if (from === ab || c.to === ab) delete L.csel[from];
+    for (const id of Object.keys(L.waive)) if (L.players[id].team === ab) delete L.waive[id];
     for (const [id, to] of Object.entries(L.sel)) if (!L.teamIds.includes(to)) L.sel[id] = L.teamIds.find(x => x !== L.players[id].team);
     if (U.mteam === ab) U.mteam = L.teamIds[0];
   } else {
-    if (L.teamIds.length >= 4) return toast("Trades can include up to 4 teams. Remove one first.");
+    if (L.teamIds.length >= E.MAX_TEAMS) return toast(`Trades can include up to ${E.MAX_TEAMS} teams. Remove one first.`);
     L.teamIds.push(ab); U.mteam = ab;
     if (U.sheet === null && U.mode === "mobile" && L.teamIds.length < 2) toast(`Added the ${team(ab).short}. Now pick a team to trade with.`);
   }
@@ -327,7 +337,7 @@ function toggleTeam(ab) {
 }
 function addTeamFor(ab, what) {
   if (L.teamIds.includes(ab)) return true;
-  if (L.teamIds.length >= 4) { toast(`Trades can include up to 4 teams. Remove one to add ${what}.`); return false; }
+  if (L.teamIds.length >= E.MAX_TEAMS) { toast(`Trades can include up to ${E.MAX_TEAMS} teams. Remove one to add ${what}.`); return false; }
   L.teamIds.push(ab); return true;
 }
 function togglePlayer(id, to) {
@@ -335,6 +345,7 @@ function togglePlayer(id, to) {
   if (L.sel[id] && !to) delete L.sel[id];
   else {
     if (!addTeamFor(p.team, p.name)) return;
+    delete L.waive[id];
     const dest = to && L.teamIds.includes(to) ? to : L.teamIds.find(x => x !== p.team);
     if (!dest) { U.mteam = p.team; toast(`Added the ${team(p.team).short}. Pick a second team to send ${p.name} to.`); return render(); }
     L.sel[id] = dest;
@@ -361,6 +372,50 @@ function toggleSwap(key) {
   }
   render();
 }
+// ---------- share links and saved trades ----------
+// A trade travels in the page address as "#t-" plus hex (only letters, digits and hyphens survive artifact links).
+function encodeTrade() {
+  const st = {d: L.date.toISOString().slice(0, 10), t: L.teamIds, s: L.sel, p: L.psel, w: L.wsel, c: L.csel, r: L.pprot, v: Object.keys(L.waive)};
+  return "t-" + [...new TextEncoder().encode(JSON.stringify(st))].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function decodeTrade(h) {
+  if (!/^t-(?:[0-9a-f]{2})+$/.test(h || "")) return null;
+  try { return JSON.parse(new TextDecoder().decode(new Uint8Array(h.slice(2).match(/../g).map(x => parseInt(x, 16))))); } catch { return null; }
+}
+function applyTradeState(st) {
+  if (!st || !Array.isArray(st.t)) return false;
+  const teams = st.t.filter(ab => L.teams[ab]).slice(0, E.MAX_TEAMS), inT = ab => teams.includes(ab);
+  L.teamIds = teams; L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; L.pprot = {}; L.waive = {};
+  for (const [id, to] of Object.entries(st.s || {})) if (L.players[id] && inT(L.players[id].team) && inT(to) && to !== L.players[id].team) L.sel[id] = to;
+  for (const [id, to] of Object.entries(st.p || {})) if (L.picks[id] && inT(L.picks[id].own) && inT(to) && to !== L.picks[id].own) L.psel[id] = to;
+  for (const [id, to] of Object.entries(st.w || {})) { const sw = E.swapFromKey(id); if (sw && inT(sw.isNew ? sw.grantor : sw.holder) && inT(to)) L.wsel[id] = to; }
+  for (const [ab, c] of Object.entries(st.c || {})) if (inT(ab) && inT(c.to) && c.amt > 0) L.csel[ab] = {to: c.to, amt: Math.min(+c.amt, E.CASH_LIMIT * 2)};
+  for (const [id, pr] of Object.entries(st.r || {})) if (L.psel[id] && E.PROT[pr]) L.pprot[id] = pr;
+  for (const id of st.v || []) if (L.players[id] && inT(L.players[id].team) && !L.sel[id]) L.waive[id] = true;
+  const dt = st.d ? E.d(st.d) : null; if (dt && dt >= E.START && dt <= E.END) L.date = dt;
+  U.mteam = teams[0] || null;
+  return true;
+}
+const inArtifact = !!window.claude?.use;
+async function shareLink() {
+  const h = encodeTrade();
+  if (location.hash !== "#" + h) { U.ownHash = h; location.hash = h; }
+  if (inArtifact) return toast("Link ready: use Share → Copy link at the top of this page to send this exact trade.");
+  try { await navigator.clipboard.writeText(location.href); toast("Link copied. Anyone who opens it sees this trade."); }
+  catch { toast("Copy the address from your browser's address bar to share this trade."); }
+}
+const savedList = () => store.get("tdesk.saved") || [];
+function saveTrade() {
+  const ev = E.evaluate(); if (ev.state === "idle") return;
+  const list = savedList();
+  list.unshift({name: L.teamIds.map(ab => team(ab).short).join(" ⇄ "), h: encodeTrade(), at: Date.now(), ok: ev.state === "ok", date: L.date.toISOString().slice(0, 10)});
+  store.set("tdesk.saved", list.slice(0, 40)); render(); toast("Trade saved in this browser.");
+}
+function savedHtml() {
+  const list = savedList();
+  if (!list.length) return `<p class="sub" style="margin:4px 2px">Trades you save appear here. They're kept in this browser only.</p>`;
+  return `<div class="saved">${list.map((x, i) => `<div class="sv"><button class="svl" data-load="${i}"><span class="dot" style="background:${x.ok ? "var(--ok)" : "var(--bad)"}"></span><span class="n">${esc(x.name)}</span><span class="m">${esc(x.date)}</span></button><button class="svx" data-del="${i}" aria-label="Delete saved trade ${esc(x.name)}">×</button></div>`).join("")}</div>`;
+}
 // ---------- trade image ----------
 // Completing a trade never changes the rosters. It draws a shareable image of the deal with everything that matters.
 const IMG = {bg: "#0f1319", panel: "#171c24", panel2: "#1d232d", line: "#2b3340", ink: "#e8ecf1", mute: "#9aa4b2", faint: "#6c7685",
@@ -381,9 +436,11 @@ function wrapLines(ctx, text, maxW) {
   return out;
 }
 const poss = s => s.endsWith("s") ? s + "\x27" : s + "\x27s";
-function drawTrade(ev, ctx, W, colH) {
+function drawTrade(ev, ctx, W, colH, story) {
   // Returns the height used. Called once to measure (ctx draws off-screen) and once to paint.
-  const pad = 40, n = L.teamIds.length, gap = 18, colW = (W - pad * 2 - gap * (n - 1)) / n;
+  // "story" stacks the teams in one tall column for phones; otherwise teams sit side by side.
+  const pad = 40, n = L.teamIds.length, gap = 18, colW = story ? W - pad * 2 : (W - pad * 2 - gap * (n - 1)) / n;
+  const proj = E.projections(ev);
   const [vc, vh] = verdict(ev);
   const text = (s, x, y, font, color, align = "left") => { ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align; ctx.fillText(s, x, y); };
   const para = (s, x, y, w, font, color, lh) => { ctx.font = font; ctx.fillStyle = color; ctx.textAlign = "left"; for (const l of wrapLines(ctx, s, w)) { ctx.fillText(l, x, y); y += lh; } return y; };
@@ -403,10 +460,10 @@ function drawTrade(ev, ctx, W, colH) {
   text(`League date ${L.date.toLocaleDateString("en-US", {weekday: "short", month: "short", day: "numeric", year: "numeric"})} · ${DATA.season} season · ${verdict(ev)[2]}`, pad, y, `400 15px ${F.body}`, IMG.mute);
   y += 26;
   // team columns
-  const top = y; let maxBottom = y; const heights = [];
+  const top = y; let maxBottom = y, colTop = y; const heights = [];
   L.teamIds.forEach((ab, i) => {
-    const t = team(ab), s = ev.summary[ab], x = pad + i * (colW + gap), inner = colW - 28;
-    let cy = top;
+    const t = team(ab), s = ev.summary[ab], x = story ? pad : pad + i * (colW + gap), inner = colW - 28;
+    let cy = story ? colTop : top;
     const blockTop = cy;
     if (colH) { ctx.fillStyle = IMG.panel; ctx.beginPath(); ctx.roundRect(x, blockTop, colW, colH[i], 12); ctx.fill(); }
     ctx.fillStyle = t.color; ctx.beginPath(); ctx.roundRect(x, cy, colW, 64, [12, 12, 0, 0]); ctx.fill();
@@ -431,7 +488,8 @@ function drawTrade(ev, ctx, W, colH) {
     for (const k of s.pIn) {
       text(`${k.y} ${k.r === 1 ? "first" : "second"}-round pick`, x + 14, cy, `600 17px ${F.body}`, IMG.ink);
       text(k.orig === ab ? "their own" : `${poss(team(k.orig).short)} pick`, x + 14 + inner, cy, `400 12px ${F.body}`, IMG.mute, "right"); cy += 20;
-      if (E.isConditional(k)) cy = para(E.pickTerms(k), x + 14, cy, inner, `400 13px ${F.body}`, IMG.warn, 17);
+      if (L.pprot[k.id] && E.PROT[L.pprot[k.id]]) cy = para(`Sent ${E.PROT[L.pprot[k.id]][1]}: if it lands 1–${E.PROT[L.pprot[k.id]][0]}, the ${team(k.orig).short} keep it.`, x + 14, cy, inner, `400 13px ${F.body}`, IMG.warn, 17);
+      else if (E.isConditional(k)) cy = para(E.pickTerms(k), x + 14, cy, inner, `400 13px ${F.body}`, IMG.warn, 17);
       else cy = para("No protections or conditions.", x + 14, cy, inner, `400 13px ${F.body}`, IMG.mute, 17);
       cy += 8;
     }
@@ -453,10 +511,14 @@ function drawTrade(ev, ctx, W, colH) {
       row("Tier after", E.TIER[E.tierOf(s.after)], s.after > E.APRON1 ? IMG.bad : s.after > E.TAX ? IMG.warn : IMG.ink);
       row("Roster (standard)", `${s.std[0]} → ${s.std[1]}`);
       if (s.hardcap) row("Hard cap", `${s.hardcap === 1 ? "1st" : "2nd"} apron`, IMG.warn);
+      s.future.forEach((fv, j) => row(`${E.SEASONS[j + 1]} salary`, `${money(fv[0])} → ${money(fv[1])}`));
+      if (proj[ab]) row("Projected record*", `${proj[ab].before.join("-")} → ${proj[ab].after.join("-")}`, proj[ab].delta > 0 ? IMG.ok : proj[ab].delta < 0 ? IMG.bad : IMG.ink);
+      if (s.waived?.length) { cy = para(`Waives ${s.waived.map(p => p.name).join(", ")} to open a roster spot (salary stays on the cap).`, x + 14, cy, inner, `400 12.5px ${F.body}`, IMG.mute, 17); }
     }
     if (s.rule) { cy += 2; cy = para(s.rule, x + 14, cy, inner, `400 12.5px ${F.body}`, ev.issues.some(q => q.kind === "salary" && q.team === ab) ? IMG.bad : IMG.ok, 17); }
     cy += 14;
     heights[i] = cy - blockTop;
+    colTop = cy + gap;
     maxBottom = Math.max(maxBottom, cy);
   });
   y = maxBottom + 26;
@@ -472,28 +534,30 @@ function drawTrade(ev, ctx, W, colH) {
   }
   y += 8; ctx.fillStyle = IMG.line; ctx.fillRect(pad, y, W - pad * 2, 1); y += 24;
   const up = new Date(DATA.updated);
+  y = para(`*Projected record: rough estimate from this season\x27s pace, adjusted for each team\x27s top-10 rotation by Game Score.`, pad, y, W - pad * 2, `400 12px ${F.body}`, IMG.faint, 16) + 4;
   y = para(`NBA Trade Desk · rosters and contracts as of ${up.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"})} · 2026-27 cap ${money(E.CAP, 1)}, tax ${money(E.TAX, 1)}, aprons ${money(E.APRON1, 1)} / ${money(E.APRON2, 1)} · sources: ESPN, Salary Swish, Basketball-Reference`, pad, y, W - pad * 2, `400 12.5px ${F.body}`, IMG.faint, 17);
   return {h: y + pad - 10, heights};
 }
-async function buildTradeImage(ev) {
+async function buildTradeImage(ev, story) {
   await Promise.all([`800 38px ${F.disp}`, `600 18px ${F.body}`, `400 14px ${F.body}`, `600 13px ${F.mono}`].map(f => document.fonts?.load(f).catch(() => null)));
-  const W = L.teamIds.length > 3 ? 1500 : 1200, scale = 2;
+  const W = story ? 1080 : L.teamIds.length > 4 ? 1800 : L.teamIds.length > 3 ? 1500 : 1200, scale = 2;
   const m = document.createElement("canvas").getContext("2d");
   m.canvas.width = W; m.canvas.height = 10;
-  const first = drawTrade(ev, m, W), H = Math.ceil(first.h);
+  const first = drawTrade(ev, m, W, null, story), H = Math.ceil(first.h);
   const c = document.createElement("canvas"); c.width = W * scale; c.height = H * scale;
   const ctx = c.getContext("2d"); ctx.scale(scale, scale);
   ctx.fillStyle = IMG.bg; ctx.fillRect(0, 0, W, H);
-  drawTrade(ev, ctx, W, first.heights);
+  drawTrade(ev, ctx, W, first.heights, story);
   return c;
 }
 let shot = null;
-async function execute() {
+async function execute(story = U.story) {
   const ev = E.evaluate(); if (ev.state === "idle") return;
+  U.story = !!story;
   toast("Making the trade image…");
-  const canvas = await buildTradeImage(ev);
+  const canvas = await buildTradeImage(ev, U.story);
   const blob = await new Promise(r => canvas.toBlob(r, "image/png"));
-  const name = `trade-${L.teamIds.map(ab => team(ab).short.toLowerCase().replace(/[^a-z0-9]+/g, "-")).join("-")}-${L.date.toISOString().slice(0, 10)}.png`;
+  const name = `trade-${L.teamIds.map(ab => team(ab).short.toLowerCase().replace(/[^a-z0-9]+/g, "-")).join("-")}-${L.date.toISOString().slice(0, 10)}${U.story ? "-story" : ""}.png`;
   if (shot?.url) URL.revokeObjectURL(shot.url);
   shot = {blob, name, url: URL.createObjectURL(blob)};
   U.sheet = "shot"; render();
@@ -511,7 +575,7 @@ async function downloadShot() {
 }
 
 document.addEventListener("click", e => {
-  const el = e.target.closest("[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-ctopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],[data-shotdl],[data-shotclose],#clearSel,select,input");
+  const el = e.target.closest("[data-shape],[data-savetrade],[data-share],[data-load],[data-del],[data-waive],[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-ctopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],[data-shotdl],[data-shotclose],#clearSel,select,input");
   if (!el || el.matches("select,input")) return;
   if (el.dataset.open) { e.stopPropagation(); U.open[el.dataset.open] = !U.open[el.dataset.open]; return render(); }
   if (el.dataset.exec !== undefined) { e.stopPropagation(); return execute(); }
@@ -519,6 +583,12 @@ document.addEventListener("click", e => {
   if (el.dataset.shotclose !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.pid) return togglePlayer(el.dataset.pid);
   if (el.dataset.pick) return togglePick(el.dataset.pick);
+  if (el.dataset.shape) return execute(el.dataset.shape === "story");
+  if (el.dataset.savetrade !== undefined) return saveTrade();
+  if (el.dataset.share !== undefined) return shareLink();
+  if (el.dataset.load) { const x = savedList()[+el.dataset.load]; if (x && applyTradeState(decodeTrade(x.h))) { U.mview = "trade"; render(); toast(`Loaded ${x.name}.`); } return; }
+  if (el.dataset.del) { const list = savedList(); list.splice(+el.dataset.del, 1); store.set("tdesk.saved", list); return render(); }
+  if (el.dataset.waive) { e.stopPropagation(); const id = el.dataset.waive; if (L.waive[id]) delete L.waive[id]; else { L.waive[id] = true; delete L.sel[id]; } return render(); }
   if (el.dataset.swap) return toggleSwap(el.dataset.swap);
   if (el.dataset.newswap) return toggleSwap(el.dataset.newswap);
   if (el.dataset.pkopen) { const ab = el.dataset.pkopen; U.pkOpen[ab] = !(U.pkOpen[ab] ?? false); return render(); }
@@ -534,7 +604,7 @@ document.addEventListener("click", e => {
   if (el.dataset.sheet) { U.sheet = el.dataset.sheet; return render(); }
   if (el.dataset.close !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.view) { U.force = el.dataset.view; store.set("tdesk.view", U.force); return render(); }
-  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; return render(); }
+  if (el.id === "clearSel") { L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; L.pprot = {}; L.waive = {}; return render(); }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ") && e.target.dataset?.pid) { e.preventDefault(); togglePlayer(e.target.dataset.pid); }
@@ -546,6 +616,7 @@ document.addEventListener("change", e => {
   const el = e.target;
   if (el.dataset.dest) { L.sel[el.dataset.dest] = el.value; render(); }
   if (el.dataset.pdest) { L.psel[el.dataset.pdest] = el.value; render(); }
+  if (el.dataset.pprot !== undefined) { if (el.value) L.pprot[el.dataset.pprot] = el.value; else delete L.pprot[el.dataset.pprot]; render(); }
   if (el.dataset.wdest) { L.wsel[el.dataset.wdest] = el.value; render(); }
   if (el.dataset.cash) { const ab = el.dataset.cash, amt = Math.max(0, Math.round((parseFloat(el.value) || 0) * 1e6)); const to = L.csel[ab]?.to || L.teamIds.find(x => x !== ab); if (amt) L.csel[ab] = {to, amt}; else delete L.csel[ab]; render(); }
   if (el.dataset.cashto) { const ab = el.dataset.cashto; if (L.csel[ab]) L.csel[ab].to = el.value; else L.csel[ab] = {to: el.value, amt: 0}; render(); }
@@ -565,6 +636,8 @@ fetch("data.json", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("
   try { localStorage.removeItem("tdesk.trades"); } catch {}
   L.teamIds = [];
   U.mteam = null;
+  if (applyTradeState(decodeTrade(location.hash.slice(1)))) U.mview = "trade";
   render();
+  addEventListener("hashchange", () => { const h = location.hash.slice(1); if (h === U.ownHash) return; if (applyTradeState(decodeTrade(h))) { U.mview = "trade"; render(); } });
 }).catch(err => { $("app").innerHTML = `<div class="loading">Couldn't load roster data (${esc(err.message)}). Reload the page to try again.</div>`; });
 })();

@@ -32,7 +32,10 @@ const maxD = (a, b) => a > b ? a : b;
 const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g, "").replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
 
 // ---------- league state ----------
-const L = {teams: {}, players: {}, picks: {}, swaps: {}, pickTerms: {}, tpes: [], hardcap: {}, hcWhy: {}, cashSent: {}, cashRecv: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, wsel: {}, csel: {}, executed: []};
+const L = {teams: {}, players: {}, picks: {}, swaps: {}, pickTerms: {}, tpes: [], hardcap: {}, hcWhy: {}, cashSent: {}, cashRecv: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, wsel: {}, csel: {}, pprot: {}, waive: {}, executed: []};
+// L.pprot: pickId -> protection the sending team adds ("top3", "top5", "top8", "top10", "lottery"); L.waive: playerId -> true (released to open a roster spot)
+const MAX_TEAMS = 5;
+const PROT = {top3: [3, "top-3 protected"], top5: [5, "top-5 protected"], top8: [8, "top-8 protected"], top10: [10, "top-10 protected"], lottery: [14, "lottery protected (1–14)"]};
 // L.sel: playerId -> destination team; L.psel: pickId -> destination team;
 // L.wsel: swapId -> destination team (passing on a swap right it holds), or "new-YEAR-ROUND-TEAM" -> team that receives a new swap right
 const SS_ABBR = {WAS: "WSH", UTA: "UTAH", SAS: "SA", NOP: "NO", NYK: "NY", GSW: "GS"};
@@ -66,7 +69,7 @@ function classify(s, name) {
 }
 
 function load(data, executed) {
-  L.teams = {}; L.players = {}; L.picks = {}; L.swaps = {}; L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {};
+  L.teams = {}; L.players = {}; L.picks = {}; L.swaps = {}; L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; L.pprot = {}; L.waive = {};
   L.cashSent = {}; L.cashRecv = {}; L.hcWhy = {};
   L.hardcap = {...(data.hardcap || {})};
   L.pickTerms = data.pickTerms || {};
@@ -364,7 +367,14 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
       if (e.kind === "agg") issues.push({kind: "agg", team: ab, pid: p.id, h: `${p.name} can't be packaged with other players yet`, p: e.why + " Trade him by himself, or wait.", fix: [[`Fast-forward to ${fmtD(e.until, false)}`, +e.until]]});
     }
     const std = t.roster.filter(id => !L.players[id].twoway).length, tw = t.roster.length - std;
-    const std2 = std - outStd.length + incStd.length, tw2 = tw - (s.out.length - outStd.length) + (s.inc.length - incStd.length);
+    const waived = t.roster.filter(id => L.waive[id] && !sel[id]).map(id => L.players[id]);
+    s.waived = waived;
+    const std2 = std - outStd.length + incStd.length - waived.filter(p => !p.twoway).length, tw2 = tw - (s.out.length - outStd.length) + (s.inc.length - incStd.length) - waived.filter(p => p.twoway).length;
+    // committed salary in the next two seasons (options counted as picked up); waived players stay on the books as dead money
+    const yr = (arr, i) => arr.reduce((a, p) => a + (p.twoway ? 0 : p.years[i]?.amt || 0), 0);
+    const keep = t.roster.map(id => L.players[id]);
+    s.future = [1, 2].map(i => [yr(keep, i), yr(keep, i) - yr(s.out, i) + yr(s.inc, i)]);
+    for (const p of waived) warns.push({h: `Waiving ${p.name}`, p: `Releasing ${p.name} opens a roster spot for the ${name}, but his ${p.twoway ? "two-way deal" : money(p.sal, 2) + " salary"} stays on their cap as dead money this season${p.years.length > 1 && !p.twoway ? ` and in later years unless it\x27s stretched` : ""}. Waiving doesn\x27t lower payroll for trade matching.`});
     s.std = [std, std2]; s.tw = [tw, tw2];
     if (std2 > 15 && std2 > std) issues.push({kind: "roster", team: ab, h: `The ${name} would have too many players`, p: `The ${name} would carry ${std2} standard contracts after this trade. The max is 15. Send ${std2 - 15} more player${std2 - 15 > 1 ? "s" : ""} out, or take fewer in.`});
     if (tw2 > 3 && tw2 > tw) issues.push({kind: "roster", team: ab, h: `The ${name} would have too many two-way players`, p: `Teams can carry at most 3 two-way players. The ${name} would have ${tw2}.`});
@@ -385,6 +395,12 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
       const clash = Object.keys(wsel).map(swapFromKey).find(s => s && s.isNew && s.y === k.y && s.r === k.r && (s.grantor === k.own || wsel[s.id] === k.own));
       if (clash) issues.push({kind: "swap", h: `The ${label} pick is also part of a new swap`, p: `This deal both trades the ${label} pick and creates a ${clash.y} swap involving it. A team can only offer or use a swap on a pick it keeps. Remove one of the two.`});
     }
+  }
+  for (const [id, prot] of Object.entries(L.pprot)) {
+    const k = L.picks[id]; if (!k || !psel[id] || !PROT[prot]) continue;
+    if (k.orig !== k.own || isConditional(k)) issues.push({kind: "pick", h: `Can\x27t add protection to the ${pickLabel(k)} pick`, p: `Only a team\x27s own pick with no existing conditions can be given new protection in a trade. This pick already has terms, so it has to be sent as it is.`});
+    else if (k.r !== 1) issues.push({kind: "pick", h: `Second-round protection isn\x27t supported`, p: `Choose protection only on first-round picks.`});
+    else warns.push({h: `The ${pickLabel(k)} pick goes out ${PROT[prot][1]}`, p: `If the ${teamName(k.orig)} pick lands 1–${PROT[prot][0]}, they keep it and the ${teamName(psel[id])} get nothing that year. Real deals usually say what happens next (the protection rolls over to the next year or turns into second-rounders), so treat this as a one-year protection. For the Stepien rule a protected first still counts as traded.`});
   }
   // pick swaps
   for (const id of wids) {
@@ -443,6 +459,40 @@ function suggest(ev) {
   return out;
 }
 
+// ---------- projected records (rough, in the spirit of ESPN's PER-based projections) ----------
+// Each player's Hollinger Game Score per game; offensive/defensive rebounds aren't split in the data, so all rebounds use 0.4.
+const gameScore = p => {
+  const s = p.st; if (!s || s[0] < 3) return 0;
+  const [, , pts, reb, ast, , , stl, blk, fgm, fga, ftm, fta, tov, pf] = s;
+  if (fga == null) return pts * 0.8;
+  return pts + 0.4 * fgm - 0.7 * fga - 0.4 * (fta - ftm) + 0.4 * reb + stl + 0.7 * ast + 0.7 * blk - 0.4 * pf - tov;
+};
+// A team's strength = Game Score of its top 10 players by minutes.
+const rotationValue = players => players.filter(p => p.st && p.st[0] >= 3).sort((a, b) => b.st[1] - a.st[1]).slice(0, 10).reduce((a, p) => a + gameScore(p), 0);
+const recordOf = ab => { const m = /^(\d+)-(\d+)/.exec(L.teams[ab].record || ""); return m ? [+m[1], +m[2]] : [0, 0]; };
+let projFit = null;
+function fitProjection() {
+  // least-squares line of win% against rotation strength across all 30 teams, using this season's records
+  const pts = Object.keys(L.teams).map(ab => { const [w, l] = recordOf(ab); return w + l ? [rotationValue(L.teams[ab].roster.map(id => L.players[id])), w / (w + l)] : null; }).filter(Boolean);
+  const n = pts.length, mx = pts.reduce((a, p) => a + p[0], 0) / n, my = pts.reduce((a, p) => a + p[1], 0) / n;
+  const b = pts.reduce((a, p) => a + (p[0] - mx) * (p[1] - my), 0) / (pts.reduce((a, p) => a + (p[0] - mx) ** 2, 0) || 1);
+  return (projFit = {b: Math.max(0, b)});
+}
+function projections(ev) {
+  const fit = projFit || fitProjection(), out = {};
+  for (const ab of L.teamIds) {
+    const s = ev.summary[ab]; if (!s) continue;
+    // early-season records are noisy, so the pace for the remaining games is pulled toward .500 by 20 "average" games
+    const [w, l] = recordOf(ab), g = w + l, left = Math.max(0, 82 - g), pct = (w + 10) / (g + 20);
+    const now = L.teams[ab].roster.map(id => L.players[id]);
+    const after = [...now.filter(p => !s.out.includes(p) && !L.waive[p.id]), ...s.inc];
+    const pct2 = Math.min(0.92, Math.max(0.08, pct + fit.b * (rotationValue(after) - rotationValue(now))));
+    const W0 = Math.round(w + pct * left), W1 = Math.round(w + pct2 * left);
+    out[ab] = {before: [W0, 82 - W0], after: [W1, 82 - W1], delta: W1 - W0};
+  }
+  return out;
+}
+
 // What a passing deal changes beyond rosters and picks: cash totals, hard caps, exceptions used and created.
 const tpeKey = x => `${x.team}|${x.from}|${+x.start}`;
 function tradeEffects(ev) {
@@ -497,6 +547,6 @@ function search(q, limit = 12) {
 }
 
 global.Engine = {L, CAP, TAX, APRON1, APRON2, BAND1, BAND2, BAND_ADD, MIN_SAL, DAY, TODAY, DEC15, JAN15, DEADLINE, REOPEN, DRAFT, END, START, SEASONS, TIER, PICK_LAST,
-  CASH_LIMIT, teamTPEs, tradeEffects,
+  CASH_LIMIT, teamTPEs, tradeEffects, MAX_TEAMS, PROT, projections, gameScore,
   d, money, fmtD, load, pickLabel, teamPicks, pickTerms, isConditional, swapLabel, swapFromKey, teamSwaps: ab => Object.values(L.swaps).filter(s => s.holder === ab && !(s.y === 2027 && L.date > DRAFT)).sort((a, b) => a.y - b.y || a.r - b.r), payroll, tierOf, windowOpen, minDate, elig, evaluate, suggest, applyTrade, search};
 })(window);
