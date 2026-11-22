@@ -1,0 +1,542 @@
+{
+  "2027-1-BKN": {
+    "note": "HOU's option to swap 2027 1st round pick with BKN",
+    "text": "The Rockets hold a swap: if this Nets pick ends up better (earlier) than the Rockets' own 2027 first, the Rockets can trade theirs for it."
+  },
+  "2027-1-HOU": {
+    "note": "HOU's option to swap 2027 1st round pick with BKN",
+    "text": "The Rockets can swap this pick for the Nets' 2027 first if the Nets' pick is better (earlier)."
+  },
+  "2027-1-CLE": {
+    "note": "More favorable pick of CLE, MIN, UTA",
+    "text": "Three 2027 firsts are linked: the Cavaliers', Jazz' and Timberwolves'. The Suns get the best of the three and the Grizzlies get the worst, so who ends up with this pick depends on where all three land."
+  },
+  "2027-1-MIN": {
+    "note": "More favorable pick of CLE, MIN, UTA",
+    "text": "Three 2027 firsts are linked: the Cavaliers', Jazz' and Timberwolves'. The Suns get the best of the three and the Grizzlies get the worst, so who ends up with this pick depends on where all three land."
+  },
+  "2027-1-UTAH": {
+    "note": "Least favourable between Utah, Cleveland and Minnesota's 2027 1st RD picks",
+    "text": "Three 2027 firsts are linked: the Cavaliers', Jazz' and Timberwolves'. The Suns get the best of the three and the Grizzlies get the worst, so who ends up with this pick depends on where all three land."
+  },
+  "2027-1-DAL": {
+    "note": "Top 2",
+    "text": "Top-2 protected. If it lands at No. 1 or No. 2, the Mavericks keep it. Otherwise it goes to the Hornets."
+  },
+  "2027-1-DEN": {
+    "note": "OKC receives a protected 2027 1st round pick from DEN, details are below: 2027: 1-5 2028: 1-5 2029: 1-5 If not conveyed, 2029 2nd RD pick to OKC",
+    "text": "Top-5 protected. If it lands 1–5, the Nuggets keep it and the same protected pick rolls to 2028, then to 2029. If it still hasn't gone to the Thunder by 2029, the Thunder get the Nuggets' 2029 second-rounder instead."
+  },
+  "2027-1-LAC": {
+    "note": "OKC will have the option to swap 2027 1st round pick of OKC or DEN (top 5 protected) for LAC 1st round pick.",
+    "text": "The Thunder can swap their own 2027 first (or the Nuggets' first they're owed, which is top-5 protected) for this Clippers pick if it's better. The Raptors hold a second swap right on it after that."
+  },
+  "2027-1-OKC": {
+    "note": "OKC will have the option to swap 2027 1st round pick of OKC or DEN (top 5 protected) for LAC 1st round pick.",
+    "text": "The Thunder can trade this pick (or the Nuggets' first they're owed, top-5 protected) for the Clippers' 2027 first if the Clippers' pick is better."
+  },
+  "2027-1-TOR": {
+    "note": "2027 first-round pick swap rights (TOR for LAC/OKC/DEN, subject to OKC's prior swap rights and DEN (Top 5 protected)).",
+    "text": "After the Thunder use their swap, the Raptors can trade this pick for the best remaining pick among the Clippers', Thunder's and Nuggets' 2027 firsts (the Nuggets' is top-5 protected)."
+  },
+  "2027-1-LAL": {
+    "note": "MEM receives a protected 2027 1st round pick from UTA, see details below: 2027: 1-4 Protected If pick is protected, MEM will receive a 2nd round pick.",
+    "text": "Top-4 protected. If it lands 1–4, the Lakers keep it and the Grizzlies get a second-round pick instead. If it's 5–30, it goes to the Grizzlies."
+  },
+  "2027-1-MIA": {
+    "note": "Lottery protected in 2027 (1-14), unprotected in 2028",
+    "text": "Lottery protected (1–14). If the Heat make the playoffs (pick 15–30), it goes to the Hornets. If it's in the lottery, the Heat keep it and the Hornets get the Heat's 2028 first with no protection instead."
+  },
+  "2027-1-MIL": {
+    "note": "ATL will receive least favorable pick of MIL/NOP Protected 1-4",
+    "text": "The Hawks get whichever of the Bucks' and Pelicans' 2027 firsts is worse (later), protected 1–4. The Pelicans keep the better one."
+  },
+  "2027-1-NO": {
+    "note": "ATL will receive least favorable pick of MIL/NOP",
+    "text": "The Pelicans keep the better (earlier) of their own and the Bucks' 2027 firsts. The Hawks get the worse one, unless it's in the top 4."
+  },
+  "2027-1-POR": {
+    "note": "",
+    "text": "Owed to the Bulls with protection. If the protection kicks in, the Trail Blazers keep it. The source doesn't list the exact protected range."
+  },
+  "2027-1-SA": {
+    "note": "Protected 1-16, If pick is protected, OKC receives 2027 2nd RD picks of SAS and CHA",
+    "text": "If it lands 17–30, it goes to the Thunder. If it lands 1–16, it goes to the Kings, and the Thunder get the Spurs' and Hornets' 2027 second-rounders instead."
+  },
+  "2027-2-BOS": {
+    "note": "Least favorable of ORL or BOS",
+    "text": "The Celtics' and Magic's 2027 seconds are paired. The Jazz get the better of the two, and the worse one goes to the Suns."
+  },
+  "2027-2-ORL": {
+    "note": "Least favorable of ORL or BOS",
+    "text": "The Magic's and Celtics' 2027 seconds are paired. The Jazz get the better of the two, and the worse one goes to the Hornets."
+  },
+  "2027-2-BKN": {
+    "note": "The higher of BKN or DAL 2027 2nd round pick.",
+    "text": "The Nets' and Mavericks' 2027 seconds are paired. The Wizards get the better of the two. The worse one goes to the Bucks, who got that claim from the Pistons."
+  },
+  "2027-2-DAL": {
+    "note": "least favourable of DAL/BKN",
+    "text": "The Mavericks' and Nets' 2027 seconds are paired. The Wizards get the better of the two. The worse one goes to the Bucks, who got that claim from the Pistons."
+  },
+  "2027-2-CHA": {
+    "note": "SAC receives a protected 2025 1st round pick from SAS (originally CHA), details are below: 2023: 1-16 (DID NOT transfer) 2024: 1-14 (DID NOT transfer) 2025: 1-14 (DID NOT transfer) If 2025 1st round pick doesn't transfer, 2026 and 2027 2nd RD pick (CHA) to SAC Result: SAC receives 2026 and 2027 2nd RD pick (CHA) Result: Resolved",
+    "text": "The Kings get this pick because the Hornets' protected first-rounder they were owed from 2023 never conveyed. It turned into Hornets second-round picks instead, and this is one of them."
+  },
+  "2027-2-CHI": {
+    "note": "Protected 31-50",
+    "text": "Protected 31–50. The Thunder get it only if it's pick 51–60. Otherwise the Bulls keep it."
+  },
+  "2027-2-GS": {
+    "note": "PHI will receive the most favorable 2027 2nd round pick of GSW/PHX",
+    "text": "The 76ers get the better of the Warriors' and Suns' 2027 seconds. The other one goes into a pool that the Wizards draw from."
+  },
+  "2027-2-PHX": {
+    "note": "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Philadelphia's pick.",
+    "text": "The 76ers get the better of the Warriors' and Suns' 2027 seconds. The other one goes into a pool that the Wizards draw from."
+  },
+  "2027-2-PHI": {
+    "note": "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Philadelphia's pick.",
+    "text": "The Wizards get the second-best pick from a group: the better of the Warriors' and Suns' 2027 seconds, plus the best of the Rockets', Pacers', Heat's and Thunder's. This 76ers pick is part of that same set of deals."
+  },
+  "2027-2-HOU": {
+    "note": "The Wizards' will receive the second-most favorable of the following second-round picks: (a) the more favorable of Golden State and Phoenix, (b) the most favorable of Houston, Indiana, Miami, and Oklahoma City and (c) Philadelphia's pick.",
+    "text": "Part of a pool of 2027 seconds (Rockets, Pacers, Heat, Thunder and Spurs) that several teams split by draft position. The Pelicans and Knicks each get a set rank (such as the second-best), and the Spurs and Heat get the lowest. Its final owner depends on where these teams finish."
+  },
+  "2027-2-IND": {
+    "note": "NOP will receive the second most favorable of IND/MIA/HOU/OKC 2027 2nd round pick",
+    "text": "Part of a pool of 2027 seconds (Rockets, Pacers, Heat, Thunder and Spurs) that several teams split by draft position. The Pelicans and Knicks each get a set rank (such as the second-best), and the Spurs and Heat get the lowest. Its final owner depends on where these teams finish."
+  },
+  "2027-2-MIA": {
+    "note": "NYK will receive the 2nd most favorable 2nd RD pick of OKC/HOU/MIA/IND",
+    "text": "Part of a pool of 2027 seconds (Rockets, Pacers, Heat, Thunder and Spurs) that several teams split by draft position. The Pelicans and Knicks each get a set rank (such as the second-best), and the Spurs and Heat get the lowest. Its final owner depends on where these teams finish."
+  },
+  "2027-2-OKC": {
+    "note": "SAS receives the lowest 2027 2nd round pick between OKC, IND, HOU, or MIA",
+    "text": "Part of a pool of 2027 seconds (Rockets, Pacers, Heat, Thunder and Spurs) that several teams split by draft position. The Pelicans and Knicks each get a set rank (such as the second-best), and the Spurs and Heat get the lowest. Its final owner depends on where these teams finish."
+  },
+  "2027-2-SA": {
+    "note": "MIA will receive the lowest 2nd round pick of SAS, HOU, IND, MIA, OKC.",
+    "text": "Part of a pool of 2027 seconds (Rockets, Pacers, Heat, Thunder and Spurs) that several teams split by draft position. The Heat get the lowest of the group. Its final owner depends on where these teams finish."
+  },
+  "2027-2-LAL": {
+    "note": "BKN gets LAL’s 2027 2nd-round pick only if LAL sends its 2027 1st-round pick to UTA. If not, UTA gets the 2nd-round pick instead, and BKN gets nothing",
+    "text": "The Nets get this pick only if the Lakers end up sending their 2027 first to the Jazz. If they don't, the Jazz get this second-rounder instead and the Nets get nothing."
+  },
+  "2027-2-NO": {
+    "note": "HOU will receive the less favorable of: -POR 2027 2nd round pick -NOP 2027 2nd round pick (Protected 31-55)",
+    "text": "The Rockets get the worse of the Trail Blazers' and Pelicans' 2027 seconds. The Pelicans' pick only counts if it's 56–60 (it's protected 31–55). The Hornets have a claim on the other one."
+  },
+  "2027-2-POR": {
+    "note": "HOU will receive the less favorable of: -POR 2027 2nd round pick -NOP 2027 2nd round pick (Protected 31-55)",
+    "text": "The Rockets get the worse of the Trail Blazers' and Pelicans' 2027 seconds. The Pelicans' pick only counts if it's 56–60 (it's protected 31–55). The Hornets have a claim on the other one."
+  },
+  "2027-2-WSH": {
+    "note": "NYK receives a protected 2023 1st round pick from OKC, details are below: 2023: 1-14 (DID NOT transfer) 2024: 1-12 (DID NOT transfer) 2025: 1-10 (DID NOT transfer) 2026: 1-8 (DID NOT transfer) If all years do not transfer, NYK will receive 2026 2nd round pick and 2027 2nd round pick. Result: 2026 2nd round pick and 2027 2nd round pick transferred Result: Resolved",
+    "text": "The Knicks get this pick because the Wizards' protected first-rounder they were owed never conveyed (it was protected every year from 2023 to 2026). It turned into the Wizards' 2026 and 2027 second-rounders."
+  },
+  "2028-1-BOS": {
+    "note": "Since pick is protected, If BOS picks #1 they will trade a 2028 2nd round pick to SAS if the pick is between #31-45 Top 1 SAS option to swap 2028 1st round pick with BOS",
+    "text": "The Spurs can swap their 2028 first for this Celtics pick if it's better. If the Celtics' pick is No. 1, there's no swap, and the Celtics send the Spurs their 2028 second-rounder (if it's 31–45) instead."
+  },
+  "2028-1-SA": {
+    "note": "Since pick is protected, If BOS picks #1 they will trade a 2028 2nd round pick to SAS if the pick is between #31-45 Top 1 SAS option to swap 2028 1st round pick with BOS",
+    "text": "The Spurs can trade this pick for the Celtics' 2028 first if the Celtics' is better. If the Celtics' pick is No. 1, there's no swap, and the Spurs get the Celtics' 2028 second-rounder (if it's 31–45) instead."
+  },
+  "2028-1-BKN": {
+    "note": "WAS has the option to swap WAS 2028 1st round pick for the lower 2028 1st round pick of BKN or PHX",
+    "text": "The Knicks' 2028 first is tied to this pick by a Nets swap. Separately, the Wizards can trade their 2028 first for the worse of the Nets' and Suns' firsts, if that pick is better than the Wizards' own."
+  },
+  "2028-1-PHX": {
+    "note": "WAS has the option to swap WAS 2028 1st round pick for the lower 2028 1st round pick of BKN or PHX",
+    "text": "The Wizards can trade their 2028 first for the worse of the Nets' and Suns' 2028 firsts, if that pick is better than the Wizards' own."
+  },
+  "2028-1-WSH": {
+    "note": "WAS has the option to swap WAS 2028 1st round pick for the lower 2028 1st round pick of BKN or PHX",
+    "text": "The Wizards can trade this pick for the worse of the Nets' and Suns' 2028 firsts, if that pick is better."
+  },
+  "2028-1-CLE": {
+    "note": "On a prior trade UTA can swap its 2028 1st RD pick with CLE 2028 1st RD pick. After that, ATL can swap its 2028 1st RD pick for the less favorable of the two picks between UTA and CLE (after the first swap, if it happens).",
+    "text": "A chain of swaps. First the Jazz can swap their 2028 first with the Cavaliers'. Then the Hawks can swap their 2028 first for the worse of the Jazz and Cavaliers picks. Who ends up with this pick depends on where all three land."
+  },
+  "2028-1-UTAH": {
+    "note": "UTA's option to swap 2028 1st round pick with CLE",
+    "text": "The Jazz can swap this pick with the Cavaliers' 2028 first. They can also swap the better of the Jazz and Cavaliers picks for the Lakers' 2028 first. The Hawks can then swap for the worse of the Jazz and Cavaliers picks."
+  },
+  "2028-1-LAL": {
+    "note": "UTA's right to swap the more favorable of CLE or UTA 2028 1st for LAL 2028 1st",
+    "text": "The Jazz can trade the better of the Jazz' and Cavaliers' 2028 firsts for this Lakers pick if the Lakers' pick is better."
+  },
+  "2028-1-DAL": {
+    "note": "OKC has the option to swap 2028 1st round picks with DAL",
+    "text": "The Thunder can swap their 2028 first for this Mavericks pick if it's better."
+  },
+  "2028-1-OKC": {
+    "note": "OKC has the option to swap 2028 1st round picks with DAL",
+    "text": "The Thunder can trade this pick for the Mavericks' 2028 first if the Mavericks' is better."
+  },
+  "2028-1-DEN": {
+    "note": "",
+    "text": "Only in play if the Nuggets' 2027 first (owed to the Thunder, top-5 protected) doesn't convey. In that case the Thunder are owed this 2028 first instead, again top-5 protected."
+  },
+  "2028-1-LAC": {
+    "note": "A conditional 2028 first-round pick (LAC or PHI own, protected 1-16). If the pick does not convey, BOS instead receives the right to swap its own or SAS's 2028 first-round pick with LAC's or PHI's (if 1-8).",
+    "text": "The Celtics are owed either the Clippers' or 76ers' 2028 first, protected 1–16. If that pick lands in the top 16, the Celtics instead get the right to swap their own (or the Spurs') 2028 first for it, but only if it's 1–8."
+  },
+  "2028-1-PHI": {
+    "note": "A conditional 2028 first-round pick (LAC or PHI own, protected 1-16). If the pick does not convey, BOS instead receives the right to swap its own or SAS's 2028 first-round pick with LAC's or PHI's (if 1-8).",
+    "text": "The Nets hold this pick. It's also tied to the Celtics' deal: they're owed the Clippers' or 76ers' 2028 first (protected 1–16), so where this pick ends up depends on where both picks land."
+  },
+  "2028-1-MIA": {
+    "note": "",
+    "text": "Only in play if the Heat's 2027 first lands in the lottery (1–14). In that case the Hornets get this 2028 first with no protection."
+  },
+  "2028-1-MIL": {
+    "note": "WAS has the right to swap 2028 1st round pick of WAS/MIL",
+    "text": "The Wizards can swap their 2028 first for this Bucks pick if it's better. The Trail Blazers also hold a swap right with the Bucks."
+  },
+  "2028-1-POR": {
+    "note": "POR's option to swap 2028 1st round pick with MIL",
+    "text": "The Trail Blazers can trade this pick for the Bucks' 2028 first if the Bucks' is better."
+  },
+  "2028-1-NY": {
+    "note": "BKN has the option to swap 2028 1st RD pick (BKN/NYK)",
+    "text": "The Nets can swap their 2028 first for this Knicks pick if the Knicks' is better."
+  },
+  "2028-2-BOS": {
+    "note": "Protected 31 to 45",
+    "text": "Protected 31–45. The Knicks get it only if it's pick 46–60. Otherwise the Celtics keep it."
+  },
+  "2028-2-CHA": {
+    "note": "DET will receive less favorable 2nd RD pick of CHA/LAC",
+    "text": "The Pistons get the worse of the Hornets' and Clippers' 2028 seconds. The Jazz' 2028 pool (the worst of several seconds) also includes these picks."
+  },
+  "2028-2-LAC": {
+    "note": "UTA receives the least favorable of five possible 2028 2nd RD picks: - DET pick (protected 56-60) - The less favorable of CHA and LAC 2nd RD picks - MIA 2nd RD pick, only if DAL conveys a 1st to CHA in 2027 - NYK 2nd RD pick",
+    "text": "The Pistons get the worse of the Hornets' and Clippers' 2028 seconds. The Jazz also have a claim: they get the worst of several 2028 seconds, including this group."
+  },
+  "2028-2-MIA": {
+    "note": "UTA receives the least favorable of five possible 2028 2nd RD picks: - DET pick (protected 56-60) - The less favorable of CHA and LAC 2nd RD picks - MIA 2nd RD pick, only if DAL conveys a 1st to CHA in 2027 - NYK 2nd RD pick",
+    "text": "The Jazz get the worst of several 2028 seconds: the Pistons' (only if 56–60), the worse of the Hornets' and Clippers', this Heat pick (only if the Mavericks send the Hornets a first in 2027), and the Knicks'."
+  },
+  "2028-2-NY": {
+    "note": "UTA receives the least favorable of five possible 2028 2nd RD picks: - DET pick (protected 56-60) - The less favorable of CHA and LAC 2nd RD picks - MIA 2nd RD pick, only if DAL conveys a 1st to CHA in 2027 - NYK 2nd RD pick",
+    "text": "The Jazz get the worst of several 2028 seconds: the Pistons' (only if 56–60), the worse of the Hornets' and Clippers', the Heat's (in some cases), and this Knicks pick."
+  },
+  "2028-2-DET": {
+    "note": "Top 55 protected.",
+    "text": "Top-55 protected. The Pistons keep it unless it's pick 56–60. It's also one of the picks in the Jazz' 2028 pool (they get the worst of the group)."
+  },
+  "2028-2-DEN": {
+    "note": "Protected 31-33",
+    "text": "Protected 31–33. The Wizards get it unless it's one of the first three picks of the second round."
+  },
+  "2028-2-GS": {
+    "note": "Boston will receive the more favorable pick of GSW, OKC or MIL",
+    "text": "The Celtics get the best of the Warriors', Thunder's and Bucks' 2028 seconds. The 76ers get the others."
+  },
+  "2028-2-MIL": {
+    "note": "Boston will receive the more favorable pick of GSW, OKC or MIL",
+    "text": "The Celtics get the best of the Warriors', Thunder's and Bucks' 2028 seconds. The 76ers get the others."
+  },
+  "2028-2-OKC": {
+    "note": "Boston will receive the more favorable pick of GSW, OKC or MIL",
+    "text": "The Celtics get the best of the Warriors', Thunder's and Bucks' 2028 seconds. The 76ers get the others."
+  },
+  "2028-2-IND": {
+    "note": "CHI can swap with the more favorable of CHI/IND/PHX",
+    "text": "The Bulls can trade their 2028 second for the best of the Bulls', Pacers' and Suns' seconds."
+  },
+  "2028-2-PHX": {
+    "note": "CHI can swap with the more favorable of CHI/IND/PHX",
+    "text": "The Bulls can trade their 2028 second for the best of the Bulls', Pacers' and Suns' seconds."
+  },
+  "2028-2-LAL": {
+    "note": "WAS will receive the lower of the LAL 2028 2nd RD pick or the WAS 2nd RD pick",
+    "text": "The Magic get the worse of the Lakers' and Wizards' 2028 seconds. The Wizards keep the better one."
+  },
+  "2028-2-WSH": {
+    "note": "WAS will receive the lower of the LAL 2028 2nd RD pick or the WAS 2nd RD pick",
+    "text": "The Magic get the worse of the Lakers' and Wizards' 2028 seconds. The Wizards keep the better one."
+  },
+  "2028-2-PHI": {
+    "note": "",
+    "text": "Owed to the Nets with conditions. The source doesn't list the exact terms."
+  },
+  "2028-2-POR": {
+    "note": "",
+    "text": "Owed to the Bulls with conditions. The source doesn't list the exact terms."
+  },
+  "2029-1-BOS": {
+    "note": "WSH will receive the second most favorable 1st RD pick of POR/BOS/MIL",
+    "text": "The Trail Blazers', Celtics' and Bucks' 2029 firsts are pooled. The Wizards get the second-best of the three, and the Trail Blazers get the other two."
+  },
+  "2029-1-MIL": {
+    "note": "WSH will receive the second most favorable 1st RD pick of POR/BOS/MIL",
+    "text": "The Trail Blazers', Celtics' and Bucks' 2029 firsts are pooled. The Wizards get the second-best of the three, and the Trail Blazers get the other two."
+  },
+  "2029-1-POR": {
+    "note": "WSH will receive the second most favorable 1st RD pick of POR/BOS/MIL",
+    "text": "The Trail Blazers', Celtics' and Bucks' 2029 firsts are pooled. The Wizards get the second-best of the three, and the Trail Blazers get the other two."
+  },
+  "2029-1-CLE": {
+    "note": "Least favorable of CLE, CHA, UTA, or MIN (top 5 protected)",
+    "text": "Four 2029 firsts are linked: the Cavaliers', Hornets', Jazz' and Timberwolves'. The Suns get the worst of the four (top-5 protected). The Hornets can also swap the worst of the Hornets', Cavaliers' and Jazz picks for the Timberwolves' pick."
+  },
+  "2029-1-UTAH": {
+    "note": "Least favourable between Utah, Cleveland and Minnesota's 2029 1st RD picks",
+    "text": "Four 2029 firsts are linked: the Cavaliers', Hornets', Jazz' and Timberwolves'. The Suns get the worst of the four (top-5 protected). The Hornets can also swap the worst of the Hornets', Cavaliers' and Jazz picks for the Timberwolves' pick."
+  },
+  "2029-1-MIN": {
+    "note": "The right to swap the least favorable of CHA's, CLE's or UTA's 2029 1st for MIN's 2029 1st (if MIN is 1-5)",
+    "text": "The Hornets can trade the worst of the Hornets', Cavaliers' and Jazz' 2029 firsts for this Timberwolves pick, but only if the Timberwolves' pick is 1–5."
+  },
+  "2029-1-DAL": {
+    "note": "HOU will receive the two most favorable of DAL, PHX, or HOU 1st round pick.",
+    "text": "The Rockets get the two best of the Mavericks', Suns' and Rockets' 2029 firsts. The Nets get the worst one."
+  },
+  "2029-1-HOU": {
+    "note": "HOU will receive the two most favorable of DAL, PHX, or HOU 1st round pick.",
+    "text": "The Rockets get the two best of the Mavericks', Suns' and Rockets' 2029 firsts. The Nets get the worst one."
+  },
+  "2029-1-PHX": {
+    "note": "HOU will receive the two most favorable of DAL, PHX, or HOU 1st round pick.",
+    "text": "The Rockets get the two best of the Mavericks', Suns' and Rockets' 2029 firsts. The Nets get the worst one."
+  },
+  "2029-1-DEN": {
+    "note": "OKC receives a protected 2029 1st round pick from DEN, details are below: 2029- 1-5 2030- 1-5 If pick does not transfer, OKC will receive 2030 2nd round pick",
+    "text": "Top-5 protected in 2029 and again in 2030. If it lands 1–5 both years, it never goes to the Thunder, and they get the Nuggets' 2030 second-rounder instead."
+  },
+  "2029-1-LAC": {
+    "note": "PHI will have the option to swap 2029 1st round pick of PHI for LAC (top 3 protected)",
+    "text": "The 76ers can swap their 2029 first for this Clippers pick if it's better. If the Clippers' pick is 1–3, there's no swap."
+  },
+  "2029-1-PHI": {
+    "note": "PHI will have the option to swap 2029 1st round pick of PHI for LAC (top 3 protected)",
+    "text": "The 76ers can trade this pick for the Clippers' 2029 first if the Clippers' is better and isn't 1–3."
+  },
+  "2029-1-MEM": {
+    "note": "Top 2 Protected if protected ORL will give 2029 2nd RD pick to MEM MEM has the right to swap its 2029 1st round pick for ORL 1st round pick",
+    "text": "The Grizzlies can trade this pick for the Magic's 2029 first if the Magic's is better. If the Magic's pick is 1–2, there's no swap, and the Magic send the Grizzlies their 2029 second-rounder instead."
+  },
+  "2029-1-ORL": {
+    "note": "Top 2 Protected if protected ORL will give 2029 2nd RD pick to MEM MEM has the right to swap its 2029 1st round pick for ORL 1st round pick",
+    "text": "The Grizzlies can swap their 2029 first for this Magic pick if it's better. If it's 1–2, there's no swap, and the Magic send the Grizzlies their 2029 second-rounder instead."
+  },
+  "2029-2-ATL": {
+    "note": "More favorable of ATL or MIA",
+    "text": "The Hornets get the better of the Hawks' and Heat's 2029 seconds. The Thunder get the other one."
+  },
+  "2029-2-MIA": {
+    "note": "More favorable of ATL or MIA",
+    "text": "The Hornets get the better of the Hawks' and Heat's 2029 seconds. The Thunder get the other one."
+  },
+  "2029-2-DEN": {
+    "note": "CHA will get DEN’s 2029 second-round pick only if DEN has already sent a first-round pick to OKC by then. If not, OKC gets the pick instead, and CHA gets nothing.",
+    "text": "The Hornets get this pick only if the Nuggets have sent a first-round pick to the Thunder by then. If not, the Thunder get it instead and the Hornets get nothing."
+  },
+  "2029-2-DET": {
+    "note": "Second most favorable of NYK/DET/MIL",
+    "text": "The Pistons get the second-best of the Knicks', Pistons' and Bucks' 2029 seconds. The Bulls get another one from the group."
+  },
+  "2029-2-MIL": {
+    "note": "Second most favorable of NYK/DET/MIL",
+    "text": "The Pistons get the second-best of the Knicks', Pistons' and Bucks' 2029 seconds. The Bulls get another one from the group."
+  },
+  "2029-2-NY": {
+    "note": "Second most favorable of NYK/DET/MIL",
+    "text": "The Pistons get the second-best of the Knicks', Pistons' and Bucks' 2029 seconds. The Bulls get another one from the group."
+  },
+  "2029-2-IND": {
+    "note": "POR receive the least favorable 2029 2nd round pick of IND/WAS",
+    "text": "The Trail Blazers get the worse of the Pacers' and Wizards' 2029 seconds. The Pacers keep the better one."
+  },
+  "2029-2-WSH": {
+    "note": "POR receive the least favorable 2029 2nd round pick of IND/WAS",
+    "text": "The Trail Blazers get the worse of the Pacers' and Wizards' 2029 seconds. The Pacers keep the better one."
+  },
+  "2029-2-ORL": {
+    "note": "",
+    "text": "Goes to the Grizzlies only if the Magic's 2029 first is No. 1 or 2. In that case the Grizzlies' swap on that first doesn't happen, and they get this second instead."
+  },
+  "2030-1-DAL": {
+    "note": "SAS option to swap 2030 1st round pick with DAL",
+    "text": "The Spurs can swap their 2030 first for this Mavericks pick if it's better."
+  },
+  "2030-1-SA": {
+    "note": "SAS option to swap 2030 1st round pick with DAL",
+    "text": "The Spurs can trade this pick for the Mavericks' 2030 first if the Mavericks' is better. It's also part of a Hornets swap involving the Timberwolves' first."
+  },
+  "2030-1-MIN": {
+    "note": "A conditional 2030 first-round swap (CHA for the less favorable of MIN or the more favorable of DAL/SAS, if MIN is not 1-3)",
+    "text": "The Hornets can trade their 2030 first for the worse of two picks: this Timberwolves pick, or the better of the Mavericks' and Spurs' firsts. This only applies if the Timberwolves' pick isn't 1–3."
+  },
+  "2030-1-DEN": {
+    "note": "",
+    "text": "Only in play if the Nuggets' 2029 first (owed to the Thunder, top-5 protected) doesn't convey. In that case the Thunder are owed this 2030 first instead, again top-5 protected."
+  },
+  "2030-1-GS": {
+    "note": "Top 20 protected. Becomes a 2nd round pick if protected.",
+    "text": "Top-20 protected. The Grizzlies get it only if it's 21–30. If it's 1–20, the Warriors keep it and the Grizzlies get a second-round pick instead."
+  },
+  "2030-1-LAL": {
+    "note": "UTA will receive the more favorable of LAL or UTA 2030 1st round picks",
+    "text": "The Jazz get the better of the Lakers' and Jazz' 2030 firsts. The Lakers get the other one."
+  },
+  "2030-1-UTAH": {
+    "note": "UTA will receive the more favorable of LAL or UTA 2030 1st round picks",
+    "text": "The Jazz get the better of the Lakers' and Jazz' 2030 firsts. The Lakers get the other one."
+  },
+  "2030-1-MEM": {
+    "note": "MEM's option to swap with lower pick of PHX or WAS",
+    "text": "The Grizzlies can trade this pick for the worse of the Suns' and Wizards' 2030 firsts, if that pick is better."
+  },
+  "2030-1-PHX": {
+    "note": "MEM's option to swap with lower pick of PHX or WAS",
+    "text": "The Grizzlies can trade their 2030 first for the worse of the Suns' and Wizards' firsts, if that pick is better than the Grizzlies' own."
+  },
+  "2030-1-WSH": {
+    "note": "MEM's option to swap with lower pick of PHX or WAS",
+    "text": "The Grizzlies can trade their 2030 first for the worse of the Suns' and Wizards' firsts, if that pick is better than the Grizzlies' own."
+  },
+  "2030-1-MIL": {
+    "note": "POR's option to swap 2030 1st round pick with MIL",
+    "text": "The Trail Blazers can swap their 2030 first for this Bucks pick if it's better."
+  },
+  "2030-1-POR": {
+    "note": "POR's option to swap 2030 1st round pick with MIL",
+    "text": "The Trail Blazers can trade this pick for the Bucks' 2030 first if the Bucks' is better."
+  },
+  "2030-2-CHA": {
+    "note": "Top 55 Protected",
+    "text": "Top-55 protected. The Celtics get it only if it's pick 56–60."
+  },
+  "2030-2-DEN": {
+    "note": "More favourable of DEN, MIA or HOU",
+    "text": "The Thunder get the best of the Nuggets', Heat's and Rockets' 2030 seconds. The Grizzlies get the others."
+  },
+  "2030-2-HOU": {
+    "note": "More favourable of DEN, MIA or HOU",
+    "text": "The Thunder get the best of the Nuggets', Heat's and Rockets' 2030 seconds. The Grizzlies get the others."
+  },
+  "2030-2-MIA": {
+    "note": "More favourable of DEN, MIA or HOU",
+    "text": "The Thunder get the best of the Nuggets', Heat's and Rockets' 2030 seconds. The Grizzlies get the others."
+  },
+  "2030-2-GS": {
+    "note": "",
+    "text": "Owed to the Mavericks with conditions. The source doesn't list the exact terms."
+  },
+  "2030-2-LAC": {
+    "note": "CHA will receive the more favorable 2030 2nd round pick of LAC/UTA",
+    "text": "The Hornets get the better of the Clippers' and Jazz' 2030 seconds. The Jazz have the other one."
+  },
+  "2030-2-UTAH": {
+    "note": "CHA will receive the more favorable 2030 2nd round pick of LAC/UTA",
+    "text": "The Hornets get the better of the Clippers' and Jazz' 2030 seconds. The Jazz have the other one."
+  },
+  "2030-2-MEM": {
+    "note": "Protected 31-50",
+    "text": "Protected 31–50. The Timberwolves get it only if it's 51–60."
+  },
+  "2030-2-NO": {
+    "note": "ORL has the option to swap 2030 2nd RD pick with NOP",
+    "text": "The Magic can swap their 2030 second for this Pelicans pick if it's better."
+  },
+  "2030-2-ORL": {
+    "note": "ORL has the option to swap 2030 2nd RD pick with NOP",
+    "text": "The Magic can trade this pick for the Pelicans' 2030 second if the Pelicans' is better."
+  },
+  "2030-2-PHX": {
+    "note": "PHI will receive the most favorable 2030 2nd round pick of PHX/POR",
+    "text": "The Suns', Trail Blazers' and Wizards' 2030 seconds are pooled. The Celtics get the best of the three, the 76ers get the better of the Suns' and Trail Blazers' that's left, and the Wizards hold the rest."
+  },
+  "2030-2-POR": {
+    "note": "Boston will receive the more favorable of WSH, POR or PHX",
+    "text": "The Suns', Trail Blazers' and Wizards' 2030 seconds are pooled. The Celtics get the best of the three, the 76ers get the better of the Suns' and Trail Blazers' that's left, and the Wizards hold the rest."
+  },
+  "2030-2-WSH": {
+    "note": "Boston will receive the more favorable of WSH, POR or PHX",
+    "text": "The Suns', Trail Blazers' and Wizards' 2030 seconds are pooled. The Celtics get the best of the three, the 76ers get the better of the Suns' and Trail Blazers' that's left, and the Wizards hold the rest."
+  },
+  "2031-1-SAC": {
+    "note": "SAS receives the right to swap 2031 1st round picks of SAC/SAS",
+    "text": "The Spurs can swap their 2031 first for this Kings pick if it's better."
+  },
+  "2031-1-SA": {
+    "note": "SAS receives the right to swap 2031 1st round picks of SAC/SAS",
+    "text": "The Spurs can trade this pick for the Kings' 2031 first if the Kings' is better."
+  },
+  "2031-2-ATL": {
+    "note": "More favorable of ATL and HOU",
+    "text": "The Thunder get the better of the Hawks' and Rockets' 2031 seconds."
+  },
+  "2031-2-BOS": {
+    "note": "Most favorable of BOS/CLE",
+    "text": "The Jazz get the better of the Celtics' and Cavaliers' 2031 seconds. The Celtics get the other one."
+  },
+  "2031-2-CLE": {
+    "note": "Most favorable of BOS/CLE",
+    "text": "The Jazz get the better of the Celtics' and Cavaliers' 2031 seconds. The Celtics get the other one."
+  },
+  "2031-2-GS": {
+    "note": "DET will receive the less favorable of the GSW and MIN 2031 2nd Rd picks",
+    "text": "The Bulls get the better of the Timberwolves' and Warriors' 2031 seconds. The Pistons get the worse one."
+  },
+  "2031-2-MIN": {
+    "note": "Chicago will receive the more favorable of MIN or GSW 2031 2nd round pick",
+    "text": "The Bulls get the better of the Timberwolves' and Warriors' 2031 seconds. The Pistons get the worse one."
+  },
+  "2031-2-HOU": {
+    "note": "Protected 56-60 Atlanta can swap their 2031 2nd round pick with Houston",
+    "text": "The Celtics get it unless it's pick 56–60 (protected 56–60). The Hawks can also swap their 2031 second for it if it's better."
+  },
+  "2031-2-IND": {
+    "note": "Memphis can swap their 2031 second-round pick for either the Pacers’ or Heat’s 2031 second-round pick",
+    "text": "The Wizards get the better of the Heat's and Pacers' 2031 seconds. The Grizzlies can swap their own second for either one."
+  },
+  "2031-2-MIA": {
+    "note": "More favorable 2nd RD pick of MIA or IND",
+    "text": "The Wizards get the better of the Heat's and Pacers' 2031 seconds. The Grizzlies can swap their own second for either one."
+  },
+  "2031-2-NO": {
+    "note": "OKC will receive the less favorable 2031 2nd round pick of NOP/ORL",
+    "text": "The Thunder get the worse of the Pelicans' and Magic's 2031 seconds."
+  },
+  "2031-2-ORL": {
+    "note": "ORL has the option to swap 2031 2nd RD pick with NOP",
+    "text": "The Thunder get the worse of the Pelicans' and Magic's 2031 seconds. The Magic can also swap their second with the Pelicans' if it's better."
+  },
+  "2032-2-ATL": {
+    "note": "More favorable of ATL and LAL",
+    "text": "The Thunder hold claims on both the Hawks' and Lakers' 2032 seconds: the better of the two through one deal and the worse through another."
+  },
+  "2032-2-LAL": {
+    "note": "OKC will receive the less favorable of LAL or ATL 2032 2nd round picks",
+    "text": "The Thunder hold claims on both the Lakers' and Hawks' 2032 seconds: the better of the two through one deal and the worse through another."
+  },
+  "2032-2-GS": {
+    "note": "top 50 protected",
+    "text": "Top-50 protected. The Grizzlies get it only if it's 51–60."
+  },
+  "2032-2-HOU": {
+    "note": "MIN receives the right to swap 2032 2nd round picks of PHX/HOU",
+    "text": "The Bulls get the better of the Suns' and Rockets' 2032 seconds. The Timberwolves also hold a swap right on these two picks."
+  },
+  "2032-2-PHX": {
+    "note": "Chicago will receive the more favorable of PHX or HOU 2032 2nd round pick",
+    "text": "The Bulls get the better of the Suns' and Rockets' 2032 seconds. The Timberwolves also hold a swap right on these two picks."
+  },
+  "2032-2-MEM": {
+    "note": "MEM's option to swap 2032 2nd round pick with PHI",
+    "text": "The Grizzlies can trade this pick for the 76ers' 2032 second if the 76ers' is better."
+  },
+  "2032-2-PHI": {
+    "note": "MEM's option to swap 2032 2nd round pick with PHI",
+    "text": "The Grizzlies can swap their 2032 second for this 76ers pick if it's better."
+  },
+  "2032-2-UTAH": {
+    "note": "Most favorable of MEM, PHI and UTA 2032 2nd round pick swap",
+    "text": "The Grizzlies can trade their 2032 second for the best of the Grizzlies', 76ers' and Jazz' seconds."
+  }
+}

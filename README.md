@@ -9,7 +9,8 @@ An NBA trade machine with live rosters and contracts. It checks every trade agai
 - Plain-English explanations with one-click fixes: fast-forward to the eligibility date, or add a player that makes the salaries work
 - Draft picks: every team's 2027-2033 firsts and seconds with current owners and protections, checked against the Stepien rule, the frozen 7-years-out first for second-apron teams, and the draft date
 - Pick swaps: trade swap rights a team holds, or offer a new swap on a pick a team owns (both teams must own that year's pick; frozen picks can't be swapped)
-- 2 to 4 team trades, league-wide player search, and "Make trade" to play out a season (saved in your browser)
+- 2 to 4 team trades and league-wide player search. Completing a trade saves a PNG image of it (players with height, stats and contracts; picks and swaps with their terms; cash; salary, payroll and roster before and after; any rule problems). Rosters always stay as they really are.
+- Every protected, conditional or swap pick has a plain-English explanation (`pick-terms.json`). Each one is tied to the source note it was written for, so if Salary Swish changes a pick's terms, the page falls back to a cleaned-up version of the new note instead of showing a stale explanation.
 - Separate desktop (three-pane desk) and mobile (tabbed app) layouts
 
 ## Data

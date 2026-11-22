@@ -90,7 +90,7 @@ function picksSection(ab) {
       ${tag ? `<span class="pill warn">${tag}</span>` : ""}${frozen ? `<span class="pill lock">Frozen</span>` : ""}
       ${to ? destSel("data-pdest", k.id, to, `${k.y} pick`) : `<span class="chk" aria-hidden="true">✓</span>`}
     </div>
-    ${cond ? `<div class="pnote"><b>Depends on:</b> ${esc(E.pickTerms(k))}</div>` : ""}
+    ${cond ? `<div class="pnote"><b>How it works:</b> ${esc(E.pickTerms(k))}</div>` : ""}
     ${sw ? `<div class="pk swnew sel" data-newswap="${newKey(k)}" role="button" tabindex="0" aria-pressed="true"><span class="pr sw">Swap</span><span class="po">Swap rights on this pick</span>${destSel("data-wdest", newKey(k), sw, `${k.y} swap`)}</div>`
       : canSwap ? `<button class="swbtn" data-newswap="${newKey(k)}">+ Offer a swap on this pick</button>` : ""}</div>`;
   };
@@ -99,7 +99,7 @@ function picksSection(ab) {
     return `<div class="pkw"><div class="pk ${to ? "sel" : ""}" role="button" tabindex="0" aria-pressed="${!!to}" data-swap="${s.id}">
       <span class="py">${s.y}</span><span class="pr sw">Swap</span><span class="po">Right to swap with the ${esc(team(s.grantor)?.short || s.grantor)}</span>
       ${to ? destSel("data-wdest", s.id, to, `${s.y} swap right`) : `<span class="chk" aria-hidden="true">✓</span>`}</div>
-      <div class="pnote"><b>Terms:</b> ${esc(E.pickTerms({note: s.note, also: [], tags: ""}) || `May trade their ${s.y} pick for the ${team(s.grantor)?.short} pick if it's better.`)}</div></div>`;
+      <div class="pnote"><b>How it works:</b> ${esc(E.pickTerms(L.picks[s.pick] || {note: s.note, also: [], tags: ""}) || `May trade their ${s.y} pick for the ${team(s.grantor)?.short} pick if it's better.`)}</div></div>`;
   };
   const inDeal = picks.filter(k => L.psel[k.id] || L.wsel[newKey(k)]).length + swaps.filter(s => L.wsel[s.id]).length;
   const body = open ? [...picks.map(row), ...swaps.map(srow)].join("") || `<div class="sub" style="padding:6px 4px">No picks left to trade.</div>`
@@ -211,8 +211,9 @@ function dPanel(ev) {
   const [c, h, s] = verdict(ev);
   $("dPanel").innerHTML = `<div class="vhead"><div><div class="vtitle ${c}">${h}${c === "ok" ? " ✓" : ""}</div><div class="vsub">${s}</div></div></div>
     ${issuesHtml(ev)}
-    <div class="actions"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec ${ev.state === "ok" ? "" : "disabled"}>Make this trade</button><button class="btn" id="clearSel" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div>
-    ${summaryHtml(ev)}${historyHtml()}`;
+    <div class="actions"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec ${ev.state === "idle" ? "disabled" : ""}>${ev.state === "ok" ? "Complete trade · save image" : "Save trade image"}</button><button class="btn" id="clearSel" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div>
+    <p class="sub" style="margin:2px 0 8px">Completing a trade saves an image of it. The rosters stay as they really are.</p>
+    ${summaryHtml(ev)}`;
 }
 function renderDesktop(keepSlider) {
   const ev = E.evaluate();
@@ -249,20 +250,20 @@ function mBody(ev) {
     const [c, h, s] = verdict(ev);
     b.innerHTML = `<div class="m-section"><div class="vtitle ${c}">${h}${c === "ok" ? " ✓" : ""}</div><div class="vsub">${s}</div>
       ${ev.issues.length || ev.warns.length ? `<div style="margin-top:12px">${issuesHtml(ev)}</div>` : ""}
-      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec style="flex:1;padding:11px" ${ev.state === "ok" ? "" : "disabled"}>Make this trade</button><button class="btn" id="clearSel" style="padding:11px" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div></div>
-      <div class="m-section">${summaryHtml(ev)}${historyHtml()}</div>
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn ${ev.state === "ok" ? "go" : "primary"}" data-exec style="flex:1;padding:11px" ${ev.state === "idle" ? "disabled" : ""}>${ev.state === "ok" ? "Complete trade · save image" : "Save trade image"}</button><button class="btn" id="clearSel" style="padding:11px" ${ev.state === "idle" ? "disabled" : ""}>Clear</button></div></div>
+      <div class="m-section">${summaryHtml(ev)}</div>
       <div class="sub" style="padding:4px 2px 12px">${footHtml()}</div>`;
   }
 }
 function mDock(ev) {
   const [c, h] = verdict(ev), n = Object.keys(L.sel).length + Object.keys(L.psel).length + Object.keys(L.wsel).length + Object.values(L.csel).filter(c => c.amt > 0).length;
   const detail = ev.state === "bad" ? ev.issues[0].h : ev.state === "ok" ? `${n} asset${n > 1 ? "s" : ""} move` : L.teamIds.length < 2 ? "Pick at least 2 teams" : "Tap players or picks to add them";
-  $("mDock").innerHTML = (U.mview !== "trade" ? `<button class="m-verdict" data-mview="trade"><span class="vt ${c}">${h}</span><span class="vd">${esc(detail)}</span>${ev.state === "ok" ? `<span class="btn go" data-exec>Make trade</span>` : ""}</button>` : "") +
+  $("mDock").innerHTML = (U.mview !== "trade" ? `<button class="m-verdict" data-mview="trade"><span class="vt ${c}">${h}</span><span class="vd">${esc(detail)}</span>${ev.state !== "idle" ? `<span class="btn ${ev.state === "ok" ? "go" : ""}" data-exec>Save image</span>` : ""}</button>` : "") +
     `<div class="m-tabs" role="tablist">${[["roster", "Rosters"], ["search", "Search"], ["trade", "Trade"]].map(([k, l]) => `<button role="tab" aria-selected="${U.mview === k}" class="${U.mview === k ? "on" : ""}" data-mview="${k}">${ICON[k]}${l}${k === "trade" && n ? `<span class="badge ${ev.state}">${n}</span>` : ""}</button>`).join("")}</div>`;
 }
 function mSheet() {
   const el = $("mSheet");
-  if (!U.sheet) { el.innerHTML = ""; return; }
+  if (!U.sheet || U.sheet === "shot") { el.innerHTML = ""; return; }
   if (U.sheet === "time") {
     const [wc, wt] = windowText();
     el.innerHTML = `<div class="sheet-bg" data-close></div><div class="sheet" role="dialog" aria-label="League date"><div class="grab"></div>
@@ -286,10 +287,21 @@ function renderMobile(keepSlider) {
 }
 
 // ---------- shared render + actions ----------
+function renderShot() {
+  let el = $("shotModal");
+  if (U.sheet !== "shot" || !shot) { if (el) el.remove(); return; }
+  if (!el) { el = document.createElement("div"); el.id = "shotModal"; document.body.appendChild(el); }
+  el.innerHTML = `<div class="sheet-bg" data-shotclose></div><div class="shot" role="dialog" aria-label="Trade image">
+    <div class="shot-head"><h3>Trade image</h3><button class="tx-x shotx" data-shotclose aria-label="Close">×</button></div>
+    <div class="shot-img"><img src="${shot.url}" alt="Image of this trade with players, picks, contracts and cap details"></div>
+    <div class="shot-actions"><button class="btn go" data-shotdl>Download PNG</button><button class="btn" data-shotclose>Close</button></div>
+    <p class="sub">If the download doesn\x27t start, press and hold (or right-click) the image and choose Save. The rosters haven\x27t changed.</p></div>`;
+}
 function render(keepSlider) {
   const mode = U.force || (mq.matches ? "mobile" : "desktop");
   if (mode !== U.mode) { U.mode = mode; mode === "mobile" ? mobileShell() : desktopShell(); keepSlider = false; }
   mode === "mobile" ? renderMobile(keepSlider) : renderDesktop(keepSlider);
+  renderShot();
 }
 function toast(msg) { const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
 function setDate(ms, keepSlider) {
@@ -349,18 +361,162 @@ function toggleSwap(key) {
   }
   render();
 }
-function execute() {
-  const ev = E.evaluate(); if (ev.state !== "ok") return;
-  const label = L.teamIds.map(ab => { const s = ev.summary[ab]; const got = [...s.inc.map(p => p.name), ...s.pIn.map(k => E.pickLabel(k) + " pick"), ...s.wIn.map(w => `${w.y} swap rights (${team(w.grantor).short} pick)`), ...(s.cashIn ? [money(s.cashIn, 2) + " cash"] : [])]; return got.length ? `${team(ab).short} get ${got.join(", ")}` : null; }).filter(Boolean).join("; ");
-  E.applyTrade({date: L.date.toISOString().slice(0, 10), moves: Object.entries(L.sel), pmoves: Object.entries(L.psel), wmoves: Object.entries(L.wsel), fx: E.tradeEffects(ev), label});
-  L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; store.set("tdesk.trades", L.executed); render(); toast("Trade made. Rosters and picks updated.");
+// ---------- trade image ----------
+// Completing a trade never changes the rosters. It draws a shareable image of the deal with everything that matters.
+const IMG = {bg: "#0f1319", panel: "#171c24", panel2: "#1d232d", line: "#2b3340", ink: "#e8ecf1", mute: "#9aa4b2", faint: "#6c7685",
+  accent: "#f08a3c", ok: "#4cc683", bad: "#ff6b63", warn: "#e8b04a", sel: "#6d9dff"};
+const F = {disp: '"Barlow Condensed", "Arial Narrow", sans-serif', body: '"IBM Plex Sans", system-ui, sans-serif', mono: '"IBM Plex Mono", ui-monospace, monospace'};
+const dlCap = window.claude?.use ? window.claude.use("downloads").catch(() => null) : Promise.resolve(null);
+
+function wrapLines(ctx, text, maxW) {
+  const out = [];
+  for (const para of String(text).split("\n")) {
+    let line = "";
+    for (const w of para.split(/\s+/)) {
+      const t = line ? line + " " + w : w;
+      if (ctx.measureText(t).width > maxW && line) { out.push(line); line = w; } else line = t;
+    }
+    out.push(line);
+  }
+  return out;
+}
+const poss = s => s.endsWith("s") ? s + "\x27" : s + "\x27s";
+function drawTrade(ev, ctx, W, colH) {
+  // Returns the height used. Called once to measure (ctx draws off-screen) and once to paint.
+  const pad = 40, n = L.teamIds.length, gap = 18, colW = (W - pad * 2 - gap * (n - 1)) / n;
+  const [vc, vh] = verdict(ev);
+  const text = (s, x, y, font, color, align = "left") => { ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align; ctx.fillText(s, x, y); };
+  const para = (s, x, y, w, font, color, lh) => { ctx.font = font; ctx.fillStyle = color; ctx.textAlign = "left"; for (const l of wrapLines(ctx, s, w)) { ctx.fillText(l, x, y); y += lh; } return y; };
+  ctx.fillStyle = IMG.bg; ctx.fillRect(0, 0, W, 20000);
+  // header
+  let y = pad + 30;
+  text("TRADE", pad, y, `800 38px ${F.disp}`, IMG.ink);
+  ctx.font = `800 38px ${F.disp}`; const tw = ctx.measureText("TRADE ").width;
+  text("DESK", pad + tw, y, `800 38px ${F.disp}`, IMG.accent);
+  const badge = vc === "ok" ? "TRADE WORKS ✓" : vc === "bad" ? "TRADE DOESN'T WORK" : "TRADE IDEA";
+  ctx.font = `800 26px ${F.disp}`; const bw = ctx.measureText(badge).width + 32;
+  ctx.fillStyle = vc === "ok" ? "rgba(76,198,131,.16)" : "rgba(255,107,99,.16)"; ctx.beginPath(); ctx.roundRect(W - pad - bw, y - 30, bw, 42, 8); ctx.fill();
+  text(badge, W - pad - bw / 2, y, `800 26px ${F.disp}`, vc === "ok" ? IMG.ok : IMG.bad, "center");
+  y += 30;
+  text(L.teamIds.map(ab => team(ab).name).join("  ⇄  "), pad, y, `600 20px ${F.body}`, IMG.ink);
+  y += 26;
+  text(`League date ${L.date.toLocaleDateString("en-US", {weekday: "short", month: "short", day: "numeric", year: "numeric"})} · ${DATA.season} season · ${verdict(ev)[2]}`, pad, y, `400 15px ${F.body}`, IMG.mute);
+  y += 26;
+  // team columns
+  const top = y; let maxBottom = y; const heights = [];
+  L.teamIds.forEach((ab, i) => {
+    const t = team(ab), s = ev.summary[ab], x = pad + i * (colW + gap), inner = colW - 28;
+    let cy = top;
+    const blockTop = cy;
+    if (colH) { ctx.fillStyle = IMG.panel; ctx.beginPath(); ctx.roundRect(x, blockTop, colW, colH[i], 12); ctx.fill(); }
+    ctx.fillStyle = t.color; ctx.beginPath(); ctx.roundRect(x, cy, colW, 64, [12, 12, 0, 0]); ctx.fill();
+    text(`${t.loc} · ${t.record || "0-0"}`, x + 14, cy + 22, `500 13px ${F.body}`, "rgba(255,255,255,.85)");
+    text(t.short.toUpperCase(), x + 14, cy + 52, `700 30px ${F.disp}`, "#fff");
+    cy += 64 + 22;
+    const sect = label => { text(label, x + 14, cy, `700 12px ${F.body}`, IMG.mute); cy += 8; ctx.fillStyle = IMG.line; ctx.fillRect(x + 14, cy, inner, 1); cy += 20; };
+    sect("RECEIVES");
+    const got = s.inc.length + s.pIn.length + s.wIn.length + (s.cashIn ? 1 : 0);
+    if (!got) { text("Nothing", x + 14, cy, `400 15px ${F.body}`, IMG.faint); cy += 26; }
+    for (const p of s.inc) {
+      text(p.name, x + 14, cy, `600 18px ${F.body}`, IMG.ink);
+      if (n > 2) text(`from ${team(L.teamIds.find(a => ev.summary[a].out.includes(p))).short}`, x + 14 + inner, cy, `400 12px ${F.body}`, IMG.mute, "right");
+      cy += 21;
+      cy = para(`${p.pos} · ${p.ht} · ${p.wt} · Age ${p.age ?? "—"} · ${p.exp ? p.exp + " yrs exp" : "Rookie"}`, x + 14, cy, inner, `400 13.5px ${F.body}`, IMG.mute, 18);
+      if (p.st) cy = para(`${p.st[2].toFixed(1)} PTS  ${p.st[3].toFixed(1)} REB  ${p.st[4].toFixed(1)} AST  ${p.st[5].toFixed(1)} FG%  ${p.st[6].toFixed(1)} 3P%  (${p.st[0]} GP)`, x + 14, cy, inner, `500 13px ${F.mono}`, IMG.ink, 18);
+      const oi = p.years.findIndex(v => v.opt);
+      const con = p.twoway ? "Two-way contract" : `${money(p.sal, 2)} · ${p.yrs} yr${p.yrs === 1 ? "" : "s"}${p.yrs ? " thru " + E.SEASONS[Math.min(p.yrs, 6) - 1] : ""}${oi >= 0 ? ` · ${p.years[oi].opt === "P" ? "player" : p.years[oi].opt === "T" ? "team" : "early-termination"} option ${E.SEASONS[oi]}` : ""}${p.ntc ? " · can veto trades" : ""}`;
+      cy = para(con, x + 14, cy, inner, `600 13.5px ${F.mono}`, IMG.accent, 18);
+      cy += 10;
+    }
+    for (const k of s.pIn) {
+      text(`${k.y} ${k.r === 1 ? "first" : "second"}-round pick`, x + 14, cy, `600 17px ${F.body}`, IMG.ink);
+      text(k.orig === ab ? "their own" : `${poss(team(k.orig).short)} pick`, x + 14 + inner, cy, `400 12px ${F.body}`, IMG.mute, "right"); cy += 20;
+      if (E.isConditional(k)) cy = para(E.pickTerms(k), x + 14, cy, inner, `400 13px ${F.body}`, IMG.warn, 17);
+      else cy = para("No protections or conditions.", x + 14, cy, inner, `400 13px ${F.body}`, IMG.mute, 17);
+      cy += 8;
+    }
+    for (const w of s.wIn) {
+      text(`${w.y} ${w.r === 1 ? "1st" : "2nd"}-round swap rights`, x + 14, cy, `600 17px ${F.body}`, IMG.ink); cy += 20;
+      cy = para(w.isNew ? `New swap: the ${t.short} may trade their own ${w.y} pick for the ${poss(team(w.grantor).short)} if that one is better (earlier).`
+        : E.pickTerms(L.picks[w.pick] || {note: w.note, also: [], tags: ""}), x + 14, cy, inner, `400 13px ${F.body}`, IMG.sel, 17);
+      cy += 8;
+    }
+    if (s.cashIn) { text(`${money(s.cashIn, 2)} cash`, x + 14, cy, `600 17px ${F.body}`, IMG.ink); cy += 26; }
+    cy += 6; sect("SENDS");
+    const sent = [...s.out.map(p => `${p.name} (${p.twoway ? "two-way" : money(p.sal)})`), ...s.pOut.map(k => `${E.pickLabel(k)} pick`), ...s.wOut.map(w => `${w.y} swap rights`), ...(s.cashOut ? [`${money(s.cashOut, 2)} cash`] : [])];
+    cy = para(sent.length ? sent.join(", ") : "Nothing", x + 14, cy, inner, `400 14px ${F.body}`, sent.length ? IMG.ink : IMG.faint, 19);
+    cy += 10; sect("CAP SHEET");
+    const row = (k, v, col = IMG.ink) => { text(k, x + 14, cy, `400 13.5px ${F.body}`, IMG.mute); text(v, x + 14 + inner, cy, `600 13.5px ${F.mono}`, col, "right"); cy += 20; };
+    row("Salary out / in", `${money(s.outV)} / ${money(s.inV)}`);
+    if (s.before != null) {
+      row("Payroll", `${money(s.before)} → ${money(s.after)}`);
+      row("Tier after", E.TIER[E.tierOf(s.after)], s.after > E.APRON1 ? IMG.bad : s.after > E.TAX ? IMG.warn : IMG.ink);
+      row("Roster (standard)", `${s.std[0]} → ${s.std[1]}`);
+      if (s.hardcap) row("Hard cap", `${s.hardcap === 1 ? "1st" : "2nd"} apron`, IMG.warn);
+    }
+    if (s.rule) { cy += 2; cy = para(s.rule, x + 14, cy, inner, `400 12.5px ${F.body}`, ev.issues.some(q => q.kind === "salary" && q.team === ab) ? IMG.bad : IMG.ok, 17); }
+    cy += 14;
+    heights[i] = cy - blockTop;
+    maxBottom = Math.max(maxBottom, cy);
+  });
+  y = maxBottom + 26;
+  // problems and notes
+  const notes = [...ev.issues.map(q => ["bad", q]), ...ev.warns.filter(w => !/depends on other results/.test(w.h)).map(w => ["warn", w])];
+  if (notes.length) {
+    text(ev.issues.length ? "WHY IT DOESN'T WORK" : "THINGS TO KNOW", pad, y, `700 13px ${F.body}`, IMG.mute); y += 22;
+    for (const [kind, q] of notes) {
+      text("●", pad, y, `700 14px ${F.body}`, kind === "bad" ? IMG.bad : IMG.warn);
+      y = para(q.h, pad + 20, y, W - pad * 2 - 20, `600 16px ${F.body}`, IMG.ink, 21);
+      y = para(q.p, pad + 20, y, W - pad * 2 - 20, `400 14px ${F.body}`, IMG.mute, 19) + 10;
+    }
+  }
+  y += 8; ctx.fillStyle = IMG.line; ctx.fillRect(pad, y, W - pad * 2, 1); y += 24;
+  const up = new Date(DATA.updated);
+  y = para(`NBA Trade Desk · rosters and contracts as of ${up.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"})} · 2026-27 cap ${money(E.CAP, 1)}, tax ${money(E.TAX, 1)}, aprons ${money(E.APRON1, 1)} / ${money(E.APRON2, 1)} · sources: ESPN, Salary Swish, Basketball-Reference`, pad, y, W - pad * 2, `400 12.5px ${F.body}`, IMG.faint, 17);
+  return {h: y + pad - 10, heights};
+}
+async function buildTradeImage(ev) {
+  await Promise.all([`800 38px ${F.disp}`, `600 18px ${F.body}`, `400 14px ${F.body}`, `600 13px ${F.mono}`].map(f => document.fonts?.load(f).catch(() => null)));
+  const W = L.teamIds.length > 3 ? 1500 : 1200, scale = 2;
+  const m = document.createElement("canvas").getContext("2d");
+  m.canvas.width = W; m.canvas.height = 10;
+  const first = drawTrade(ev, m, W), H = Math.ceil(first.h);
+  const c = document.createElement("canvas"); c.width = W * scale; c.height = H * scale;
+  const ctx = c.getContext("2d"); ctx.scale(scale, scale);
+  ctx.fillStyle = IMG.bg; ctx.fillRect(0, 0, W, H);
+  drawTrade(ev, ctx, W, first.heights);
+  return c;
+}
+let shot = null;
+async function execute() {
+  const ev = E.evaluate(); if (ev.state === "idle") return;
+  toast("Making the trade image…");
+  const canvas = await buildTradeImage(ev);
+  const blob = await new Promise(r => canvas.toBlob(r, "image/png"));
+  const name = `trade-${L.teamIds.map(ab => team(ab).short.toLowerCase().replace(/[^a-z0-9]+/g, "-")).join("-")}-${L.date.toISOString().slice(0, 10)}.png`;
+  if (shot?.url) URL.revokeObjectURL(shot.url);
+  shot = {blob, name, url: URL.createObjectURL(blob)};
+  U.sheet = "shot"; render();
+}
+async function downloadShot() {
+  if (!shot) return;
+  const dl = await dlCap;
+  if (dl) {
+    try { await dl.save({filename: shot.name, data: shot.blob}); toast("Trade image saved."); }
+    catch (e) { if (e?.code !== "declined") toast("Couldn't save here. Press and hold (or right-click) the image to save it."); }
+    return;
+  }
+  const a = document.createElement("a"); a.href = shot.url; a.download = shot.name; document.body.appendChild(a); a.click(); a.remove();
+  toast("Trade image downloaded.");
 }
 
 document.addEventListener("click", e => {
-  const el = e.target.closest("[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-ctopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],#clearSel,#resetLeague,select,input");
+  const el = e.target.closest("[data-pid],[data-pick],[data-swap],[data-newswap],[data-pkopen],[data-ctopen],[data-go],[data-addd],[data-rm],[data-sort],[data-exec],[data-team],[data-open],[data-find],[data-addp],[data-mteam],[data-mview],[data-sheet],[data-close],[data-view],[data-shotdl],[data-shotclose],#clearSel,select,input");
   if (!el || el.matches("select,input")) return;
   if (el.dataset.open) { e.stopPropagation(); U.open[el.dataset.open] = !U.open[el.dataset.open]; return render(); }
   if (el.dataset.exec !== undefined) { e.stopPropagation(); return execute(); }
+  if (el.dataset.shotdl !== undefined) return downloadShot();
+  if (el.dataset.shotclose !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.pid) return togglePlayer(el.dataset.pid);
   if (el.dataset.pick) return togglePick(el.dataset.pick);
   if (el.dataset.swap) return toggleSwap(el.dataset.swap);
@@ -379,7 +535,6 @@ document.addEventListener("click", e => {
   if (el.dataset.close !== undefined) { U.sheet = null; return render(); }
   if (el.dataset.view) { U.force = el.dataset.view; store.set("tdesk.view", U.force); return render(); }
   if (el.id === "clearSel") { L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {}; return render(); }
-  if (el.id === "resetLeague") { store.set("tdesk.trades", []); const keep = L.teamIds; E.load(DATA, []); L.date = E.START; L.teamIds = keep; return render(); }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ") && e.target.dataset?.pid) { e.preventDefault(); togglePlayer(e.target.dataset.pid); }
@@ -406,7 +561,8 @@ mq.addEventListener?.("change", () => { if (!U.force) render(); });
 // ---------- boot: start with no teams picked ----------
 fetch("data.json", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(data => {
   DATA = data;
-  E.load(data, store.get("tdesk.trades") || []);
+  E.load(data, []);   // trades never change the real rosters
+  try { localStorage.removeItem("tdesk.trades"); } catch {}
   L.teamIds = [];
   U.mteam = null;
   render();

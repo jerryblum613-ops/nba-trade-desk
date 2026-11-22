@@ -32,7 +32,7 @@ const maxD = (a, b) => a > b ? a : b;
 const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g, "").replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
 
 // ---------- league state ----------
-const L = {teams: {}, players: {}, picks: {}, swaps: {}, tpes: [], hardcap: {}, hcWhy: {}, cashSent: {}, cashRecv: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, wsel: {}, csel: {}, executed: []};
+const L = {teams: {}, players: {}, picks: {}, swaps: {}, pickTerms: {}, tpes: [], hardcap: {}, hcWhy: {}, cashSent: {}, cashRecv: {}, order: [], date: START, teamIds: [], sel: {}, psel: {}, wsel: {}, csel: {}, executed: []};
 // L.sel: playerId -> destination team; L.psel: pickId -> destination team;
 // L.wsel: swapId -> destination team (passing on a swap right it holds), or "new-YEAR-ROUND-TEAM" -> team that receives a new swap right
 const SS_ABBR = {WAS: "WSH", UTA: "UTAH", SAS: "SA", NOP: "NO", NYK: "NY", GSW: "GS"};
@@ -69,6 +69,7 @@ function load(data, executed) {
   L.teams = {}; L.players = {}; L.picks = {}; L.swaps = {}; L.sel = {}; L.psel = {}; L.wsel = {}; L.csel = {};
   L.cashSent = {}; L.cashRecv = {}; L.hcWhy = {};
   L.hardcap = {...(data.hardcap || {})};
+  L.pickTerms = data.pickTerms || {};
   for (const ab of Object.keys(L.hardcap)) L.hcWhy[ab] = "a signing or trade they made earlier this season (per Salary Swish's hard cap tracker)";
   L.tpes = (data.tpe || []).map(([team, from, amt, start, end], i) => ({id: "tpe" + i, team, from, amt, start: d(start), end: d(end)}));
   for (const t of data.teams) L.teams[t.abbr] = {...t};   // names first, so notes can be read below
@@ -84,7 +85,7 @@ function load(data, executed) {
     const grantor = holder === k.orig ? (named.find(x => x !== holder) || pool[0]) : k.orig;
     if (!holder || !grantor || holder === grantor) continue;
     const id = `sw-${k.y}-${k.r}-${grantor}-${holder}`;
-    if (!L.swaps[id]) L.swaps[id] = {id, y: k.y, r: k.r, grantor, holder, note: k.note, pre: true};
+    if (!L.swaps[id]) L.swaps[id] = {id, y: k.y, r: k.r, grantor, holder, note: k.note, pick: k.id, pre: true};
     k.swap = id;
     const gp = L.picks[`${k.y}-${k.r}-${grantor}`]; if (gp && !gp.swap) gp.swap = id;
   }
@@ -210,8 +211,22 @@ const teamPicks = ab => Object.values(L.picks).filter(k => k.own === ab && !(k.y
 // Plain-English terms for a conditional pick, with team codes turned into names.
 function pickTerms(k) {
   const abbrs = {...Object.fromEntries(Object.keys(L.teams).map(a => [a, a])), ...SS_ABBR};
+  // 1) A hand-written explanation, used only while the source still describes the pick the same way it did
+  //    when the explanation was written (pick-terms.json stores that source note).
+  const curated = L.pickTerms[k.id];
+  if (curated && curated.note === k.note) return curated.text;
+  // 2) Otherwise, clean up the source's wording: team names instead of codes, "better/worse" instead of "favorable".
   const named = s => s.replace(/\b([A-Z]{2,4})\b(?!-)/g, (m, a) => abbrs[a] && L.teams[abbrs[a]] ? L.teams[abbrs[a]].short : m).replace(/s's\b/g, "s'");
-  if (k.note) return named(k.note.replace(/1st RD/g, "1st round").replace(/2nd RD/g, "2nd round"));
+  if (k.note) {
+    let t = k.note
+      .replace(/\b1st (RD|Rd|round) pick/gi, "first-round pick").replace(/\b2nd (RD|Rd|round) pick/gi, "second-round pick")
+      .replace(/\b1st RD\b/g, "first-round").replace(/\b2nd RD\b/g, "second-round")
+      .replace(/\b(most|more) favou?rable\b/gi, "better (earlier)").replace(/\b(least|less) favou?rable\b/gi, "worse (later)")
+      .replace(/\blowest\b/gi, "worst (latest)").replace(/\bhigher\b/gi, "better (earlier)")
+      .replace(/\b(?:Top (\d+) Protected|Protected 1[-–](\d+)|1[-–](\d+) Protected)\b/gi, (m, a, b, c) => `top-${a || b || c} protected (the original team keeps it if it lands 1–${a || b || c})`)
+      .replace(/\bProtected (3\d|4\d|5\d)[-–]? ?(?:to )?(\d+)\b/gi, (m, a, b) => `protected ${a}–${b} (it only moves if it's pick ${+b + 1}–60)`);
+    return "Source terms: " + named(t).replace(/\s+/g, " ").trim();
+  }
   if (k.also.length) return `Who ends up with this pick depends on terms between the ${[k.own, ...k.also].map(teamName).join(" and the ")}. The source doesn't list the exact terms.`;
   return "";
 }
@@ -365,7 +380,7 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
     if (k.r === 1 && k.y === PICK_LAST && payroll(k.own) > APRON2) issues.push({kind: "pick", team: k.own, h: `The ${owner} can't trade their ${PICK_LAST} first`,
       p: `The ${owner} are above the ${money(APRON2)} second apron (${money(payroll(k.own))}). Teams above the second apron have their first-round pick seven years out (${PICK_LAST}) frozen. Trade a different pick, or get payroll under the second apron first.`});
     if (isConditional(k)) warns.push({h: `The ${label} pick depends on other results`,
-      p: `What it depends on: ${pickTerms(k)} The team receiving it takes on exactly the same terms.`});
+      p: `How it works: ${pickTerms(k)} The team receiving it takes on exactly the same terms.`});
     if (sel && Object.values(wsel).length) {
       const clash = Object.keys(wsel).map(swapFromKey).find(s => s && s.isNew && s.y === k.y && s.r === k.r && (s.grantor === k.own || wsel[s.id] === k.own));
       if (clash) issues.push({kind: "swap", h: `The ${label} pick is also part of a new swap`, p: `This deal both trades the ${label} pick and creates a ${clash.y} swap involving it. A team can only offer or use a swap on a pick it keeps. Remove one of the two.`});
@@ -386,7 +401,7 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
         p: `The ${teamName(g)} are above the ${money(APRON2)} second apron, so their ${PICK_LAST} first (seven drafts out) is frozen. That includes giving another team swap rights on it.`});
       if (gp?.swap && L.swaps[gp.swap] && !wsel[gp.swap]) warns.push({h: `The ${s.y} ${teamName(g)} pick already has a swap`, p: `The ${teamName(L.swaps[gp.swap].holder)} already hold a swap on this pick (${pickTerms(gp)}). A new swap would only apply after that one is settled.`});
     } else if (/least|more|most|lower|higher/i.test(s.note)) {
-      warns.push({h: `The ${swapLabel(s)} has conditions`, p: `What it depends on: ${pickTerms(L.picks[`${s.y}-${s.r}-${s.grantor}`])} The new holder gets exactly the same rights.`});
+      warns.push({h: `The ${swapLabel(s)} has conditions`, p: `How it works: ${pickTerms(L.picks[s.pick] || L.picks[`${s.y}-${s.r}-${s.grantor}`])} The new holder gets exactly the same rights.`});
     }
   }
   // Stepien rule: no team may be without a first-round pick in back-to-back future drafts

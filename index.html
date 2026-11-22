@@ -160,6 +160,15 @@ input,select{font:inherit;color:var(--ink)}
 .cashin{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap;font-size:12.5px}
 .cashin input{width:76px;padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--panel);font-family:var(--f-mono)}
 .cashin select{font-size:12px;padding:3px 6px;border-radius:6px;border:1px solid var(--line);background:var(--panel)}
+.shot{position:fixed;z-index:41;left:50%;top:50%;transform:translate(-50%,-50%);width:min(960px,calc(100% - 32px));max-height:calc(100% - 48px);display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 20px 50px var(--shadow)}
+.shot-head{display:flex;align-items:center;justify-content:space-between}
+.shot-head h3{margin:0;font-family:var(--f-display);font-size:22px;text-transform:uppercase}
+.shot .shotx{background:var(--panel2);color:var(--ink)}
+.shot-img{overflow:auto;border-radius:8px;border:1px solid var(--line);background:#0f1319;min-height:0;flex:1}
+.shot-img img{display:block;width:100%;height:auto}
+.shot-actions{display:flex;gap:8px}
+.shot-actions .btn{padding:10px 16px}
+.shot .sub{margin:0}
 .startcol{padding:16px}
 .pickteams h3{margin:0 0 4px;font-family:var(--f-display);font-size:24px;text-transform:uppercase}
 .pickteams .sub{margin:0 0 12px}
