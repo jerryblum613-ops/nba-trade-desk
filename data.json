@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T17:50:05Z",
+  "updated": "2026-11-22T09:59:19Z",
   "season": "2026-27",
   "tx": [
     [
@@ -11424,6 +11424,9339 @@
     "UTAH": 1,
     "WSH": 1
   },
+  "sheets": {
+    "MIL": {
+      "cap": 187760790,
+      "dead": 27368420,
+      "players": [
+        [
+          "Tyler Herro",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              33000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Myles Turner",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              26584164,
+              ""
+            ],
+            [
+              27850077,
+              ""
+            ],
+            [
+              29115990,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Kyle Kuzma",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $425,000"
+          ],
+          [
+            [
+              20490152,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Gary Trent Jr.",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              15200000,
+              ""
+            ],
+            [
+              16400000,
+              ""
+            ],
+            [
+              16400000,
+              ""
+            ],
+            [
+              16000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Caris LeVert",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14809200,
+              ""
+            ]
+          ]
+        ],
+        [
+          "AJ Green",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              10044644,
+              ""
+            ],
+            [
+              10848215,
+              ""
+            ],
+            [
+              11651786,
+              ""
+            ],
+            [
+              12455355,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Brayden Burries",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $641,736"
+          ],
+          [
+            [
+              6417360,
+              ""
+            ],
+            [
+              6738000,
+              ""
+            ],
+            [
+              7058520,
+              "T"
+            ],
+            [
+              8999613,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jaime Jaquez Jr.",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $7,690"
+          ],
+          [
+            [
+              5939141,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ousmane Dieng",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              5750000,
+              ""
+            ],
+            [
+              5750000,
+              ""
+            ],
+            [
+              5750000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Nate Ament",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $550,200"
+          ],
+          [
+            [
+              5502000,
+              ""
+            ],
+            [
+              5777280,
+              ""
+            ],
+            [
+              6052200,
+              "T"
+            ],
+            [
+              8648594,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kel'el Ware",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $5,000"
+          ],
+          [
+            [
+              4654920,
+              "T"
+            ],
+            [
+              7135992,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ryan Rollins",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              4000000,
+              ""
+            ],
+            [
+              4000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Kasparas Jakucionis",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $150,000"
+          ],
+          [
+            [
+              3841680,
+              ""
+            ],
+            [
+              4024440,
+              "T"
+            ],
+            [
+              6205686,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jericho Sims",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2801346,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Bogoljub Marković",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kam Jones",
+          "Two-Way",
+          "Trade",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Pete Nance",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Cormac Ryan",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "CHI": {
+      "cap": 168033555,
+      "dead": 1075459,
+      "players": [
+        [
+          "Josh Giddey",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              25000000,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Nicolas Claxton",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $173,011"
+          ],
+          [
+            [
+              23320738,
+              ""
+            ],
+            [
+              21099720,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Norman Powell",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              21500000,
+              ""
+            ],
+            [
+              22575000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Patrick Williams",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              18000000,
+              ""
+            ],
+            [
+              18000000,
+              ""
+            ],
+            [
+              18000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Isaac Okoro",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              11814814,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Caleb Wilson",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              10683720,
+              ""
+            ],
+            [
+              11217960,
+              ""
+            ],
+            [
+              11752320,
+              "T"
+            ],
+            [
+              14866685,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Buddy Hield",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              9658536,
+              ""
+            ],
+            [
+              10097560,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jalen Smith",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9428571,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Zach Collins",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              8500000,
+              ""
+            ],
+            [
+              8500000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tre Jones",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              8000000,
+              ""
+            ],
+            [
+              8000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Matas Buzelis",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5715360,
+              "T"
+            ],
+            [
+              7584283,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Noa Essengue",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5701200,
+              ""
+            ],
+            [
+              5972760,
+              "T"
+            ],
+            [
+              8230463,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Dailyn Swain",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              4965480,
+              ""
+            ],
+            [
+              5213760,
+              ""
+            ],
+            [
+              5461920,
+              "T"
+            ],
+            [
+              8373123,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Leonard Miller",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2406205,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Orlando Robinson",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2263472,
+              ""
+            ],
+            [
+              2988178,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tobe Awaka",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jordan Hawkins",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jaylin Sellers",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "CLE": {
+      "cap": 207150518,
+      "dead": 424672,
+      "players": [
+        [
+          "Donovan Mitchell",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              50105628,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Evan Mobley",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              50105628,
+              ""
+            ],
+            [
+              53817156,
+              ""
+            ],
+            [
+              57528684,
+              ""
+            ],
+            [
+              61240212,
+              ""
+            ]
+          ]
+        ],
+        [
+          "James Harden",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              30647619,
+              ""
+            ],
+            [
+              32180000,
+              ""
+            ],
+            [
+              33712381,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jarrett Allen",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              28000000,
+              ""
+            ],
+            [
+              30240000,
+              ""
+            ],
+            [
+              32480000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Peyton Watson",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              20465116,
+              ""
+            ],
+            [
+              21488372,
+              ""
+            ],
+            [
+              22511628,
+              ""
+            ],
+            [
+              23534884,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Sam Merrill",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9160715,
+              ""
+            ],
+            [
+              9839285,
+              ""
+            ],
+            [
+              10517856,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jaylon Tyson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3658560,
+              "T"
+            ],
+            [
+              5641500,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Thomas Bryant",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Mario Hezonja",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Nae'Qwan Tomlin",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2411090,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Craig Porter Jr.",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2406205,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tyrese Proctor",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Khalifa Diop",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Meleek Thomas",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Zach Austin",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Norchad Omier",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ernest Udeh Jr.",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "BOS": {
+      "cap": 198722406,
+      "dead": 0,
+      "players": [
+        [
+          "Jayson Tatum",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              58456566,
+              ""
+            ],
+            [
+              62786682,
+              ""
+            ],
+            [
+              67116798,
+              ""
+            ],
+            [
+              71446914,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Paul George",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              54126380,
+              ""
+            ],
+            [
+              56586670,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Derrick White",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $1,890,000"
+          ],
+          [
+            [
+              30348000,
+              ""
+            ],
+            [
+              32596000,
+              ""
+            ],
+            [
+              34844000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Mitchell Robinson",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              15044000,
+              ""
+            ],
+            [
+              15796200,
+              ""
+            ],
+            [
+              16548400,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Sam Hauser",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              10848215,
+              ""
+            ],
+            [
+              11651785,
+              ""
+            ],
+            [
+              12455356,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Payton Pritchard",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              7767857,
+              ""
+            ],
+            [
+              8303571,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ron Harper Jr.",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3150752,
+              ""
+            ],
+            [
+              3308290,
+              ""
+            ],
+            [
+              3465828,
+              ""
+            ],
+            [
+              3779359,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Chris Cenac Jr.",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2988120,
+              ""
+            ],
+            [
+              3137640,
+              ""
+            ],
+            [
+              3287400,
+              "T"
+            ],
+            [
+              5930470,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Hugo Gonzalez",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $262,500"
+          ],
+          [
+            [
+              2923560,
+              ""
+            ],
+            [
+              3062640,
+              "T"
+            ],
+            [
+              5528065,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Luka Garza",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2801346,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Baylor Scheierman",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              2744040,
+              "T"
+            ],
+            [
+              4952992,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Neemias Queta",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2667944,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Mike Conley",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jordan Walsh",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2406205,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Devin Carter",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Dillon Mitchell",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Amari Williams",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "LAC": {
+      "cap": 183207323,
+      "dead": 2291688,
+      "players": [
+        [
+          "Darius Garland",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              42166510,
+              ""
+            ],
+            [
+              44886930,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Brandon Ingram",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              40000000,
+              ""
+            ],
+            [
+              41904762,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Max Strus",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              16660836,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Rui Hachimura",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              14000000,
+              ""
+            ],
+            [
+              14000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Derrick Jones Jr.",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              10476190,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Keaton Wagler",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $50,000"
+          ],
+          [
+            [
+              9674760,
+              ""
+            ],
+            [
+              10158240,
+              ""
+            ],
+            [
+              10641960,
+              "T"
+            ],
+            [
+              13483363,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Brook Lopez",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9187500,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Gradey Dick",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              7131510,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Isaiah Jackson",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              7000000,
+              ""
+            ],
+            [
+              6400000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Bradley Beal",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              6424800,
+              ""
+            ],
+            [
+              6746040,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Kris Dunn",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              5684800,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jordan Miller",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              5300000,
+              ""
+            ],
+            [
+              5000000,
+              ""
+            ],
+            [
+              5000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Yanic Niederhauser",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              2880960,
+              ""
+            ],
+            [
+              3018480,
+              "T"
+            ],
+            [
+              5448356,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kobe Sanders",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2622139,
+              ""
+            ],
+            [
+              2753246,
+              ""
+            ],
+            [
+              2884353,
+              ""
+            ],
+            [
+              3019000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Baba Miller",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1705630,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Cameron Christie",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Nick Martinelli",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jalen Pickett",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "MEM": {
+      "cap": 161742655,
+      "dead": 41191603,
+      "players": [
+        [
+          "Jerami Grant",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              34206898,
+              ""
+            ],
+            [
+              36413790,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Isaiah Stewart",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              15000000,
+              ""
+            ],
+            [
+              15000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Cameron Boozer",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              11849760,
+              ""
+            ],
+            [
+              12441840,
+              ""
+            ],
+            [
+              13034880,
+              "T"
+            ],
+            [
+              16476088,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ty Jerome",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9220050,
+              ""
+            ],
+            [
+              9659100,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Quinten Post",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              9000000,
+              ""
+            ],
+            [
+              8550000,
+              ""
+            ],
+            [
+              8550000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Taylor Hendricks",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              7805900,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Zach Edey",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              6332760,
+              "T"
+            ],
+            [
+              8067936,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Cedric Coward",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              6001080,
+              ""
+            ],
+            [
+              6286920,
+              "T"
+            ],
+            [
+              8342743,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kris Murray",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5315004,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Karim Lopez",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3746760,
+              ""
+            ],
+            [
+              3934320,
+              ""
+            ],
+            [
+              4121760,
+              "T"
+            ],
+            [
+              6565964,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Olivier-Maxence Prosper",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2497812,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Scotty Pippen Jr.",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2461462,
+              ""
+            ],
+            [
+              2789215,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Cam Spencer",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2411090,
+              ""
+            ],
+            [
+              2616754,
+              ""
+            ],
+            [
+              2830685,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "GG Jackson II",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2406205,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jaylen Wells",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ],
+            [
+              2486995,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jahmai Mashack",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Richie Saunders",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Javon Small",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "ATL": {
+      "cap": 201080502,
+      "dead": 7569170,
+      "players": [
+        [
+          "Jalen Johnson",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              30000000,
+              ""
+            ],
+            [
+              30000000,
+              ""
+            ],
+            [
+              30000000,
+              ""
+            ],
+            [
+              30000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Dyson Daniels",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              25000000,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "CJ McCollum",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              21000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Luguentz Dort",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              17722222,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Onyeka Okongwu",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              16120000,
+              ""
+            ],
+            [
+              16880000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Nickeil Alexander-Walker",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              14403710,
+              ""
+            ],
+            [
+              15161800,
+              ""
+            ],
+            [
+              15919890,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Dorian Finney-Smith",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14196974,
+              ""
+            ],
+            [
+              13335000,
+              ""
+            ],
+            [
+              13335000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jock Landale",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              14100000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Corey Kispert",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              13975000,
+              ""
+            ],
+            [
+              13050000,
+              ""
+            ],
+            [
+              13050000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Aaron Wiggins",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $196,262"
+          ],
+          [
+            [
+              9028038,
+              ""
+            ],
+            [
+              8168226,
+              ""
+            ],
+            [
+              8168226,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kingston Flemings",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              7348580,
+              ""
+            ],
+            [
+              7716120,
+              ""
+            ],
+            [
+              8083680,
+              "T"
+            ],
+            [
+              10282441,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Zuby Ejiofor",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $150,000"
+          ],
+          [
+            [
+              3453360,
+              ""
+            ],
+            [
+              3626160,
+              ""
+            ],
+            [
+              3798360,
+              "T"
+            ],
+            [
+              6445817,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Asa Newell",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $150,000"
+          ],
+          [
+            [
+              3399480,
+              ""
+            ],
+            [
+              3560880,
+              "T"
+            ],
+            [
+              6042813,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Mouhamed Gueye",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2406205,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Henri Veesaar",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Rafael Castro",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "RayJ Dennis",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jalen Wilson",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "MIA": {
+      "cap": 206189256,
+      "dead": 0,
+      "players": [
+        [
+          "Giannis Antetokounmpo",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              58456566,
+              ""
+            ],
+            [
+              62786682,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Bam Adebayo",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              49488300,
+              ""
+            ],
+            [
+              53447364,
+              ""
+            ],
+            [
+              57406428,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Andrew Wiggins",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              30169644,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Nikola Jovic",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              16200000,
+              ""
+            ],
+            [
+              14904000,
+              ""
+            ],
+            [
+              15096000,
+              ""
+            ],
+            [
+              16200000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Bobby Portis",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14521414,
+              ""
+            ],
+            [
+              15597074,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Davion Mitchell",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              12400000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tim Hardaway Jr.",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              6065000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Klay Thompson",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              5600000,
+              ""
+            ],
+            [
+              5880000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Dru Smith",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2584539,
+              ""
+            ],
+            [
+              2934742,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Simone Fontecchio",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Nick Richards",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Pelle Larsson",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Myron Gardner",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ryan Conwell",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tre Donaldson",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Vladislav Goldin",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Keshad Johnson",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "CHA": {
+      "cap": 168581193,
+      "dead": 6889320,
+      "players": [
+        [
+          "Coby White",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              26811593,
+              ""
+            ],
+            [
+              24666667,
+              ""
+            ],
+            [
+              22521740,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Naz Reid",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              23275862,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ],
+            [
+              26724138,
+              ""
+            ],
+            [
+              28448276,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Grayson Allen",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              18125000,
+              ""
+            ],
+            [
+              19375000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Brandon Miller",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              15104626,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Dennis Schroder",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14809200,
+              ""
+            ],
+            [
+              15514400,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Grant Williams",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14265750,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Royce O'Neale",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              10875000,
+              ""
+            ],
+            [
+              11625000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kon Knueppel",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              10516560,
+              ""
+            ],
+            [
+              11017560,
+              "T"
+            ],
+            [
+              13937213,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tidjane Salaün",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              8237880,
+              ""
+            ],
+            [
+              10445632,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Hannes Steinbach",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              5227200,
+              ""
+            ],
+            [
+              5488560,
+              ""
+            ],
+            [
+              5750160,
+              "T"
+            ],
+            [
+              8515987,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Christian Anderson",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              4257480,
+              ""
+            ],
+            [
+              4470000,
+              ""
+            ],
+            [
+              4683120,
+              "T"
+            ],
+            [
+              7202639,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Liam McNeeley",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              2902080,
+              ""
+            ],
+            [
+              3040320,
+              "T"
+            ],
+            [
+              5487778,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Moussa Diabaté",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2461462,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Sion James",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2411090,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ryan Kalkbrenner",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2411090,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Michael Ajayi",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kylan Boswell",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "PJ Hall",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "UTAH": {
+      "cap": 182965101,
+      "dead": 0,
+      "players": [
+        [
+          "Jaren Jackson Jr.",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              49000000,
+              ""
+            ],
+            [
+              50500000,
+              ""
+            ],
+            [
+              52000000,
+              ""
+            ],
+            [
+              53500000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Lauri Markkanen",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              46113154,
+              ""
+            ],
+            [
+              49824681,
+              ""
+            ],
+            [
+              53536209,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Josh Green",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14679012,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Darryn Peterson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              13195320,
+              ""
+            ],
+            [
+              13855320,
+              ""
+            ],
+            [
+              14515320,
+              "T"
+            ],
+            [
+              18318334,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jusuf Nurkic",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              11458333,
+              ""
+            ],
+            [
+              10541667,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ace Bailey",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $50,000"
+          ],
+          [
+            [
+              9523080,
+              ""
+            ],
+            [
+              9976560,
+              "T"
+            ],
+            [
+              12640302,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Keyonte George",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              6563925,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jaxson Hayes",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              6000000,
+              ""
+            ],
+            [
+              6000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Josh Okogie",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              6000000,
+              ""
+            ],
+            [
+              6000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Brice Sensabaugh",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              4862237,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Sviatoslav Mykhailiuk",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3850000,
+              ""
+            ],
+            [
+              4025000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Mo Bamba",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3506659,
+              ""
+            ],
+            [
+              3700320,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kyle Filipowski",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3000000,
+              ""
+            ],
+            [
+              3000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Isaiah Collier",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              2763960,
+              "T"
+            ],
+            [
+              4988948,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tony Bradley",
+          "Roster",
+          "Waivers claim",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jonas Aidoo",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kobe Bufkin",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Harrison Ingram",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "SAC": {
+      "cap": 202823148,
+      "dead": 10000000,
+      "players": [
+        [
+          "Zach LaVine",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              48967380,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Domantas Sabonis",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              45472000,
+              ""
+            ],
+            [
+              48608000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "De'Andre Hunter",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              24910714,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Keegan Murray",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              24137936,
+              ""
+            ],
+            [
+              26068965,
+              ""
+            ],
+            [
+              27999999,
+              ""
+            ],
+            [
+              29931033,
+              ""
+            ],
+            [
+              31862067,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Malik Monk",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              20190035,
+              ""
+            ],
+            [
+              21582451,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Darius Acuff",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              8021640,
+              ""
+            ],
+            [
+              8422920,
+              ""
+            ],
+            [
+              8823600,
+              "T"
+            ],
+            [
+              11205972,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Precious Achiuwa",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the Biannual Exception"
+          ],
+          [
+            [
+              5477000,
+              ""
+            ],
+            [
+              5750850,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Alex Karaban",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              2948280,
+              ""
+            ],
+            [
+              3095640,
+              ""
+            ],
+            [
+              3243120,
+              "T"
+            ],
+            [
+              5853832,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Daeqwon Plowden",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ],
+            [
+              2664401,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ben Simmons",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Maxime Raynaud",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Dylan Cardwell",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Mason Plumlee",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2139724,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Emanuel Sharp",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Leaky Black",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jonathan Mogbo",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Sean Pedulla",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "NY": {
+      "cap": 220861653,
+      "dead": 0,
+      "players": [
+        [
+          "Karl-Anthony Towns",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              57078728,
+              ""
+            ],
+            [
+              61015192,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "OG Anunoby",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              42500000,
+              ""
+            ],
+            [
+              45431034,
+              ""
+            ],
+            [
+              48362068,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jalen Brunson",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              37739521,
+              ""
+            ],
+            [
+              40535041,
+              ""
+            ],
+            [
+              43330561,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Mikal Bridges",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              33482145,
+              ""
+            ],
+            [
+              36160714,
+              ""
+            ],
+            [
+              38839285,
+              ""
+            ],
+            [
+              41517856,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Josh Hart",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              20923760,
+              ""
+            ],
+            [
+              22375280,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Landry Shamet",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              5490967,
+              ""
+            ],
+            [
+              5737500,
+              ""
+            ],
+            [
+              6162500,
+              ""
+            ],
+            [
+              6587500,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jose Alvarado",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              4439656,
+              ""
+            ],
+            [
+              4794828,
+              ""
+            ],
+            [
+              5150000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Miles McBride",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3956523,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Pacôme Dadiet",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $497,280"
+          ],
+          [
+            [
+              2983680,
+              "T"
+            ],
+            [
+              5373608,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Mohamed Diawara",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2622139,
+              ""
+            ],
+            [
+              2753246,
+              ""
+            ],
+            [
+              2884353,
+              ""
+            ],
+            [
+              3019000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jordan Clarkson",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Andre Drummond",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "James Wiseman",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tyler Kolek",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ],
+            [
+              2486995,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jaden Akins",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Dalton Knecht",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tyler Nickel",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "LAL": {
+      "cap": 202442622,
+      "dead": 4201080,
+      "players": [
+        [
+          "Luka Doncic",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              51033600,
+              ""
+            ],
+            [
+              55116288,
+              ""
+            ],
+            [
+              59198976,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Austin Reaves",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              41240250,
+              ""
+            ],
+            [
+              42954030,
+              ""
+            ],
+            [
+              46253250,
+              ""
+            ],
+            [
+              49552470,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Walker Kessler",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              30108821,
+              ""
+            ],
+            [
+              31614262,
+              ""
+            ],
+            [
+              33119703,
+              ""
+            ],
+            [
+              34625144,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Quentin Grimes",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              13953489,
+              ""
+            ],
+            [
+              14651163,
+              ""
+            ],
+            [
+              15348837,
+              ""
+            ],
+            [
+              16046511,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Sandro Mamukelashvili",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              13000000,
+              ""
+            ],
+            [
+              12350000,
+              ""
+            ],
+            [
+              13000000,
+              ""
+            ],
+            [
+              13650000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jarred Vanderbilt",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              12428571,
+              ""
+            ],
+            [
+              13285714,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Collin Sexton",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the Room-MLE"
+          ],
+          [
+            [
+              9366000,
+              ""
+            ],
+            [
+              9834000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jaden Hardy",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              6000000,
+              ""
+            ],
+            [
+              6000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jake LaRavia",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              6000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Cameron Carr",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              3315360,
+              ""
+            ],
+            [
+              3481080,
+              ""
+            ],
+            [
+              3646800,
+              "T"
+            ],
+            [
+              6378253,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kevon Looney",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Matisse Thybulle",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ziaire Williams",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Bronny James",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ],
+            [
+              2486995,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Adou Thiero",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Carson Cooper",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Arthur Kaluma",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Chris Manon",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "ORL": {
+      "cap": 217865321,
+      "dead": 8000000,
+      "players": [
+        [
+          "Franz Wagner",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              41754690,
+              ""
+            ],
+            [
+              44847630,
+              ""
+            ],
+            [
+              47940570,
+              ""
+            ],
+            [
+              51033510,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Paolo Banchero",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              41240250,
+              ""
+            ],
+            [
+              44539470,
+              ""
+            ],
+            [
+              47838690,
+              ""
+            ],
+            [
+              51137910,
+              ""
+            ],
+            [
+              54437130,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Desmond Bane",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              39446090,
+              ""
+            ],
+            [
+              42166510,
+              ""
+            ],
+            [
+              44886930,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jalen Suggs",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              32400000,
+              ""
+            ],
+            [
+              29600000,
+              ""
+            ],
+            [
+              26800000,
+              ""
+            ],
+            [
+              26700000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Wendell Carter Jr.",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              18102000,
+              ""
+            ],
+            [
+              19550160,
+              ""
+            ],
+            [
+              20998320,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Anthony Black",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              10106316,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Goga Bitadze",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              7608696,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tristan Da Silva",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3991200,
+              "T"
+            ],
+            [
+              6138466,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jase Richardson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3132360,
+              ""
+            ],
+            [
+              3282000,
+              "T"
+            ],
+            [
+              5910882,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jamal Cain",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2584539,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jevon Carter",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jonathan Isaac",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Nikola Vucevic",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Noah Penda",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Colin Castleton",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Alex Morales",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Izaiyah Nelson",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "DAL": {
+      "cap": 189066094,
+      "dead": 11871533,
+      "players": [
+        [
+          "Kyrie Irving",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              39491282,
+              ""
+            ],
+            [
+              42416562,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "P.J. Washington",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              19813044,
+              ""
+            ],
+            [
+              21398087,
+              ""
+            ],
+            [
+              22983131,
+              ""
+            ],
+            [
+              24568174,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Daniel Gafford",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              17263584,
+              ""
+            ],
+            [
+              18126763,
+              ""
+            ],
+            [
+              18989942,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Santi Aldama",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              17007043,
+              ""
+            ],
+            [
+              17007043,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Cooper Flagg",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              14517480,
+              ""
+            ],
+            [
+              15208680,
+              "T"
+            ],
+            [
+              19178145,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Zaccharie Risacher",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              13826040,
+              "T"
+            ],
+            [
+              17434636,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Caleb Martin",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              10001494,
+              ""
+            ],
+            [
+              9371351,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Naji Marshall",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9428571,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Max Christie",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              8285714,
+              ""
+            ],
+            [
+              8857143,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Dereck Lively II",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              7239130,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Morez Johnson",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              6754800,
+              ""
+            ],
+            [
+              7093080,
+              ""
+            ],
+            [
+              7430640,
+              "T"
+            ],
+            [
+              9466635,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Marcus Sasser",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              5198983,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Sergio De Larrea",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3182280,
+              ""
+            ],
+            [
+              3341280,
+              ""
+            ],
+            [
+              3500880,
+              "T"
+            ],
+            [
+              6305085,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tarik Biberovic",
+          "Roster",
+          "Trade",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              3000000,
+              ""
+            ],
+            [
+              3000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Moussa Cissé",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2185116,
+              ""
+            ],
+            [
+              2571895,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Walter Clayton Jr.",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jett Howard",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tobi Lawal",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "BKN": {
+      "cap": 160056358,
+      "dead": 0,
+      "players": [
+        [
+          "Michael Porter Jr.",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              40806150,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Julius Randle",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              33333334,
+              ""
+            ],
+            [
+              35802468,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Terance Mann",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              15500000,
+              ""
+            ],
+            [
+              16000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Day'Ron Sharpe",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              10000000,
+              ""
+            ],
+            [
+              10000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Keon Ellis",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9000000,
+              ""
+            ],
+            [
+              9000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Moritz Wagner",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9000000,
+              ""
+            ],
+            [
+              9450000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Mikel Brown Jr.",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              8787000,
+              ""
+            ],
+            [
+              9226440,
+              ""
+            ],
+            [
+              9666000,
+              "T"
+            ],
+            [
+              12256488,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Egor Demin",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              7233720,
+              ""
+            ],
+            [
+              7578240,
+              "T"
+            ],
+            [
+              9639521,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Noah Clowney",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5414034,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Josh Minott",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              4500000,
+              ""
+            ],
+            [
+              4500000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Nolan Traore",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              4002000,
+              ""
+            ],
+            [
+              4193040,
+              "T"
+            ],
+            [
+              6457282,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Drake Powell",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              3540600,
+              ""
+            ],
+            [
+              3709320,
+              "T"
+            ],
+            [
+              6101831,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ben Saraf",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              3028560,
+              ""
+            ],
+            [
+              3172920,
+              "T"
+            ],
+            [
+              5720775,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Joshua Jefferson",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              2969520,
+              ""
+            ],
+            [
+              3118560,
+              ""
+            ],
+            [
+              3266880,
+              "T"
+            ],
+            [
+              5896718,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Danny Wolf",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              2941440,
+              ""
+            ],
+            [
+              3081840,
+              "T"
+            ],
+            [
+              5559639,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tyler Bilodeau",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Chaney Johnson",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Grant Nelson",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "DEN": {
+      "cap": 220887619,
+      "dead": 2000000,
+      "players": [
+        [
+          "Nikola Jokic",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              59033114,
+              ""
+            ],
+            [
+              62841702,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jamal Murray",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              50105628,
+              ""
+            ],
+            [
+              53817156,
+              ""
+            ],
+            [
+              57528684,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Aaron Gordon",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              31978037,
+              ""
+            ],
+            [
+              34536280,
+              ""
+            ],
+            [
+              37094523,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Cameron Johnson",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $562,500"
+          ],
+          [
+            [
+              23062500,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Christian Braun",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              21551726,
+              ""
+            ],
+            [
+              23275863,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ],
+            [
+              26724137,
+              ""
+            ],
+            [
+              28448274,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Zeke Nnaji",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              7466667,
+              ""
+            ],
+            [
+              7466667,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Spencer Jones",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              6000000,
+              ""
+            ],
+            [
+              5750000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Julian Strawther",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              4826931,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "DeMar DeRozan",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3876528,
+              ""
+            ]
+          ]
+        ],
+        [
+          "DaRon Holmes",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3372120,
+              "T"
+            ],
+            [
+              5547137,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Marvin Bagley III",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tyus Jones",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Trevon Brazile",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Alpha Diallo",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Bryce Hopkins",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ryan Nembhard",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Cam Whitmore",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "IND": {
+      "cap": 206299932,
+      "dead": 0,
+      "players": [
+        [
+          "Tyrese Haliburton",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              48924624,
+              ""
+            ],
+            [
+              52298736,
+              ""
+            ],
+            [
+              55672848,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Pascal Siakam",
+          "Roster",
+          "Signed",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              48924624,
+              ""
+            ],
+            [
+              52298736,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ivica Zubac",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              20342140,
+              ""
+            ],
+            [
+              21790300,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Andrew Nembhard",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              19550160,
+              ""
+            ],
+            [
+              20998320,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Obi Toppin",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              15000000,
+              ""
+            ],
+            [
+              16025000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "T.J. McConnell",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              11000000,
+              ""
+            ],
+            [
+              11800000,
+              ""
+            ],
+            [
+              11800000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Aaron Nesmith",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              11000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jarace Walker",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              8478541,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kelly Oubre Jr.",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              8050000,
+              ""
+            ],
+            [
+              8450000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ben Sheppard",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5031668,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jay Huff",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2667944,
+              ""
+            ],
+            [
+              3005085,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Quenton Jackson",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2584539,
+              ""
+            ],
+            [
+              2934742,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Larry Nance Jr.",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Johnny Furphy",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ],
+            [
+              2486995,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jalen Slawson",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Braden Smith",
+          "Two-Way",
+          "Draft",
+          [],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kobe Brown",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "NO": {
+      "cap": 196221049,
+      "dead": 0,
+      "players": [
+        [
+          "Zion Williamson",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              42166510,
+              ""
+            ],
+            [
+              44886930,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jordan Poole",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              34044642,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Dejounte Murray",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              32785071,
+              ""
+            ],
+            [
+              30751504,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Trey Murphy III",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              27000000,
+              ""
+            ],
+            [
+              29000000,
+              ""
+            ],
+            [
+              31000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Herbert Jones",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              14898786,
+              ""
+            ],
+            [
+              20858300,
+              ""
+            ],
+            [
+              22526964,
+              ""
+            ],
+            [
+              24195628,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jeremiah Fears",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              7896240,
+              ""
+            ],
+            [
+              8271960,
+              "T"
+            ],
+            [
+              10505389,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Bennedict Mathurin",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              7500000,
+              ""
+            ],
+            [
+              7875000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Saddiq Bey",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $116,402"
+          ],
+          [
+            [
+              6557080,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Derik Queen",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              5416080,
+              ""
+            ],
+            [
+              5673840,
+              "T"
+            ],
+            [
+              8107917,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "DeAndre Jordan",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3876529,
+              ""
+            ],
+            [
+              4070355,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Yves Missi",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3512760,
+              "T"
+            ],
+            [
+              5595827,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "A.J. Johnson",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3237120,
+              "T"
+            ],
+            [
+              5493393,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Bryce McGowens",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2584539,
+              ""
+            ],
+            [
+              2934742,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Trendon Watford",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Karlo Matković",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Malik Dia",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jaron Pierre",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Julian Reese",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "DET": {
+      "cap": 194498178,
+      "dead": 3815861,
+      "players": [
+        [
+          "Cade Cunningham",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              50105628,
+              ""
+            ],
+            [
+              53817156,
+              ""
+            ],
+            [
+              57528684,
+              ""
+            ],
+            [
+              61240212,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jalen Duren",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              40160643,
+              ""
+            ],
+            [
+              36947792,
+              ""
+            ],
+            [
+              38955824,
+              ""
+            ],
+            [
+              40963856,
+              ""
+            ],
+            [
+              42971885,
+              ""
+            ]
+          ]
+        ],
+        [
+          "John Collins",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              17000000,
+              ""
+            ],
+            [
+              17000000,
+              ""
+            ],
+            [
+              17000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Duncan Robinson",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              15992957,
+              ""
+            ],
+            [
+              15151222,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Isaiah Joe",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              11323006,
+              ""
+            ],
+            [
+              11323006,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ausar Thompson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              11117925,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kevin Huerter",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              9507042,
+              ""
+            ],
+            [
+              8746479,
+              ""
+            ],
+            [
+              8746479,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ron Holland II",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              9069600,
+              "T"
+            ],
+            [
+              11491183,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Paul Reed",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              5602689,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ebuka Okorie",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              4481280,
+              ""
+            ],
+            [
+              4705440,
+              ""
+            ],
+            [
+              4929360,
+              "T"
+            ],
+            [
+              7571497,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Daniss Jenkins",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              4000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Javonte Green",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3943679,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Taurean Prince",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              3815861,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Tolu Smith III",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2411090,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Chaz Lanier",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Elijah Harkless",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Isaac Jones",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ugonna Onyenso",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "TOR": {
+      "cap": 201188888,
+      "dead": 0,
+      "players": [
+        [
+          "Kawhi Leonard",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              50300000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Scottie Barnes",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              41754690,
+              ""
+            ],
+            [
+              44847630,
+              ""
+            ],
+            [
+              47940570,
+              ""
+            ],
+            [
+              51033510,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Immanuel Quickley",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              32500000,
+              ""
+            ],
+            [
+              32500000,
+              ""
+            ],
+            [
+              32500000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "RJ Barrett",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              29616071,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jakob Poeltl",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              19500000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Collin Murray-Boyles",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              6649560,
+              ""
+            ],
+            [
+              6966000,
+              "T"
+            ],
+            [
+              8874684,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Allen Graves",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              4065720,
+              ""
+            ],
+            [
+              4268880,
+              ""
+            ],
+            [
+              4472640,
+              ""
+            ],
+            [
+              6887866,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ja'Kobe Walter",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3811800,
+              "T"
+            ],
+            [
+              5870172,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kyle Anderson",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Trayce Jackson-Davis",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2406205,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jamison Battle",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jamal Shead",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Alijah Martin",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2185116,
+              ""
+            ],
+            [
+              2571895,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jaden Bradley",
+          "Roster",
+          "Draft",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Nate Bittle",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kevin McCullar Jr.",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Malachi Smith",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "HOU": {
+      "cap": 202233360,
+      "dead": 1819437,
+      "players": [
+        [
+          "Kevin Durant",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              43902439,
+              ""
+            ],
+            [
+              46097561,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Alperen Şengün",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              35642202,
+              ""
+            ],
+            [
+              37339450,
+              ""
+            ],
+            [
+              39036697,
+              ""
+            ],
+            [
+              39036697,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Fred VanVleet",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              25000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jabari Smith Jr.",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              23643411,
+              ""
+            ],
+            [
+              21751940,
+              ""
+            ],
+            [
+              23643411,
+              ""
+            ],
+            [
+              25534883,
+              ""
+            ],
+            [
+              27426355,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tari Eason",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              14053356,
+              ""
+            ],
+            [
+              15117624,
+              ""
+            ],
+            [
+              16301892,
+              ""
+            ],
+            [
+              17426160,
+              ""
+            ],
+            [
+              18550428,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Steven Adams",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              13000000,
+              ""
+            ],
+            [
+              11869566,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Amen Thompson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              12258609,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Reed Sheppard",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              11108880,
+              "T"
+            ],
+            [
+              14041624,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Clint Capela",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              7035000,
+              ""
+            ],
+            [
+              7370000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Marcus Smart",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the Taxpayer-MLE"
+          ],
+          [
+            [
+              6064000,
+              ""
+            ],
+            [
+              6367200,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Bogdan Bogdanovic",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Isaiah Crawford",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ],
+            [
+              2664401,
+              ""
+            ],
+            [
+              2888193,
+              ""
+            ],
+            [
+              3272766,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jae’Sean Tate",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Bruce Thornton",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Quadir Copeland",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Julian Phillips",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Oscar Tshiebwe",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "PHI": {
+      "cap": 207186471,
+      "dead": 0,
+      "players": [
+        [
+          "Joel Embiid",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              57985752,
+              ""
+            ],
+            [
+              62624612,
+              ""
+            ],
+            [
+              67263473,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jaylen Brown",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              57736350,
+              ""
+            ],
+            [
+              61672814,
+              ""
+            ],
+            [
+              65609278,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tyrese Maxey",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              40770520,
+              ""
+            ],
+            [
+              43582280,
+              ""
+            ],
+            [
+              46394040,
+              ""
+            ]
+          ]
+        ],
+        [
+          "VJ Edgecombe",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              11663880,
+              ""
+            ],
+            [
+              12219840,
+              "T"
+            ],
+            [
+              15445878,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Dean Wade",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              9000000,
+              ""
+            ],
+            [
+              9450000,
+              ""
+            ],
+            [
+              9900000,
+              ""
+            ],
+            [
+              10350000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Anfernee Simons",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              6000000,
+              ""
+            ],
+            [
+              6300000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "LeBron James",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3876528,
+              ""
+            ],
+            [
+              4070355,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Labaron Philon",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              3597120,
+              ""
+            ],
+            [
+              3776760,
+              ""
+            ],
+            [
+              3956760,
+              "T"
+            ],
+            [
+              6508870,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Dominick Barlow",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              3415000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ariel Hukporti",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the Biannual Exception"
+          ],
+          [
+            [
+              3400000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jabari Walker",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2584539,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kentavious Caldwell-Pope",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Justin Edwards",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2411090,
+              ""
+            ],
+            [
+              2616754,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Adem Bona",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ],
+            [
+              2486995,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tacko Fall",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Caleb Love",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Rayan Rupert",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "SA": {
+      "cap": 198279967,
+      "dead": 0,
+      "players": [
+        [
+          "De'Aaron Fox",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              49488300,
+              ""
+            ],
+            [
+              53447364,
+              ""
+            ],
+            [
+              57406428,
+              ""
+            ],
+            [
+              61365492,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Devin Vassell",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $500,000"
+          ],
+          [
+            [
+              27500000,
+              ""
+            ],
+            [
+              25108696,
+              ""
+            ],
+            [
+              27500000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Keldon Johnson",
+          "Roster",
+          "Draft",
+          [
+            "Likely Incentive: $500,000"
+          ],
+          [
+            [
+              18000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Victor Wembanyama",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              16868246,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Julian Champagnie",
+          "Roster",
+          "Waivers claim",
+          [],
+          [
+            [
+              15350000,
+              ""
+            ],
+            [
+              15000000,
+              ""
+            ],
+            [
+              14650000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Tobias Harris",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              15044000,
+              ""
+            ],
+            [
+              15796200,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Dylan Harper",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              12989040,
+              ""
+            ],
+            [
+              13607760,
+              "T"
+            ],
+            [
+              17172993,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Luke Kornet",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              10450000,
+              ""
+            ],
+            [
+              9900000,
+              ""
+            ],
+            [
+              9350000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Stephon Castle",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              10015920,
+              "T"
+            ],
+            [
+              12670139,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Harrison Barnes",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              8000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Carter Bryant",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $857,560"
+          ],
+          [
+            [
+              5145360,
+              ""
+            ],
+            [
+              5390640,
+              "T"
+            ],
+            [
+              7983538,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jayden Quaintance",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3902760,
+              ""
+            ],
+            [
+              4097880,
+              ""
+            ],
+            [
+              4292880,
+              "T"
+            ],
+            [
+              6619621,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tarris Reed Jr.",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3076920,
+              ""
+            ],
+            [
+              3230520,
+              ""
+            ],
+            [
+              3384480,
+              "T"
+            ],
+            [
+              6102217,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jordan McLaughlin",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Maliq Brown",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ja'Kobi Gillespie",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "David Jones",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "PHX": {
+      "cap": 217225506,
+      "dead": 26646472,
+      "players": [
+        [
+          "Devin Booker",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              57078728,
+              ""
+            ],
+            [
+              61015192,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jalen Green",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              36251166,
+              ""
+            ],
+            [
+              36000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Miles Bridges",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              22826087,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Dillon Brooks",
+          "Roster",
+          "Trade",
+          [
+            "Likely Incentive: $1,000,000"
+          ],
+          [
+            [
+              20992727,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Mark Williams",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              11728395,
+              ""
+            ],
+            [
+              12666667,
+              ""
+            ],
+            [
+              13604938,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Collin Gillespie",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              10714286,
+              ""
+            ],
+            [
+              11571429,
+              ""
+            ],
+            [
+              12428571,
+              ""
+            ],
+            [
+              13285714,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Khaman Maluach",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              6316680,
+              ""
+            ],
+            [
+              6617160,
+              "T"
+            ],
+            [
+              8436879,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Luke Kennard",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the Taxpayer-MLE"
+          ],
+          [
+            [
+              6064000,
+              ""
+            ],
+            [
+              6367200,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jordan Goodwin",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              5864198,
+              ""
+            ],
+            [
+              6333333,
+              ""
+            ],
+            [
+              6802469,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Koa Peat",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              2926800,
+              ""
+            ],
+            [
+              3073080,
+              ""
+            ],
+            [
+              3219840,
+              "T"
+            ],
+            [
+              5811811,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ryan Dunn",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              2784240,
+              "T"
+            ],
+            [
+              5025553,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jamaree Bouyea",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2584539,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Oso Ighodaro",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2296271,
+              ""
+            ],
+            [
+              2486995,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Rasheer Fleming",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Duop Reath",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Drew Timme",
+          "Two-Way",
+          "Waivers claim",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Pat Spencer",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "OKC": {
+      "cap": 217648521,
+      "dead": 105629,
+      "players": [
+        [
+          "Chet Holmgren",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              41240250,
+              ""
+            ],
+            [
+              44539470,
+              ""
+            ],
+            [
+              47838690,
+              ""
+            ],
+            [
+              51137910,
+              ""
+            ],
+            [
+              54437130,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jalen Williams",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              41240250,
+              ""
+            ],
+            [
+              44539470,
+              ""
+            ],
+            [
+              47838690,
+              ""
+            ],
+            [
+              51137910,
+              ""
+            ],
+            [
+              54437130,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Shai Gilgeous-Alexander",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              40806150,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Isaiah Hartenstein",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              23148148,
+              ""
+            ],
+            [
+              25000000,
+              ""
+            ],
+            [
+              26851852,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Alex Caruso",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              19550160,
+              ""
+            ],
+            [
+              20998320,
+              ""
+            ],
+            [
+              22446480,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jaylin Williams",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              7774648,
+              ""
+            ],
+            [
+              7774648,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Cason Wallace",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              7420806,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Aday Mara",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              5791680,
+              ""
+            ],
+            [
+              6081480,
+              ""
+            ],
+            [
+              6371160,
+              "T"
+            ],
+            [
+              8779458,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Nikola Topić",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5429760,
+              "T"
+            ],
+            [
+              7482209,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kenrich Williams",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              5000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Thomas Sorber",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $814,620"
+          ],
+          [
+            [
+              4887720,
+              ""
+            ],
+            [
+              5120400,
+              "T"
+            ],
+            [
+              7849573,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Bennett Stirtz",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              4717320,
+              ""
+            ],
+            [
+              4953240,
+              ""
+            ],
+            [
+              5189400,
+              "T"
+            ],
+            [
+              7960540,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jared McCain",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              4422600,
+              "T"
+            ],
+            [
+              6784268,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Nique Clifford",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $100,000"
+          ],
+          [
+            [
+              3263400,
+              ""
+            ],
+            [
+              3418800,
+              "T"
+            ],
+            [
+              5979481,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Ajay Mitchell",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2850000,
+              ""
+            ],
+            [
+              2850000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Brooks Barnhizer",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Josh Dix",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Micah Peavy",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "MIN": {
+      "cap": 214930955,
+      "dead": 2055000,
+      "players": [
+        [
+          "Anthony Edwards",
+          "Roster",
+          "Draft",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              48924624,
+              ""
+            ],
+            [
+              52298736,
+              ""
+            ],
+            [
+              55672848,
+              ""
+            ]
+          ]
+        ],
+        [
+          "LaMelo Ball",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              40770520,
+              ""
+            ],
+            [
+              43582280,
+              ""
+            ],
+            [
+              46394040,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Rudy Gobert",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              36500000,
+              ""
+            ],
+            [
+              38000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Jaden McDaniels",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              26200001,
+              ""
+            ],
+            [
+              28006898,
+              ""
+            ],
+            [
+              29813790,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Ayo Dosunmu",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              19310345,
+              ""
+            ],
+            [
+              20855173,
+              ""
+            ],
+            [
+              22400001,
+              ""
+            ],
+            [
+              23944829,
+              ""
+            ],
+            [
+              25489652,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Donte DiVincenzo",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              12535000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jonathan Kuminga",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the Taxpayer-MLE"
+          ],
+          [
+            [
+              6064000,
+              ""
+            ],
+            [
+              6367200,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Cody Williams",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              6015600,
+              "T"
+            ],
+            [
+              7669890,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Joan Beringer",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $412,500"
+          ],
+          [
+            [
+              4411200,
+              ""
+            ],
+            [
+              4621200,
+              "T"
+            ],
+            [
+              7098163,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Jaylen Clark",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3086420,
+              ""
+            ],
+            [
+              3333334,
+              ""
+            ],
+            [
+              3580246,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Terrence Shannon Jr.",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              2801640,
+              "T"
+            ],
+            [
+              5054159,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Nah'Shon Bones Hyland",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Trey Lyles",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Isaiah Evans",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              1357763,
+              ""
+            ],
+            [
+              2294370,
+              ""
+            ],
+            [
+              2694363,
+              ""
+            ],
+            [
+              2918152,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Johni Broome",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Zyon Pullin",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Rocco Zikarsky",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "POR": {
+      "cap": 192093473,
+      "dead": 268032,
+      "players": [
+        [
+          "Ja Morant",
+          "Roster",
+          "Trade",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              42166510,
+              ""
+            ],
+            [
+              44886930,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jrue Holiday",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              34800000,
+              ""
+            ],
+            [
+              37200000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Shaedon Sharpe",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              20089287,
+              ""
+            ],
+            [
+              21696429,
+              ""
+            ],
+            [
+              23303571,
+              ""
+            ],
+            [
+              24910713,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Toumani Camara",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              18080358,
+              ""
+            ],
+            [
+              19526786,
+              ""
+            ],
+            [
+              20973214,
+              ""
+            ],
+            [
+              22419642,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Robert Williams III",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              14000000,
+              ""
+            ],
+            [
+              14500000,
+              ""
+            ],
+            [
+              15000000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Scoot Henderson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              13585523,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Damian Lillard",
+          "Roster",
+          "Signed",
+          [
+            "No Trade Clause"
+          ],
+          [
+            [
+              13398800,
+              ""
+            ],
+            [
+              14104000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Deni Avdija",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              13125000,
+              ""
+            ],
+            [
+              11875000,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Donovan Clingan",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              7519920,
+              "T"
+            ],
+            [
+              9550298,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Hansen Yang",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $50,000"
+          ],
+          [
+            [
+              4643520,
+              ""
+            ],
+            [
+              4864920,
+              "T"
+            ],
+            [
+              7462787,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Micah Potter",
+          "Roster",
+          "Waivers claim",
+          [],
+          [
+            [
+              2801346,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Vit Krejci",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              2667944,
+              ""
+            ],
+            [
+              3005085,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Sidy Cissoko",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2497812,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Branden Carlson",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jayson Kent",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "John Tonje",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Chris Youngblood",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "GS": {
+      "cap": 220838431,
+      "dead": 0,
+      "players": [
+        [
+          "Stephen Curry",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              62587158,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jimmy Butler",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              56832773,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Draymond Green",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              27678571,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Kristaps Porzingis",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              20000000,
+              ""
+            ],
+            [
+              20000000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Moses Moody",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              12500000,
+              ""
+            ],
+            [
+              13425925,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Al Horford",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              6822000,
+              ""
+            ],
+            [
+              7163100,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Yaxel Lendeborg",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              6096240,
+              ""
+            ],
+            [
+              6401280,
+              ""
+            ],
+            [
+              6706200,
+              "T"
+            ],
+            [
+              8899127,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "De'Anthony Melton",
+          "Roster",
+          "Signed",
+          [
+            "Signed using the MLE"
+          ],
+          [
+            [
+              6064000,
+              ""
+            ],
+            [
+              6367200,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Brandin Podziemski",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              5679458,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Gui Santos",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              4629630,
+              ""
+            ],
+            [
+              5000000,
+              ""
+            ],
+            [
+              5370370,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Charles Bassey",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Georges Niang",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Gary Payton II",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Brandon Williams",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Will Richard",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              2150917,
+              ""
+            ],
+            [
+              2525901,
+              ""
+            ],
+            [
+              2735698,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "LJ Cryer",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Graham Ike",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ],
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Malevy Leons",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    },
+    "WSH": {
+      "cap": 194462515,
+      "dead": 0,
+      "players": [
+        [
+          "Anthony Davis",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              58456566,
+              ""
+            ],
+            [
+              62786682,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Trae Young",
+          "Roster",
+          "Signed",
+          [
+            "Maximum Contract"
+          ],
+          [
+            [
+              49488300,
+              ""
+            ],
+            [
+              50478066,
+              ""
+            ],
+            [
+              54437130,
+              ""
+            ],
+            [
+              58396194,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "AJ Dybantsa",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              14748000,
+              ""
+            ],
+            [
+              15485760,
+              ""
+            ],
+            [
+              16223040,
+              "T"
+            ],
+            [
+              20457253,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Alexandre Sarr",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              12370680,
+              "T"
+            ],
+            [
+              15611798,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Bilal Coulibaly",
+          "Roster",
+          "Trade",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              9240012,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tre Johnson",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $720,800"
+          ],
+          [
+            [
+              8649600,
+              ""
+            ],
+            [
+              9061680,
+              "T"
+            ],
+            [
+              11490210,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Deandre Ayton",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              8104000,
+              "P"
+            ]
+          ]
+        ],
+        [
+          "Tre Mann",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              8000000,
+              ""
+            ],
+            [
+              8000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Khris Middleton",
+          "Roster",
+          "Trade",
+          [],
+          [
+            [
+              5591112,
+              ""
+            ],
+            [
+              5870678,
+              ""
+            ],
+            [
+              6150234,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Carlton Carrington",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              4900560,
+              "T"
+            ],
+            [
+              7257729,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Will Riley",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract",
+            "Likely Incentive: $200,000"
+          ],
+          [
+            [
+              3688320,
+              ""
+            ],
+            [
+              3864000,
+              "T"
+            ],
+            [
+              6155352,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Kyshawn George",
+          "Roster",
+          "Draft",
+          [
+            "Rookie Scale Contract"
+          ],
+          [
+            [
+              3108000,
+              "T"
+            ],
+            [
+              5435892,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Tristan Vukcevic",
+          "Roster",
+          "Draft",
+          [],
+          [
+            [
+              3000000,
+              ""
+            ],
+            [
+              3000000,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Justin Champagnie",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2667944,
+              ""
+            ],
+            [
+              3005085,
+              "T"
+            ]
+          ]
+        ],
+        [
+          "Anthony Gill",
+          "Roster",
+          "Signed",
+          [],
+          [
+            [
+              2449421,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Reece Beekman",
+          "Two-Way",
+          "Signed",
+          [
+            "Two-Way Contract",
+            "Unconfirmed"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Felix Okpara",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ],
+        [
+          "Jamir Watkins",
+          "Two-Way",
+          "Draft",
+          [
+            "Two-Way Contract"
+          ],
+          [
+            [
+              0,
+              ""
+            ]
+          ]
+        ]
+      ]
+    }
+  },
   "teams": [
     {
       "id": "1",
@@ -11914,7 +21247,7 @@
       "loc": "Boston",
       "color": "008348",
       "alt": "ffffff",
-      "record": "11-4",
+      "record": "11-5",
       "players": [
         {
           "id": "4433188",
@@ -12099,14 +21432,7 @@
           "exp": 5,
           "inj": null,
           "prev": 0,
-          "c": {
-            "sal": 2538126,
-            "inV": 2538126,
-            "outV": 2538126,
-            "yrs": 3,
-            "kick": 0,
-            "prev": 0
-          },
+          "c": null,
           "st": [
             7,
             6.7,
@@ -12245,7 +21571,7 @@
           "wt": "240 lbs",
           "age": 28,
           "exp": 9,
-          "inj": null,
+          "inj": "Out",
           "prev": 12954546,
           "c": null,
           "st": [
@@ -12300,7 +21626,7 @@
           "wt": "224 lbs",
           "age": 28,
           "exp": 10,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 54126450,
           "c": {
             "sal": 58456566,
@@ -12362,7 +21688,7 @@
           "wt": "200 lbs",
           "age": 32,
           "exp": 10,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 28100001,
           "c": {
             "sal": 30348001,
@@ -12408,7 +21734,7 @@
       "loc": "New Orleans",
       "color": "0a2240",
       "alt": "b4975a",
-      "record": "5-12",
+      "record": "5-13",
       "players": [
         {
           "id": "4397136",
@@ -12708,7 +22034,7 @@
           "wt": "206 lbs",
           "age": 26,
           "exp": 6,
-          "inj": null,
+          "inj": "Out",
           "prev": 25000000,
           "c": {
             "sal": 27000000,
@@ -12918,7 +22244,7 @@
           "wt": "284 lbs",
           "age": 26,
           "exp": 7,
-          "inj": null,
+          "inj": "Out",
           "prev": 39446090,
           "c": {
             "sal": 42166510,
@@ -13288,7 +22614,7 @@
           "wt": "215 lbs",
           "age": 33,
           "exp": 12,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 20482758,
           "c": null,
           "st": [
@@ -13405,7 +22731,7 @@
           "wt": "215 lbs",
           "age": 25,
           "exp": 7,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 18000000,
           "c": {
             "sal": 18000000,
@@ -13928,7 +23254,7 @@
       "loc": "Dallas",
       "color": "0064b1",
       "alt": "bbc4ca",
-      "record": "8-7",
+      "record": "9-7",
       "players": [
         {
           "id": "4593125",
@@ -14039,7 +23365,7 @@
           "wt": "195 lbs",
           "age": 23,
           "exp": 2,
-          "inj": "Day-To-Day",
+          "inj": null,
           "prev": 3991320,
           "c": {
             "sal": 4190520,
@@ -14404,7 +23730,7 @@
           "wt": "230 lbs",
           "age": 28,
           "exp": 8,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 14152174,
           "c": {
             "sal": 19813044,
@@ -14951,7 +24277,7 @@
           "wt": "220 lbs",
           "age": 25,
           "exp": 6,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 46394100,
           "c": {
             "sal": 50105628,
@@ -15233,7 +24559,7 @@
           "wt": "186 lbs",
           "age": 19,
           "exp": 0,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": null,
           "c": null,
           "st": [
@@ -15545,7 +24871,7 @@
           "wt": "230 lbs",
           "age": 36,
           "exp": 15,
-          "inj": "Day-To-Day",
+          "inj": null,
           "prev": 25892857,
           "c": {
             "sal": 27678571,
@@ -16530,7 +25856,7 @@
           "wt": "190 lbs",
           "age": 34,
           "exp": 12,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 10200000,
           "c": {
             "sal": 11000000,
@@ -16702,7 +26028,7 @@
           "wt": "245 lbs",
           "age": 32,
           "exp": 11,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 45550512,
           "c": {
             "sal": 48924624,
@@ -16875,7 +26201,7 @@
       "loc": "LA",
       "color": "12173f",
       "alt": "c8102e",
-      "record": "4-10",
+      "record": "4-11",
       "players": [
         {
           "id": "6580",
@@ -17957,7 +27283,7 @@
           "wt": "243 lbs",
           "age": 31,
           "exp": 14,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 54126450,
           "c": {
             "sal": 58456566,
@@ -18395,7 +27721,7 @@
       "loc": "Milwaukee",
       "color": "00471b",
       "alt": "eee1c6",
-      "record": "1-15",
+      "record": "1-16",
       "players": [
         {
           "id": "5164559",
@@ -18889,7 +28215,7 @@
       "loc": "Minnesota",
       "color": "266092",
       "alt": "79bc43",
-      "record": "11-5",
+      "record": "12-5",
       "players": [
         {
           "id": "4432816",
@@ -18985,14 +28311,7 @@
           "exp": 3,
           "inj": "Out",
           "prev": 2191897,
-          "c": {
-            "sal": 3086420,
-            "inV": 3086420,
-            "outV": 3086420,
-            "yrs": 0,
-            "kick": 0,
-            "prev": 2191897
-          },
+          "c": null,
           "st": [
             12,
             13.6,
@@ -19860,7 +29179,7 @@
       "loc": "New York",
       "color": "1d428a",
       "alt": "f58426",
-      "record": "9-6",
+      "record": "10-6",
       "players": [
         {
           "id": "4683730",
@@ -20019,7 +29338,7 @@
           "wt": "194 lbs",
           "age": 34,
           "exp": 13,
-          "inj": "Out",
+          "inj": "Day-To-Day",
           "prev": 2296274,
           "c": null,
           "st": [
@@ -20814,7 +30133,7 @@
       "loc": "Philadelphia",
       "color": "1d428a",
       "alt": "e01234",
-      "record": "13-3",
+      "record": "14-3",
       "players": [
         {
           "id": "4870562",
@@ -21740,7 +31059,7 @@
       "loc": "Portland",
       "color": "e03a3e",
       "alt": "000000",
-      "record": "10-5",
+      "record": "10-6",
       "players": [
         {
           "id": "4683021",
@@ -21751,7 +31070,7 @@
           "wt": "228 lbs",
           "age": 25,
           "exp": 7,
-          "inj": "Day-To-Day",
+          "inj": null,
           "prev": 14375000,
           "c": {
             "sal": 13125000,
@@ -22248,7 +31567,7 @@
       "loc": "Sacramento",
       "color": "5a2d81",
       "alt": "6a7a82",
-      "record": "1-14",
+      "record": "2-14",
       "players": [
         {
           "id": "4431679",
@@ -22259,7 +31578,7 @@
           "wt": "243 lbs",
           "age": 27,
           "exp": 7,
-          "inj": "Day-To-Day",
+          "inj": null,
           "prev": 2111516,
           "c": null,
           "st": [
@@ -22708,7 +32027,7 @@
       "loc": "San Antonio",
       "color": "000000",
       "alt": "c4ced4",
-      "record": "13-3",
+      "record": "14-3",
       "players": [
         {
           "id": "6578",
@@ -23206,7 +32525,7 @@
           "wt": "186 lbs",
           "age": 32,
           "exp": 10,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 18102000,
           "c": {
             "sal": 19550160,
@@ -23292,7 +32611,7 @@
           "wt": "195 lbs",
           "age": 28,
           "exp": 9,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 38333050,
           "c": {
             "sal": 40806150,
@@ -23547,7 +32866,7 @@
           "wt": "200 lbs",
           "age": 21,
           "exp": 2,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 5182920,
           "c": {
             "sal": 5429760,
@@ -23640,7 +32959,7 @@
           "wt": "240 lbs",
           "age": 24,
           "exp": 5,
-          "inj": null,
+          "inj": "Out",
           "prev": 8450794,
           "c": {
             "sal": 7774648,
@@ -25108,14 +34427,7 @@
           "exp": 2,
           "inj": null,
           "prev": null,
-          "c": {
-            "sal": 2150917,
-            "inV": 2150917,
-            "outV": 0,
-            "yrs": 1,
-            "kick": 0,
-            "prev": null
-          },
+          "c": null,
           "st": [
             4,
             4,
@@ -25169,7 +34481,7 @@
       "loc": "Memphis",
       "color": "5d76a9",
       "alt": "12173f",
-      "record": "12-4",
+      "record": "12-5",
       "players": [
         {
           "id": "5041935",
@@ -25359,7 +34671,7 @@
           "wt": "195 lbs",
           "age": 29,
           "exp": 8,
-          "inj": "Out",
+          "inj": null,
           "prev": 8781000,
           "c": {
             "sal": 9220050,

@@ -10,11 +10,13 @@ const CAP = 164961000, TAX = 200428000, APRON1 = 209015000, APRON2 = 221686000;
 // 2025-26 was $8,277,000 / +$8,527,000 / $33,108,000, scaled here by the 2026-27 cap increase.
 const CUSHION = 250000, BAND1 = 8829000, BAND_ADD = BAND1 + CUSHION, BAND2 = BAND1 * 4;
 const CASH_LIMIT = 8497000; // max cash a team may send, and separately receive, in trades in 2026-27
-const MIN_SAL = 1358000; // estimated rookie minimum, used only when a salary is missing
+const MIN_SAL = 1357763; // 2026-27 rookie minimum, used only when a salary is missing
+// Dates: the Feb 11, 2027 deadline (3 p.m. ET) is official. The NBA hasn't announced the 2027 Finals or draft dates,
+// so REOPEN (day after the Finals) and DRAFT are estimates and are labelled that way wherever they're shown.
 const DAY = 86400000;
 const d = s => new Date(s + "T12:00:00");
 const TODAY = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate(), 12); })();
-const DEC15 = d("2026-12-15"), JAN15 = d("2027-01-15"), DEADLINE = d("2027-02-04"), REOPEN = d("2027-06-21"), DRAFT = d("2027-06-24"), END = d("2027-06-30");
+const DEC15 = d("2026-12-15"), JAN15 = d("2027-01-15"), DEADLINE = d("2027-02-11"), REOPEN = d("2027-06-21"), DRAFT = d("2027-06-24"), END = d("2027-06-30");
 const PICK_FIRST = 2027, PICK_LAST = 2033; // teams may trade picks up to 7 drafts out
 const SEASON_START = d("2026-07-01");
 const START = TODAY < d("2026-07-06") ? d("2026-07-06") : TODAY > END ? END : TODAY;
@@ -88,15 +90,41 @@ function load(data, executed) {
   }
   const salIdx = {};
   for (const r of data.sal) { const k = norm(r[0]); (salIdx[k] ||= []).push(r); }
+  // Team cap sheets are the main salary source; Basketball-Reference and ESPN fill gaps.
+  const sheets = data.sheets || {}, shTeam = {}, shAll = {};
+  for (const [ab, t] of Object.entries(sheets)) for (const row of t.players) { const k = norm(row[0]); (shTeam[ab] ||= {})[k] = row; shAll[k] ||= row; }
+  const sheetRow = (ab, name) => {
+    const k = norm(name), parts = k.split(" "), rev = [...parts].reverse().join(" ");
+    const hit = shTeam[ab]?.[k] || shTeam[ab]?.[rev] || shAll[k];
+    if (hit) return hit;
+    // Nicknames and longer legal names: "Bones Hyland" = "Nah'Shon Bones Hyland", "David Jones Garcia" = "David Jones",
+    // "Bub Carrington" = "Carlton Carrington". Accept only a single unambiguous match on the same team.
+    const team = Object.entries(shTeam[ab] || {});
+    const tries = [
+      ([n]) => n.endsWith(" " + k) || k.endsWith(" " + n) || n.startsWith(k + " ") || k.startsWith(n + " "),
+      ([n]) => n.split(" ").at(-1) === parts.at(-1) && n[0] === k[0],
+      ([n]) => n.split(" ").at(-1) === parts.at(-1),
+    ];
+    for (const f of tries) { const c = team.filter(f); if (c.length === 1) return c[0][1]; }
+    return null;
+  };
   const sentences = data.tx.map(([date, team, desc]) => ({date: d(date), team, parts: desc.split(/\.\s+(?=[A-Z])/)}));
   for (const t of data.teams) {
-    L.teams[t.abbr] = {...t, color: "#" + (t.color || "555555"), alt: "#" + (t.alt || "999999"), roster: []};
+    L.teams[t.abbr] = {...t, color: "#" + (t.color || "555555"), alt: "#" + (t.alt || "999999"), roster: [], dead: sheets[t.abbr]?.dead || 0, sheetCap: sheets[t.abbr]?.cap || null};
     for (const p of t.players) {
-      const rows = salIdx[norm(p.name)] || [];
-      const br = rows.find(r => (BREF_TEAM[r[1]] || r[1]) === t.abbr) || rows[0];
-      const years = br ? br.slice(2).filter(Boolean).map(v => ({amt: +v.replace(/[A-Z]/g, ""), opt: v.replace(/[0-9]/g, "")})) : [];
-      let sal = p.c?.sal ?? years[0]?.amt ?? null, est = false;
-      if (p.c?.sal && years[0]) years[0].amt = p.c.sal;
+      const srow = sheetRow(t.abbr, p.name);
+      let years, sal, est = false, terms = [], src;
+      if (srow) {
+        years = srow[4].map(([amt, opt]) => ({amt, opt}));
+        sal = years[0]?.amt ?? 0; terms = srow[3]; src = "sheet";
+      } else {
+        const rows = salIdx[norm(p.name)] || [];
+        const br = rows.find(r => (BREF_TEAM[r[1]] || r[1]) === t.abbr) || rows[0];
+        years = br ? br.slice(2).filter(Boolean).map(v => ({amt: +v.replace(/[A-Z]/g, ""), opt: v.replace(/[0-9]/g, "")})) : [];
+        sal = p.c?.sal ?? years[0]?.amt ?? null;
+        if (p.c?.sal && years[0]) years[0].amt = p.c.sal;
+        src = br ? "bref" : p.c ? "espn" : null;
+      }
       const yrs = years.length || (p.c ? p.c.yrs : 0);
       // most recent signing / acquisition this calendar year (transactions are newest first)
       let sig = null;
@@ -112,11 +140,22 @@ function load(data, executed) {
         }
         if (sig) break;
       }
-      const twoway = (sig?.kind === "twoway" && !(sal > 2.5e6)) || (sal == null && !/rookie|fa|resign|ros|convert|trade|ext/.test(sig?.kind || ""));
+      // ESPN rosters can lag a few days behind waivers: drop a player who isn't on the team's cap sheet
+      // when the latest transaction naming him is his release.
+      if (!srow && sheets[t.abbr]) {
+        const lastMention = sentences.flatMap(tx => tx.parts.filter(s => s.toLowerCase().includes(p.name.toLowerCase())).map(s => s))[0];
+        if (lastMention && /^waived/i.test(lastMention)) continue;
+      }
+      const twoway = srow ? srow[1] === "Two-Way"
+        : (sig?.kind === "twoway" && !(sal > 2.5e6)) || (sal == null && !/rookie|fa|resign|ros|convert|trade|ext/.test(sig?.kind || ""));
       if (twoway) sal = 0;
       if (sal == null) { sal = MIN_SAL; est = true; }
-      const pl = {...p, team: t.abbr, sal, est, years, yrs, twoway, sig, prevSal: p.prev ?? p.c?.prev ?? null,
-        inV: twoway ? 0 : (p.c?.inV ?? sal), outV: twoway ? 0 : (p.c?.outV ?? sal), acq: null, key: norm(p.name)};
+      // No-trade rights: an explicit clause, or the implied one a player gets for re-signing a one-year deal
+      // (or one year plus an option) with his team using Bird or Early Bird rights.
+      const ntc = terms.includes("No Trade Clause") ? "clause"
+        : sig?.kind === "resign" && !twoway && (years.length === 1 || (years.length === 2 && years[1].opt === "P")) ? "one-year" : null;
+      const pl = {...p, team: t.abbr, sal, est, years, yrs, twoway, sig, terms, ntc, src, prevSal: p.prev ?? p.c?.prev ?? null,
+        inV: twoway ? 0 : (src === "sheet" ? sal : p.c?.inV ?? sal), outV: twoway ? 0 : (src === "sheet" ? sal : p.c?.outV ?? sal), acq: null, key: norm(p.name)};
       L.players[p.id] = pl;
       L.teams[t.abbr].roster.push(p.id);
     }
@@ -128,7 +167,8 @@ function load(data, executed) {
 }
 
 // ---------- rules ----------
-const payroll = ab => L.teams[ab].roster.reduce((s, id) => s + (L.players[id].twoway ? 0 : L.players[id].sal), 0);
+// Team salary for cap purposes: every standard contract on the roster plus dead money from waived players.
+const payroll = ab => (L.teams[ab].dead || 0) + L.teams[ab].roster.reduce((s, id) => s + (L.players[id].twoway ? 0 : L.players[id].sal), 0);
 const tierOf = v => v <= CAP ? 0 : v <= TAX ? 1 : v <= APRON1 ? 2 : v <= APRON2 ? 3 : 4;
 const windowOpen = dt => !(dt > DEADLINE && dt < REOPEN);
 const minDate = () => L.executed.length ? maxD(START, d(L.executed.at(-1).date)) : START;
@@ -219,10 +259,13 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
   if ((!ids.length && !pids.length && !wids.length && !cids.length) || L.teamIds.length < 2) return {state: "idle", issues, warns, summary};
   const dt = L.date;
   if (!windowOpen(dt)) issues.push({kind: "window", h: "The trade deadline has passed",
-    p: `The 2026-27 deadline is ${fmtD(DEADLINE)} (estimated). No trades can be made from the day after the deadline until the NBA Finals end, around ${fmtD(REOPEN)}. Move the league date back before the deadline, or past the Finals.`,
+    p: `The 2026-27 trade deadline was ${fmtD(DEADLINE)} at 3 p.m. ET. No trades can be made from then until the day after the NBA Finals end (estimated ${fmtD(REOPEN)}; the NBA hasn't set the Finals dates yet). Move the league date back before the deadline, or past the Finals.`,
     fix: [["Go to deadline day", +DEADLINE], ["Jump past the Finals", +REOPEN]]});
   for (const id of ids) {
     const p = L.players[id], e = elig(p, dt);
+    if (p.ntc) warns.push({h: `${p.name} can veto this trade`, p: p.ntc === "clause"
+      ? `${p.name} has a no-trade clause in his contract, so he has to agree to any trade.`
+      : `${p.name} re-signed with his team for one season using Bird rights. That gives him the right to block any trade until the season ends.`});
     if (e.ok) continue;
     const late = e.until && e.until > DEADLINE && e.until < REOPEN && dt <= DEADLINE, go = late ? REOPEN : e.until;
     issues.push({kind: "elig", pid: id, h: `${p.name} isn't eligible to be traded yet`,
@@ -245,9 +288,13 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
         if (s.inV > s.allowed) salaryProblem = `The ${name} would be at ${money(after)} after this deal, above the ${money(APRON1)} first apron. Teams above the first apron can only take back as much salary as they send out, and they can't use trade exceptions. They send ${money(s.outV)} and receive ${money(s.inV)}, which is ${money(s.inV - s.outV)} too much. Send more salary from the ${name}, or take back less.`;
       } else {
         const o = s.outV;
-        s.allowed = matchCap(o);
-        s.rule = o <= BAND1 ? `Sends ≤ ${money(BAND1)}: may take back 200% + $250K.` : o <= BAND2 ? `Sends ${money(BAND1)}–${money(BAND2)}: may take back outgoing + ${money(BAND_ADD)}.` : `Sends > ${money(BAND2)}: may take back 125% + $250K.`;
-        if (s.inV > s.allowed) salaryProblem = `The ${name} are over the cap but under the first apron after this deal (${money(after)}). Sending out ${money(o)} lets them take back up to ${money(s.allowed)}, but they'd receive ${money(s.inV)}, which is ${money(s.inV - s.allowed)} over the limit. ${s.rule}${o === 0 ? " Draft picks and cash don't count as salary, so a team over the cap has to send a contract back or use a trade exception to take a player in." : ""} Send more salary from the ${name}, take back less, or use a trade exception.`;
+        // A team under the cap may instead use its room: take back what it sends plus its cap room plus $250K.
+        const room = before < CAP ? o + (CAP - before) + CUSHION : 0, byRoom = room >= s.inV;
+        s.allowed = Math.max(matchCap(o), room);
+        s.rule = byRoom ? `Under the cap before the deal: uses ${money(CAP - before)} of cap room (+$250K allowance).`
+          : o <= BAND1 ? `Sends ≤ ${money(BAND1)}: may take back 200% + $250K.` : o <= BAND2 ? `Sends ${money(BAND1)}–${money(BAND2)}: may take back outgoing + ${money(BAND_ADD)}.` : `Sends > ${money(BAND2)}: may take back 125% + $250K.`;
+        if (byRoom) { /* room trades don't create a hard cap */ }
+        else if (s.inV > s.allowed) salaryProblem = `The ${name} are over the cap but under the first apron after this deal (${money(after)}). Sending out ${money(o)} lets them take back up to ${money(s.allowed)}, but they'd receive ${money(s.inV)}, which is ${money(s.inV - s.allowed)} over the limit. ${s.rule}${o === 0 ? " Draft picks and cash don't count as salary, so a team over the cap has to send a contract back or use a trade exception to take a player in." : ""} Send more salary from the ${name}, take back less, or use a trade exception.`;
         else triggers.push([1, "taking back more salary than they send"]);
       }
       // Traded player exception: absorb incoming players (one per exception) into open exceptions; the rest must match normally.
@@ -265,7 +312,7 @@ function evaluate(sel = L.sel, psel = L.psel, wsel = L.wsel, csel = L.csel) {
         } else if (open.length) {
           salaryProblem += ` Their trade exceptions (largest ${money(open.at(-1).amt)}) can't absorb ${incStd.length > 1 ? "these contracts" : "this contract"}: an exception takes one player whose salary fits inside it.`;
         }
-      } else if (salaryProblem && teamTPEs(ab, dt).length) salaryProblem += ` Teams above the first apron after a trade can't use trade exceptions.`;
+      }
       if (salaryProblem) issues.push({kind: "salary", team: ab, gap: s.inV - (s.allowed || 0), h: `The ${name} take back too much salary`, p: salaryProblem});
     } else s.rule = s.inV === s.outV ? "Salaries match exactly." : `Takes back less salary than it sends (${money(s.outV - s.inV)} saved).`;
     const aggregated = outStd.length >= 2 && s.inV > Math.max(0, ...outStd.map(p => p.outV)) && after > CAP;

@@ -14,7 +14,7 @@ An NBA trade machine with live rosters and contracts. It checks every trade agai
 
 ## Data
 
-`build.sh` pulls rosters, stats and transactions from ESPN's public API and contracts from Basketball-Reference, and future pick ownership from Salary Swish (parsed by `picks.pl`), then writes `data.json`. A GitHub Action (`.github/workflows/refresh.yml`) runs it every morning and commits the new data, so the GitHub Pages site stays current.
+`build.sh` pulls rosters, stats and transactions from ESPN's public API and contracts, options, two-way deals and dead money from Salary Swish team cap sheets (`sheets.pl`; Basketball-Reference as a backup), and future pick ownership from Salary Swish (`picks.pl`), then writes `data.json`. A GitHub Action (`.github/workflows/refresh.yml`) runs it every morning and commits the new data, so the GitHub Pages site stays current.
 
 Run it yourself (needs `bash`, `curl`, `jq`, `perl`):
 
@@ -26,4 +26,4 @@ Then serve the folder with any static server and open `index.html`.
 
 ## Notes
 
-2026-27 cap figures come from the NBA's July 2026 release. The salary-matching bands, the Feb 4, 2027 deadline and the Finals end date are estimates. Pick ownership and terms come from Salary Swish; every conditional pick shows what it depends on. Swap rights can be traded, and new swaps can be offered on a pick a team owns. Cash limits, trade exceptions and hard caps are checked too, using Salary Swish's trade exception and hard cap trackers (parsed by `trackers.pl`).
+2026-27 cap figures come from the NBA's July 2026 release. The Feb 11, 2027 trade deadline is official. The salary-matching bands follow the CBA formula scaled to the 2026-27 cap; the 2027 Finals and draft dates are estimates until the NBA announces them. Pick ownership and terms come from Salary Swish; every conditional pick shows what it depends on. Swap rights can be traded, and new swaps can be offered on a pick a team owns. Cash limits, trade exceptions and hard caps are checked too, using Salary Swish's trade exception and hard cap trackers (parsed by `trackers.pl`).

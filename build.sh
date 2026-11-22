@@ -19,8 +19,15 @@ done
 # Salary Swish trackers: open trade exceptions and which teams are hard-capped
 curl -sf -A "$UA" "https://www.salaryswish.com/trade-exception" -o raw/tpe.html &
 curl -sf -A "$UA" "https://www.salaryswish.com/hard-cap-tracker" -o raw/hardcap.html &
+# Salary Swish team cap sheets: exact cap hits, options, two-way deals, dead money
+mkdir -p raw/sheets
+for s in bucks bulls cavaliers celtics clippers grizzlies hawks heat hornets jazz kings knicks lakers magic mavericks nets nuggets pacers pelicans pistons raptors rockets sixers spurs suns thunder timberwolves trailblazers warriors wizards; do
+  curl -sf -A "$UA" "https://www.salaryswish.com/teams/$s" -o raw/sheets/$s.html &
+done
 wait
 perl trackers.pl > raw/trackers.json || echo '{"tpe":[],"hardcap":{}}' > raw/trackers.json
+perl sheets.pl > raw/sheets.json 2>/dev/null || echo '{}' > raw/sheets.json
+if [ "$(jq 'length' raw/sheets.json)" -lt 28 ] && [ -f data.json ] && jq -e '.sheets' data.json > /dev/null 2>&1; then jq -c '.sheets' data.json > raw/sheets.json; echo "Cap sheets unavailable; kept previous"; fi
 perl picks.pl $PICK_YEARS > raw/picks.jsonl || : > raw/picks.jsonl
 # Full pick grid: every team's own 1st and 2nd for 2027-2033, with current owner if traded
 jq -n -c --slurpfile p raw/picks.jsonl '
@@ -52,12 +59,12 @@ jq -R 'split("|")' raw/bref.psv | jq -s . > raw/bref.json
         inj: ([.injuries[]?.status] | first), prev: ([.contracts[]? | select(.season.year==2026) | .salary] | first),
         c: (if .contract then {sal: .contract.salary, inV: .contract.incomingTradeValue, outV: .contract.outgoingTradeValue, yrs: .contract.yearsRemaining, kick: (if .contract.tradeKicker.active then .contract.tradeKicker.percentage else 0 end), prev: ([.contracts[]? | select(.season.year==2026) | .salary] | first)} else null end)}]}' raw/team_$i.json
   done
-} | jq -s --slurpfile st raw/stats.json --slurpfile tx raw/tx.json --slurpfile br raw/bref.json --slurpfile pk raw/picks.json --slurpfile tk raw/trackers.json '
+} | jq -s --slurpfile st raw/stats.json --slurpfile tx raw/tx.json --slurpfile br raw/bref.json --slurpfile pk raw/picks.json --slurpfile tk raw/trackers.json --slurpfile sh raw/sheets.json '
   ($st[0].athletes | map({key: .athlete.id, value: (
      (.categories|map({key:.name, value:.values})|from_entries) as $c |
      [$c.general[0], $c.general[1], $c.offensive[0], $c.general[11], $c.offensive[10], $c.offensive[3], $c.offensive[6], $c.defensive[0], $c.defensive[1]] | map(. * 10 | round / 10))}) | from_entries) as $stats
   | {updated: (now|todate), season: $tx[0].season.displayName,
      tx: [$tx[0].transactions[] | [.date[0:10], .team.abbreviation, .description]],
-     sal: $br[0], picks: $pk[0], tpe: $tk[0].tpe, hardcap: $tk[0].hardcap,
+     sal: $br[0], picks: $pk[0], tpe: $tk[0].tpe, hardcap: $tk[0].hardcap, sheets: $sh[0],
      teams: map(.players |= map(. + {st: $stats[.id]}))}' > data.json
 echo "teams: $(jq '.teams|length' data.json)  players: $(jq '[.teams[].players[]]|length' data.json)  size: $(wc -c < data.json)"
