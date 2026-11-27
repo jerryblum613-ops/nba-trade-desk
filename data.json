@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T19:54:54Z",
+  "updated": "2026-11-27T19:44:23Z",
   "season": "2026-27",
   "tx": [
     [
@@ -13004,7 +13004,7 @@
       ]
     },
     "MEM": {
-      "cap": 161742655,
+      "cap": 161868236,
       "dead": 41191603,
       "players": [
         [
@@ -23264,7 +23264,7 @@
           "wt": "206 lbs",
           "age": 19,
           "exp": 2,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 5429520,
           "c": {
             "sal": 5701200,
@@ -24583,7 +24583,7 @@
           "wt": "195 lbs",
           "age": 34,
           "exp": 15,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 36566002,
           "c": {
             "sal": 39416562,
@@ -25504,7 +25504,7 @@
           "wt": "220 lbs",
           "age": 25,
           "exp": 6,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 46394100,
           "c": {
             "sal": 50105628,
@@ -27140,7 +27140,7 @@
           "jersey": "9",
           "ht": "6' 8\"",
           "wt": "255 lbs",
-          "age": 26,
+          "age": 27,
           "exp": 4,
           "inj": null,
           "prev": 0,
@@ -27487,7 +27487,7 @@
           "wt": "215 lbs",
           "age": 27,
           "exp": 7,
-          "inj": "Day-To-Day",
+          "inj": null,
           "prev": 11000000,
           "c": {
             "sal": 11000000,
@@ -27524,7 +27524,7 @@
           "wt": "203 lbs",
           "age": 30,
           "exp": 12,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 8382150,
           "c": null,
           "st": [
@@ -28852,7 +28852,7 @@
           "wt": "197 lbs",
           "age": 28,
           "exp": 6,
-          "inj": "Out",
+          "inj": null,
           "prev": 13937574,
           "c": null,
           "st": [
@@ -29102,7 +29102,7 @@
           "wt": "243 lbs",
           "age": 31,
           "exp": 14,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 54126450,
           "c": {
             "sal": 58456566,
@@ -29805,7 +29805,7 @@
           "wt": "205 lbs",
           "age": 20,
           "exp": 2,
-          "inj": null,
+          "inj": "Out",
           "prev": 3658800,
           "c": {
             "sal": 3841680,
@@ -30231,7 +30231,7 @@
           "wt": "180 lbs",
           "age": 25,
           "exp": 7,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 37958760,
           "c": {
             "sal": 40770520,
@@ -31695,7 +31695,7 @@
           "wt": "279 lbs",
           "age": 33,
           "exp": 15,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 5000000,
           "c": null,
           "st": [
@@ -31836,7 +31836,7 @@
           "wt": "195 lbs",
           "age": 26,
           "exp": 6,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 4333333,
           "c": {
             "sal": 3956523,
@@ -31933,7 +31933,7 @@
           "wt": "248 lbs",
           "age": 31,
           "exp": 12,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 54126450,
           "c": {
             "sal": 57078728,
@@ -32665,7 +32665,7 @@
           "wt": "223 lbs",
           "age": 30,
           "exp": 11,
-          "inj": "Day-To-Day",
+          "inj": "Out",
           "prev": 53142264,
           "c": {
             "sal": 57078728,
@@ -34076,7 +34076,7 @@
           "wt": "200 lbs",
           "age": 36,
           "exp": 15,
-          "inj": null,
+          "inj": "Out",
           "prev": 14104000,
           "c": {
             "sal": 13398000,
@@ -34949,7 +34949,7 @@
           "jersey": "11",
           "ht": "6' 7\"",
           "wt": "230 lbs",
-          "age": 20,
+          "age": 21,
           "exp": 2,
           "inj": null,
           "prev": 4900320,
@@ -36145,7 +36145,7 @@
           "wt": "231 lbs",
           "age": 28,
           "exp": 9,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": null,
           "c": null,
           "st": [
@@ -36418,7 +36418,7 @@
           "jersey": "00",
           "ht": "6' 5\"",
           "wt": "230 lbs",
-          "age": 23,
+          "age": 24,
           "exp": 3,
           "inj": null,
           "prev": 0,
@@ -37584,7 +37584,7 @@
           "wt": "212 lbs",
           "age": 24,
           "exp": 2,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 0,
           "c": null,
           "st": [
@@ -38410,7 +38410,7 @@
           "wt": "250 lbs",
           "age": 25,
           "exp": 7,
-          "inj": null,
+          "inj": "Day-To-Day",
           "prev": 15000000,
           "c": {
             "sal": 15000000,
